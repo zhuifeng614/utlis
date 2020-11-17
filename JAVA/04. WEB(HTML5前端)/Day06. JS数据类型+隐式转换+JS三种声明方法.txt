@@ -1,0 +1,243 @@
+###CSS课程回顾
+1. CSS三种引入方式
+- 内联:在标签的style属性里面写css代码, 不能复用, 优先级最高
+- 内部:在head标签里面添加style标签通过选择器给元素添加样式,可以在当前页面复用
+- 外部:在单独的css文件里面写样式代码,在html页面中通过link标签引入,可以多页面复用
+- 优先级:内部和外部一样 后执行覆盖先执行的
+2. 选择器
+- 标签名选择器   div{}
+- 类选择器    .class{}
+- id选择器    #id{}
+- 分组选择器    div,.class{}
+- 属性选择器    div[属性名='值']{}
+- 伪类选择器    a:link/visited/hover/active{}
+- 子孙后代选择器   div span{}
+- 子元素选择器  div>span{} 
+- 任意元素选择器   *{}
+3. 颜色赋值
+- 单词   red
+- 6位16进制  #ff0000
+- 3位16进制  #f00
+- 3位10进制  rgb(255,0,0)
+- 4位10进制  rgba(255,0,0,0-1);
+4. 背景图片
+- background-image:url("路径");
+- background-color:red;
+- background-size:100px 200px;
+- background-repeat:no-repeat;
+- backgournd-position: 1. left/right/top/bottom/center  2. 百分比
+5. 盒子模型
+- 外边距+边框+内边距+宽高=盒子模型
+- 宽高:width/height 1.像素 2.上级元素的百分比
+	行内元素 不能修改宽高 由内容决定 
+- 外边距:元素距上级元素或相邻兄弟元素的距离,
+	margin-left/right/top/bottom:
+	margin:10px;
+	margin:10px 20px;
+	margin:0 auto;
+	margin:10px 20px 30px 40px;
+	上下相邻取最大  左右相邻相加
+	粘连问题: overflow:hidden
+	行内元素上下外边距无效
+- 边框: border:粗细  样式  颜色 ;
+	行内元素不影响所占高度
+- 内边距:元素边框距内容的距离 赋值方式和外边距类似  padding
+	行内元素不影响所占高度
+6. 文本相关
+- 水平对齐方式: text-align:left/right/center
+- 文本修饰:  text-decoration: overline/underline/line-through/none;
+- 文本阴影: text-shadow: 颜色 x偏移值 y偏移值 浓度 值越小越清晰
+- 文本颜色 :  color:red;
+- 行高: line-height
+7. 字体相关
+- 字体大小 font-size
+- 字体加粗 font-weight:bold/normal 
+- 斜体  font-style:italic
+- 字体设置 font-family: xxx,xxx,xxx;
+8. 溢出设置overflow
+- hidden 超出隐藏
+- visible 超出显示(默认)
+- scroll  超出滚动显示
+9. 显示方式display
+- block: 块级元素的默认值,独占一行 可以修改宽高
+- inline: 行内元素的默认值,共占一行 不可以修改宽高
+- inline-block: 行内块   共占一行 可以修改宽高
+10. CSS三大特性
+- 继承: 元素可以继承上级元素的文本和字体相关的样式, 部分元素自带的显示效果不受继承影响 
+- 层叠: 当多个选择器选择到同一个元素时,如果样式不同则全部生效 ,如果样式相同则由优先级决定
+- 优先级: 作用范围越小优先级越高  id>class>标签名>继承
+11. position定位
+- 文档流定位/静态定位 static
+	行内元素从左向右  块级元素从上到下,通过元素的外边距控制位置
+- 相对定位 relative 	
+	不脱离文档流, 通过left/right/top/bottom控制元素的位置,坐标相对于元素的初始位置 
+- 绝对定位 absolute
+	脱离文档流,通过left/right/top/bottom控制元素的位置,坐标相对于窗口(默认)或某一个上级元素(在上级元素里面添加相对定位)
+- 固定定位 fixed
+	脱离文档流, 通过left/right/top/bottom控制元素的位置,坐标相对于窗口
+12. 浮动定位float
+- 元素脱离文档流, 从当前行向左或向右浮动,当撞到上级元素边框或其它浮动元素停止,一行装不下会自动换行,换行时有可能卡住, 通过元素的外边距控制位置, 给元素添加clear:both 禁止元素两侧出现浮动元素, 如果元素的所有子元素全部浮动则自动识别的高度为0通过overflow:hidden解决 
+
+###JavaScript  JS
+- html负责搭建页面结构和内容(盖房子)  CSS负责美化页面(装修) JS给页面添加动态效果和动态内容
+- js历史
+	95年由网景公司(NetScape)发布LiveScipt,同年更名为JavaScript 和Java语言没关系 为了蹭热度
+- JS特点:
+1. 属于脚本语言,不需要编译,由浏览器解析执行 
+2. 可以嵌入到html页面中
+3. 基于面向对象, 属于弱类型语言
+4. 具有良好的交互性 
+5. 安全性高,禁止访问浏览器外部的内容
+###js的引入方式
+- 内联:在标签的事件属性中添加js代码,当事件触发时代码执行
+- 内部:在html页面中任意位置添加script标签,在标签内部写js代码
+- 外部:在单独的js文件中写js代码,通过script标签的src属性引入
+
+###JS语法
+####数据类型
+- JS中只有对象类型
+- 常见的对象类型:
+1. 数值类型: number 
+2. 字符串类型: string
+3. 布尔值类型: boolean
+4. 未定义类型: undefined
+5. 自定义类型: object
+####变量的声明和赋值
+- JS属于弱类型语言
+- java: int x = 10;
+- js:  var x = 10;
+		var s = "abc";
+		var b = true/false;
+		var u;
+		var p = new Person();
+		p = 10;
+###常见类型介绍
+1. 数值类型:number
+	数值类型底层全部是浮点数,在使用的过程中会自动转换整数或者小数
+	var x = 5;
+	var y = 2;
+	var z = x/y;   z=2.5  
+	
+	var x = 6;
+	var y = 2;
+	var z = x/y;   z=3  
+	
+	java : int x = 5;   int y = 2;   int z = x/y;   z=2
+- NaN: Not a Number 不是一个数,  判断一个变量是否是数, 通过isNaN()方法判断变量是否是数 true代表不是数 false代表是数
+2. 布尔值类型:boolean
+	var b = true/false;
+3. 字符串:string
+	var s1 = "abc";
+	var s2 = 'abc';
+4. 未定义:undefined
+- 当一个变量只声明不赋值的时候,此变量的类型为未定义	
+###各种数据类型之间的隐式转换
+1. 数值类型
+- 转字符串:   直接转    18->"18"   "abc"+18 ="abc18"
+- 转布尔值:   0和NaN转false    其它true
+2. 布尔值类型
+- 转字符串:   直接转    true/false-> "true"/"false"  "abc"+true="abctrue";
+- 转数值:   	true->1    false->0      18+true
+3. 字符串
+- 转数值:  能转直接转 "18"->18 不能转则转成NaN "abc"->NaN 
+		"18"+8 ="188"  加法运算会把数值转成字符串
+		"18"-8 = 10    -*/把字符串转成数值
+		"abc"-8 = NaN  任何数值和NaN进行任何运算结果都是NaN
+- 转布尔值:  空字符串转false  ""->false   其它转true 	
+4. 未定义
+- 转字符串: 直接转   "abc"+undefined = "abcundefined"
+- 转数值:  转成NaN       18+undefined = NaN
+- 转布尔值:  false    if(undefined){alert("xxx")}
+5. null 
+- 转字符串: 直接转   "abc"+null = "abcnull";
+- 转数值:  转成0    18+null = 18 ;
+- 转布尔值: false 	 if(null){alert("xxx")} 
+###运算符+ - * / % =
+- 和Java大体相同 
+- ==和===,==先统一两个变量的类型再比较值是否相等, ===先比较类型,如果类型相同再比较值    "66"==66     "66"===66
+- 除法运算会自动转换整数和小数  5/2=2.5  6/2=3;  
+- typeof x;  获取变量的类型      typeof 66 + 6 = "number6"
+###语句  if else while for switch cash 
+- 和Java大体相同
+- if和while括号里面的内容 如果不是布尔值会自动隐式转换成布尔值
+- for循环中的 int i改成 var i , 不支持增强for循环  
+###方法声明
+- java: public void 方法名(参数列表){方法体}
+- js:  function 方法名(参数列表){方法体}
+- 常见的四种方法:
+1. 无参无返回值
+2. 无参有返回值
+3. 有参五返回值
+4. 有参有返回值
+
+- JS中有三种声明方法的方式
+1. function 方法名(参数列表){方法体}
+2. var 方法名 = function(参数列表){方法体}
+3. var 方法名 = new Function("参数1","参数2","参数3","方法体"); 
+
+###和页面标签相关的方法
+1. 通过id获取页面中的标签
+	var d = document.getElementById("id");
+2. 获取和修改标签的文本内容
+	d.innerText = "abc";
+	d.innerText;
+3. 获取和修改文本框的文本内容
+	i.value="abc";
+	i.value;
+4. 获取和修改标签的html内容
+	d.innerHTML="<h1>abc</h1>";
+	d.innerHTML;
+
+
+###课程回顾
+1. JavaScript  给页面添加动态效果和动态内容
+2. 三种引入方式
+- 内联:在标签的事件属性中添加js代码
+- 内部:在页面的任意位置添加script标签 
+- 外部:在单独的js文件中写js代码 通过script标签的src属性引入
+3. 数据类型
+- js中只有对象类型
+- 常见的对象类型有:
+	1. 数值 number
+	2. 字符串 string
+	3. 布尔值 boolean
+	4. 未定义 undefined
+	5. 自定义 object
+4. 变量声明和赋值
+- js属于弱类型语言  
+	var x = 10;
+		x = "abc";
+5. 常见数据类型间的隐式转换
+- 字符串: 转数值能转直接转 不能则转成NaN ,转布尔值 ""转false 其它true
+- 数值:转字符串直接转  转布尔值 0和NaN转false 其它true
+- 布尔值:转字符串直接转 转数值  true->1 false->0
+- undefined: 转数值NaN 转布尔值false    
+- null:转数值0    转布尔值false
+6. 运算符
+- 和Java大体相同 
+- ==:先统一类型再比较值和===:先比较类型 如果相等再比较值 
+- 除法运算会自动转换整数和小数
+- typeof x 获取变量的类型  typeof 66+6   =  "number6";
+7. 语句
+- 和java大体相同
+- if和while括号里面的内容 如果不是布尔值会自动隐式转成布尔值
+- for循环把int i改成var i 不支持新for循环
+8. 方法声明
+- function 方法名(参数列表){方法体}
+- var 方法名 = function(参数列表){方法体}
+- var 方法名 = new Function("参数1","参数2","方法体");
+9. 和页面相关的方法
+- 通过id获取页面标签
+	 var d = document.getElementById("id")
+- 获取和修改标签的文本内容
+	d.innerText = "xxx";
+	d.innerText;
+- 获取和修改文本框的文本内容
+	input.value="xxx";
+	input.value
+- 获取和修改标签的html内容
+	d.innerHTML +="<xx>asdfa</xx>";
+	d.innerHTML;
+
+
+ 

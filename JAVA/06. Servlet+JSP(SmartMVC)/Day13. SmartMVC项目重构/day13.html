@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>day13</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>Servlet/JSP</h1>
+<h2>回顾</h2>
+<ol>
+<li>
+Servlet 线程安全问题
+<ul>
+<li>init() destroy() 是单线程执行，线程安全！</li>
+<li>service() 以及 doGet() doPost() 是并发访问方法，有线程安全风险</li>
+<li>保持Servlet是无状态的</li>
+<li>加同步代码块</li>
+</ul>
+</li>
+<li>
+反射
+<ul>
+<li>Java提供的一套动态执行API</li>
+<li>可以动态加载类，动态创建对象，动态执行方法，动态解析注解</li>
+<li>因为动态执行，可以使用动态类名，动态方法名等，反射可以解耦</li>
+</ul>
+</li>
+<li>
+注解
+<ul>
+<li>使用 @interface 声明注解</li>
+<li>使用反射API解析注解</li>
+<li>注解的用途：很广泛</li>
+</ul>
+</li>
+<li>
+SmartMVC
+<ul>
+<li>核心目的：将WEB编程，业务功能，界面显示，进行拆分。达到解耦，方便维护，方便开发的目的。 </li>
+</ul>
+</li>
+</ol>
+<h2>解析控制器上的注解</h2>
+<p>加载控制器类，读取每个标注了@RequestMapping的方法，并且读取注解上标注的URL</p>
+<p>案例:</p>
+<ol>
+<li>
+<p>声明注解 </p>
+<pre><code>@Retention(RUNTIME)
+@Target(METHOD)
+/** 
+ * 标注在控制器方法上
+ * 用途：将请求url地址映射到当前的方法上
+ * 英文翻译： Request 请求  Mapping 映射
+ */
+public @interface RequestMapping {
+    //为注解定义参数
+    public String value();
+}
+</code></pre>
+
+</li>
+<li>
+<p>在控制器上标注注解:</p>
+<pre><code>/**
+ * 控制器类， 用于封装业务功能， 
+ */
+public class BizController {
+
+    /**
+     * 第一个业务功能，Hello World! 
+     * @return 目标页面名称
+     */
+    public String execute(HttpServletRequest request) {
+        System.out.println(&quot;Hello World!&quot;);
+        request.setAttribute(&quot;msg&quot;, &quot;Hello&quot;); 
+        return &quot;hello&quot;; 
+    }
+    /**
+     * 负责处理 /test/list.do 显示员工列表
+     * 在Web程序运行期间， 将/test/list.do请求映射到
+     * list() 方法上，也就是请求/test/list.do时候，
+     * 执行list()方法
+     */
+    @RequestMapping(&quot;/test/list.do&quot;)
+    public String list(HttpServletRequest request) {
+        return &quot;list&quot;;
+    }
+    /**
+     * 负责处理 /test/add.do 显示添加员工界面
+     */
+    @RequestMapping(&quot;/test/add.do&quot;)
+    public String add(HttpServletRequest request) {
+        return &quot;add&quot;;
+    }
+    // ...
+
+}
+</code></pre>
+
+</li>
+<li>
+<p>利用Java反射API解析 @RequestMapping注解</p>
+<pre><code>public class Demo01 {
+
+    public static void main(String[] args) 
+        throws Exception{
+        /*
+         * 解析 BizController类的@RequestMapping注解
+         */
+        String className=&quot;mvc.BizController&quot;;
+        //动态加载类
+        Class cls = Class.forName(className);
+        //动态找到类的上全部方法
+        Method[] methods=cls.getDeclaredMethods();
+        //遍历全部方法，查找标注的 @RequestMapping 注解
+        for(Method method:methods) {
+            //利用RequestMapping.class类型找到的对象
+            //是 RequestMapping 类型的对象，包含value方法
+            RequestMapping ann=method.getAnnotation(
+                    RequestMapping.class);
+            if(ann!=null) {
+                //调用注解对象上的 value方法就能取到标注的值
+                String val = ann.value();
+                System.out.println(val); 
+                System.out.println(method);
+            }
+        }
+
+    }
+
+}
+</code></pre>
+
+</li>
+</ol>
+<h2>解析控制器注解存储到Map</h2>
+<p>控制器RequestMapping注解的目的是将用户的请求映射到对应的业务方法：</p>
+<p><img src="mapping.png" /></p>
+<h2>RequestHandler</h2>
+<ol>
+<li>
+Map 每次只能存储一对 key-value 
+<ol>
+<li>key 是请求路径</li>
+<li>value 包含 方法 和 包含方法对象</li>
+</ol>
+</li>
+<li>利用  RequestHandler 将包含方法的控制器对象和控制器方法封装为一个value，这样就可以将 控制器对象和控制器方法一起作为Value的存储到 map 对象中。</li>
+<li>利用 map 存储 请求路径（key） 和 RequestHandler（控制器对象和方法），这样在根据请求路径查找对应的控制器和方法时候会很快找到。</li>
+</ol>
+<p>代码：</p>
+<pre><code>/**
+ * Handler 处理器
+ * 请求处理器，用处理用户请求
+ * 封装控制器对象和控制器上的业务方法 
+ */
+public class RequestHandler {
+    private Object controller;
+    private Method method;
+
+    public RequestHandler() {
+    }
+
+    public RequestHandler(
+            Object controller, Method method) {
+        super();
+        this.controller = controller;
+        this.method = method;
+    }
+
+    public Object getController() {
+        return controller;
+    }
+
+    public Method getMethod() {
+        return method;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;RequestHandler [controller=&quot; + controller + &quot;, method=&quot; + method + &quot;]&quot;;
+    }
+
+}
+</code></pre>
+
+<h2>HandlerMapping</h2>
+<p>用于解析 控制器 类将请求URL和控制器方法的对应关系缓存到Map中，并且提供根据url找到对应控制器方法，并且执行控制方法的功能</p>
+<p>代码：</p>
+<pre><code>public class HandlerMapping {
+    /**
+     * map 用于映射 请求 path 到对应的请求处理器
+     * 如：将 /emp/list.do 映射到 bizColtroller.list()方法
+     */
+    private Map&lt;String, RequestHandler&gt; map=new HashMap&lt;&gt;();
+
+    /**
+     * 用于根据 path 执行对应控制器方法
+     * @param path 请求路径
+     * @param request 执行控制器时候的参数
+     * @return 控制器执行以后的返回值，一般是目标JSP页面
+     */
+    public String execute(String path, 
+            HttpServletRequest request)
+        throws Exception {
+        RequestHandler handler = get(path);
+        Method method = handler.getMethod();
+        Object controller = handler.getController();
+        Object val = method.invoke(
+                controller, request);
+        String value = (String)val;
+        return value;
+    }
+
+    public RequestHandler get(String path) {
+        return map.get(path);
+    }
+
+    /**
+     * 初始化方法：解析控制器中的注解，将注解和注解
+     * 标注的方法添加到 map中
+     * @param className 控制器类名
+     */
+    public void init(String className) 
+        throws Exception{
+        Class cls = Class.forName(className);
+        Method[] methods = cls.getDeclaredMethods();
+        Object controller = cls.newInstance();
+        for(Method method:methods) {
+            RequestMapping ann = method
+                .getAnnotation(RequestMapping.class);
+            if(ann!=null) {
+                //找到注解上标注的路径
+                String path=ann.value();
+                //创建请求处理器对象，封装控制器对象和方法
+                RequestHandler handler=
+                        new RequestHandler(
+                        controller, method);
+                //请求路径和对应的“请求处理器”添加到map
+                map.put(path, handler);
+                System.out.println(path+&quot;:&quot;+handler); 
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>测试案例：</p>
+<pre><code>public class Demo02 {
+
+    public static void main(String[] args) 
+        throws Exception {
+        /**
+         * 测试 HandlerMapping的初始化方法是否可用
+         */
+        HandlerMapping mapping = new HandlerMapping();
+        mapping.init(&quot;mvc.BizController&quot;); 
+
+        //执行 /test/add.do 对应的方法
+        String val = mapping.execute(&quot;/test/add.do&quot;, null);
+        System.out.println(val);     
+    }
+}
+</code></pre>
+
+<h2>增加 ContextConfigListener 加载配置文件</h2>
+<p>将配置控制器类名登记到XML文件中，这样可以灵活配置控制器的类名，以及控制器数量等</p>
+<ol>
+<li>
+<p>编写配置文件 resources/beans.xml：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans&gt;
+    &lt;bean class=&quot;mvc.BizController&quot;&gt;&lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+
+</li>
+<li>
+<p>ContextConfigListener</p>
+<pre><code>/**
+ * 初始化 URL 到 控制器 的映射表 
+ */
+public class ContextConfigListener implements ServletContextListener {
+
+    /**
+     * 读取 beans.xml 配置文件，
+     * 解析配置文件中定义的控制器类
+     * 将控制器类的url映射到对应的控制器方法
+     * @param xml
+     * @return 包含url到控制器方法映射关系的
+     *         HandlerMapping对象
+     */
+    public HandlerMapping loadControlers(String xml)
+        throws Exception {
+        SAXReader reader = new SAXReader();
+        InputStream in = ContextConfigListener.class
+            .getClassLoader().getResourceAsStream(xml);
+        System.out.println(in); 
+        Document doc = reader.read(in);
+        in.close();
+        Element root = doc.getRootElement();//beans
+        List&lt;Element&gt; list=root.elements(&quot;bean&quot;); 
+        HandlerMapping mapping = new HandlerMapping();
+        for(Element e:list) {
+            //在bean元素上获取class属性的值作为类名
+            String className=e.attributeValue(&quot;class&quot;);
+            System.out.println(className);
+            //利用类名初始化 HandlerMapping 中的map
+            mapping.init(className);
+        }
+        return mapping;
+    }
+
+    public void contextInitialized(
+            ServletContextEvent e)  {
+        try {
+            ServletContext ctx = e.getServletContext();
+            //HandlerMapping mapping=new HandlerMapping();
+            //mapping.init(&quot;mvc.BizController&quot;); 
+            HandlerMapping mapping=loadControlers(
+                    &quot;beans.xml&quot;);
+
+            String path = ctx.getContextPath();
+            ctx.setAttribute(&quot;root&quot;, path); 
+
+            ctx.setAttribute(&quot;handlerMapping&quot;, mapping);
+            System.out.println(&quot;初始化了handlerMapping&quot;); 
+        }catch(Exception ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex);
+        }
+    }
+    public void contextDestroyed(ServletContextEvent arg0)  { 
+    }
+
+}
+</code></pre>
+
+</li>
+<li>
+<p>测试：</p>
+<pre><code>public class Demo04 {
+
+    public static void main(String[] args)
+        throws Exception {
+        /**
+         * 测试: 读取配置文件，初始化 HandlerMapping
+         */
+        ContextConfigListener l = 
+                new ContextConfigListener();
+        HandlerMapping mapping=
+                l.loadControlers(&quot;beans.xml&quot;);
+    }
+
+}
+</code></pre>
+
+</li>
+<li>
+<p>配置监听器：</p>
+<pre><code>  &lt;listener&gt;
+    &lt;listener-class&gt;mvc.ContextConfigListener&lt;/listener-class&gt;
+  &lt;/listener&gt;
+</code></pre>
+
+</li>
+</ol>
+<h2>重构DispatcherServlet</h2>
+<p>根据用户的URL请求执行对应的 控制器，处理软件功能：</p>
+<pre><code>/**
+ * 单一前端控制器
+ * 负责接收请求，处理与HTTP协议有关逻辑
+ * 同时处理 get 和 post请求
+ * 为了增加广泛的实用性， 可以处理任何的*.do 请求
+ * 将 请求URL设置为 *.do
+ */
+public class DispatcherServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(
+            HttpServletRequest request, 
+            HttpServletResponse response) throws ServletException, IOException {
+        try {
+            //创建 HandlerMapping 对象 
+            //找到对应的业务方法，执行业务方法
+            //HandlerMapping mapping = new HandlerMapping();
+            //mapping.init(&quot;mvc.BizController&quot;); 
+
+            //从ServletContext获取已经创建并初始化完成的
+            //HandlerMapping 对象，这样可以避免每次都初始化
+            //可以提高软件的性能
+            HandlerMapping mapping=(HandlerMapping)
+                getServletContext().getAttribute(&quot;handlerMapping&quot;);
+
+            //获取用户发起的请求
+            String pth = request.getServletPath();
+            System.out.println(pth); 
+
+            //处理编码问题
+            request.setCharacterEncoding(&quot;UTF-8&quot;);
+
+            //执行 URL 路径对应的业务方法
+            String target=mapping.execute(pth, request);
+            //target代表需要显示是目标网页，
+            //约定target是以 redirect:为前缀
+            //则进行重定向，如果控制器返回的字符串
+            //以 redirect: 为开头，则重定向到 
+            //redirect: 以后的URL地址
+            if(target.startsWith(&quot;redirect:&quot;)) {
+                String path = target.substring(9);
+                response.sendRedirect(path); 
+            }else {
+                String path = &quot;/WEB-INF/jsp/&quot;+target+&quot;.jsp&quot;;
+                request.getRequestDispatcher(path)
+                    .forward(request, response); 
+            }
+        }catch(Exception e) {
+            e.printStackTrace();
+            //抛出一个 ServletException，这个异常是
+            //作用是，将异常e抛给Web容器，Web容器会
+            //显示 500 错误页面到浏览器
+            throw new ServletException(e);
+        }
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+
+}
+</code></pre>
+
+<p>配置：</p>
+<pre><code>&lt;servlet&gt;
+    &lt;description&gt;&lt;/description&gt;
+    &lt;display-name&gt;DispatcherServlet&lt;/display-name&gt;
+    &lt;servlet-name&gt;DispatcherServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;mvc.DispatcherServlet&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;DispatcherServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;*.do&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+
+<p>添加控制器方法并且测试：</p>
+<pre><code>@RequestMapping(&quot;/test/hello.do&quot;)
+public String hello(HttpServletRequest request) {
+    request.setAttribute(&quot;msg&quot;, &quot;HI&quot;); 
+    return &quot;hello&quot;;
+}
+// ...
+</code></pre>
+
+<h2>重构员工项目</h2>
+<ol>
+<li>
+<p>导入包:</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.dom4j&lt;/groupId&gt;
+    &lt;artifactId&gt;dom4j&lt;/artifactId&gt;
+    &lt;version&gt;2.1.1&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;commons-dbcp&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-dbcp&lt;/artifactId&gt;
+    &lt;version&gt;1.4&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;mysql&lt;/groupId&gt;
+    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+    &lt;version&gt;5.1.47&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;version&gt;4.12&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;jstl&lt;/groupId&gt;
+    &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+    &lt;version&gt;1.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+</li>
+<li>
+<p>复制软件组件:</p>
+<ol>
+<li>dao</li>
+<li>entity</li>
+<li>util</li>
+</ol>
+</li>
+<li>
+复制数据库配置文件
+<ol>
+<li>db.properties</li>
+</ol>
+</li>
+<li>
+复制webapp文件夹中的前端组件：
+<ol>
+<li>bower_components</li>
+<li>build</li>
+<li>dist</li>
+<li>pages</li>
+<li>plugins</li>
+</ol>
+</li>
+<li>
+复制页面组件：/WEB-INF
+<ol>
+<li>jsp/*</li>
+<li>include/*</li>
+</ol>
+</li>
+<li>
+<p>添加 emp.EmpContoller 控制器类</p>
+<pre><code>public class EmpController {
+
+    @RequestMapping(&quot;/emp/list.do&quot;)
+    public String list(HttpServletRequest request) {
+        EmpDao dao = new EmpDao();
+        List&lt;Emp&gt; list = dao.findAll();
+        Map&lt;Integer, String&gt; names=new HashMap&lt;&gt;();
+        for (Emp emp : list) {
+            names.put(emp.getEmpno(), emp.getEname());
+        }
+        //利用request对象将数据共享到JSP页面
+        request.setAttribute(&quot;list&quot;, list);
+        request.setAttribute(&quot;names&quot;, names);
+        //转发的员工列表页面
+        return &quot;list-emp2&quot;;
+    }
+
+    @RequestMapping(&quot;/emp/add.do&quot;)
+    public String add(HttpServletRequest request) {
+        EmpDao dao = new EmpDao();
+        List&lt;Emp&gt; mgrs = dao.findMgrs();
+        request.setAttribute(&quot;mgrs&quot;, mgrs);
+        return &quot;add-emp&quot;;
+    }
+    @RequestMapping(&quot;/emp/save.do&quot;)
+    public String save(HttpServletRequest request) {
+        try {
+            request.setCharacterEncoding(&quot;UTF-8&quot;);
+            String ename=request.getParameter(&quot;ename&quot;);
+            String mgrId=request.getParameter(&quot;mgr&quot;);
+            String date =request.getParameter(&quot;hiredate&quot;);
+            String deptId=request.getParameter(&quot;deptno&quot;);
+            String salarys=request.getParameter(&quot;salary&quot;);
+            String comms = request.getParameter(&quot;comm&quot;);
+
+            //数据类型转换: 将字符串转换为目标数据类型
+            SimpleDateFormat fmt=
+                new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);
+            int mgr = Integer.parseInt(mgrId);
+            Date hiredate = new Date(
+                    fmt.parse(date).getTime());
+            int deptno = Integer.parseInt(deptId);
+            double salary = Double.parseDouble(salarys);
+            double comm = Double.parseDouble(comms);
+            //保存到数据库
+            Emp emp = new Emp(0, ename, mgr, hiredate, deptno, salary, comm);
+            EmpDao dao = new EmpDao();
+            int n = dao.save(emp);
+            if(n==1) {
+                //设置绝对重定向路径
+                String url= request.getContextPath()+&quot;/emp/list.do&quot;;
+                return &quot;redirect:&quot;+url;
+            }else {
+                //失败
+                request.setAttribute(&quot;message&quot;, &quot;添加失败!&quot;);
+                return &quot;message&quot;;
+            }
+        }catch(Exception e) {
+            e.printStackTrace(); 
+            throw new RuntimeException(e);
+        }
+    }
+    @RequestMapping(&quot;/emp/delete.do&quot;)
+    public String delete(HttpServletRequest request) {
+        String no = request.getParameter(&quot;empno&quot;);
+        //请自行打桩测试接收到的参数是否有效
+        int empno = Integer.parseInt(no);
+        //调用EmpDao删除数据
+        EmpDao dao = new EmpDao();
+        int n = dao.delete(empno);
+        if(n==1) {
+            //重定向到 员工列表页面, 显示结果
+            String path=request.getContextPath()+
+                    &quot;/emp/list.do&quot;;
+            return &quot;redirect:&quot;+path;
+        } else {
+            //转发到message.jsp显示错误消息
+            request.setAttribute(&quot;message&quot;, &quot;删除失败&quot;);
+            return &quot;message&quot;;
+        }
+
+    }
+    @RequestMapping(&quot;/emp/edit.do&quot;)
+    public String edit(HttpServletRequest request) {
+        String no = request.getParameter(&quot;empno&quot;);
+        int empno = Integer.parseInt(no);
+        EmpDao dao = new EmpDao();
+        Emp emp = dao.findByEmpno(empno);
+
+        List&lt;Emp&gt; mgrs = dao.findMgrs();
+
+        request.setAttribute(&quot;mgrs&quot;, mgrs);
+        request.setAttribute(&quot;emp&quot;, emp);
+
+        return &quot;edit-emp&quot;;
+    }
+    @RequestMapping(&quot;/emp/update.do&quot;)
+    public String update(HttpServletRequest request) {
+        try {
+            request.setCharacterEncoding(&quot;UTF-8&quot;);
+            String no = request.getParameter(&quot;empno&quot;);
+            String ename=request.getParameter(&quot;ename&quot;);
+            String mgrno=request.getParameter(&quot;mgr&quot;);
+            String hire=request.getParameter(&quot;hiredate&quot;);
+            String dept=request.getParameter(&quot;deptno&quot;);
+            String sly =request.getParameter(&quot;salary&quot;);
+            String com =request.getParameter(&quot;comm&quot;);
+            int empno = Integer.parseInt(no);
+            int mgr = Integer.parseInt(mgrno);
+            //java.sql.Date 提供了将字符串转换为日期的方法
+            Date hiredate = Date.valueOf(hire);
+            int deptno = Integer.parseInt(dept);
+            double salary = Double.parseDouble(sly);
+            double comm = Double.parseDouble(com);
+
+            Emp emp = new Emp(empno, ename, mgr, 
+                hiredate, deptno, salary, comm);
+            EmpDao dao = new EmpDao();
+            //更新数据
+            int n = dao.updateEmp(emp);
+            if(n==1) {
+                String path=request.getContextPath()+
+                        &quot;/emp/list.do&quot;;
+                return &quot;redirect:&quot;+path; 
+            } else {
+                request.setAttribute(&quot;message&quot;, 
+                        &quot;更新失败！&quot;);
+                return &quot;message&quot;;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e); 
+        }
+    }
+
+}
+</code></pre>
+
+</li>
+<li>
+<p>添加 emp.UserContoller 控制器类</p>
+<pre><code>public class UserController {
+
+    @RequestMapping(&quot;/user/login.do&quot;)
+    public String login(HttpServletRequest request) {
+        //读取表单参数
+        String name = request.getParameter(&quot;name&quot;);
+        String password = request.getParameter(&quot;password&quot;);
+        String save = request.getParameter(&quot;save&quot;);
+
+        // 访问数据层，检查用户信息
+        UserDao dao = new UserDao();
+        User user = dao.findUserByName(name.trim());
+
+        //将用户名保存在 request中
+        request.setAttribute(&quot;name&quot;,name);
+
+        //String contextPath = request.getContextPath();
+        //request.setAttribute(&quot;root&quot;, contextPath); 
+
+        //如果没有找到用户信息，表示用户名是错误的
+        if(user==null) {
+            //转回到登录页面显示错误消息
+            request.setAttribute(&quot;message&quot;, 
+                    &quot;用户名或者密码错误&quot;); 
+            return &quot;login&quot;;
+        }
+        //找到用户信息，则判断密码是否正确
+        //哪个变量不可能为null放到前面
+        if( user.getName().equals(name) &amp;&amp; 
+            user.getPassword().equals(password)) {
+            //如果密码相等， 则可以登录
+            //将登录结果保存在 session 
+            HttpSession session = request.getSession();
+            session.setAttribute(&quot;loginUser&quot;, user);
+
+            //转发到消息页面显示登录成功消息
+            request.setAttribute(&quot;message&quot;, &quot;登录成功&quot;);
+            return &quot;message&quot;;
+        }
+        //执行到这个位置？密码不一致的情形
+        request.setAttribute(&quot;message&quot;, 
+                &quot;用户名或者密码错误&quot;);
+
+        return &quot;login&quot;;
+    }
+    @RequestMapping(&quot;/user/start-login.do&quot;)
+    public String startLogin(HttpServletRequest request) {
+        return &quot;login&quot;;
+    }
+}
+</code></pre>
+
+</li>
+<li>
+<p>配置 beans.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans&gt;
+    &lt;bean class=&quot;mvc.BizController&quot;&gt;&lt;/bean&gt;
+    &lt;bean class=&quot;emp.EmpController&quot;&gt;&lt;/bean&gt;
+    &lt;bean class=&quot;emp.UserController&quot;&gt;&lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+
+</li>
+<li>
+<p>更新 所有JSP页面，将链接增加 .do </p>
+</li>
+<li>
+<p>更新 AccessFilter</p>
+<pre><code>/**
+ * 访问控制过滤器：只有登录的用户才能通过访问
+ */
+public class AccessFilter implements Filter {
+    @Override
+    public void doFilter(
+            ServletRequest request,
+            ServletResponse response, 
+            FilterChain chain)
+            throws IOException, ServletException {
+        //转换request和response对象的类型，这样可以
+        //使用更多的API方法
+        HttpServletRequest req=(HttpServletRequest)request;
+        HttpServletResponse res=(HttpServletResponse)response;
+        HttpSession session = req.getSession();
+        User loginUser = 
+            (User)session.getAttribute(&quot;loginUser&quot;);
+        if(loginUser==null) {
+            System.out.println(&quot;没有登录，转到登录&quot;); 
+            //没有登录，重定向到登录页面，不执行后续链节
+            String login=req.getContextPath()+
+                    &quot;/user/start-login.do&quot;;
+            res.sendRedirect(login);
+            return; //不执行后续链节
+        }
+        //执行后续链节，就是执行后续的Servlet
+        System.out.println(&quot;登录成功，继续执行&quot;); 
+        chain.doFilter(req, res); 
+    }
+
+    @Override
+    public void init(FilterConfig arg0) throws ServletException {
+    }
+
+    @Override
+    public void destroy() {
+    }
+}
+</code></pre>
+
+</li>
+<li>
+<p>部署测试 GoodLuck!</p>
+</li>
+</ol>
+<h2>作业</h2>
+<ol>
+<li>实现 Smart MVC 项目</li>
+<li>利用SmartMVC重构 员工管理</li>
+</ol>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

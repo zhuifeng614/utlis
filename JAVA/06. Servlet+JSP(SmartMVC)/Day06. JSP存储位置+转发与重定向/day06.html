@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>day06</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>Servlet/JSP</h1>
+<h2>MVC</h2>
+<ol>
+<li>
+为啥使用MVC
+<ol>
+<li>组件拆分以后, 功能独立, 功能清晰, 便于分工合作.</li>
+</ol>
+</li>
+<li>
+MVC
+<ol>
+<li>M, Model 模型, 用于处理软件中的业务数据</li>
+<li>V, View 视图, 用于显示数据, 与用户进行交互</li>
+<li>C, Controller 控制器, 用户处理用户请求, 访问业务模型,选择视图显示. </li>
+</ol>
+</li>
+</ol>
+<h2>request传送/共享数据</h2>
+<ol>
+<li>request对象的附加功能</li>
+<li>经常用于在 Servlet 和 JSP之间传递数据</li>
+<li>
+request对象是在浏览器发起请求时候初始化, 请求结束时候销毁.
+<ol>
+<li>绑定在request中的数据, 在请求结束时候就销毁了.</li>
+<li>request对象底层有 &quot;对象池&quot;, request对象是被&quot;复用&quot;的</li>
+</ol>
+</li>
+</ol>
+<h2>转发</h2>
+<p>为啥要转发: 就是为了将Servlet和JSP协作为一个请求过程, 其中Servlet用于处理业务过程, JSP负责作为显示组件显示数据.</p>
+<h2>JSP 的存储位置</h2>
+<ol>
+<li>作为View显示组件的JSP, 应该存储在 /WEB-INF 文件夹中, 这样可以避免用户直接访问JSP出现意想不到的错误.</li>
+<li>作为网页使用JSP应该访问webapp文件夹.</li>
+</ol>
+<h2>复制Eclipse Maven项目</h2>
+<ol>
+<li>复制项目, 如将 Servlet05 复制为 Servlet06</li>
+<li>修改 pom.xml, 中 <code>&lt;artifactId&gt;Servlet06&lt;/artifactId&gt;</code></li>
+<li>修改 Project-&gt;Properties-&gt;Web Project Setting -&gt; Context Root = &quot;Servlet06&quot;</li>
+</ol>
+<h2>实现添加员工功能</h2>
+<p>添加原理:</p>
+<p><img src="1.png" /></p>
+<p>步骤:</p>
+<ol>
+<li>
+<p>在员工列表页面list-emp2.jsp增加添加链接: </p>
+<pre><code>...
+&lt;h3 class=&quot;box-title&quot;&gt;员工信息 &lt;a href=&quot;add-emp.jsp&quot; class=&quot;btn btn-success&quot;&gt;添加&lt;/a&gt;&lt;/h3&gt;
+...
+</code></pre>
+
+</li>
+<li>
+<p>根据模板页面 starter.html 和 pages/forms/general.html创建 add-emp.jsp</p>
+<pre><code>    ...
+  &lt;!-- Horizontal Form --&gt;
+  &lt;div class=&quot;box box-info&quot;&gt;
+    &lt;div class=&quot;box-header with-border&quot;&gt;
+      &lt;h3 class=&quot;box-title&quot;&gt;添加新员工信息&lt;/h3&gt;
+    &lt;/div&gt;
+    &lt;!-- /.box-header --&gt;
+    &lt;!-- form start --&gt;
+    &lt;form class=&quot;form-horizontal&quot; 
+      method=&quot;post&quot; action=&quot;save-emp&quot;&gt; 
+      &lt;div class=&quot;box-body&quot;&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+          &lt;label for=&quot;ename&quot; 
+            class=&quot;col-sm-2 control-label&quot;&gt;姓名&lt;/label&gt;
+          &lt;div class=&quot;col-sm-10&quot;&gt;
+            &lt;input type=&quot;text&quot; class=&quot;form-control&quot; 
+              id=&quot;ename&quot; name=&quot;ename&quot; placeholder=&quot;姓名&quot;&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+          &lt;label for=&quot;mgr&quot; 
+          class=&quot;col-sm-2 control-label&quot;&gt;领导编号&lt;/label&gt;
+          &lt;div class=&quot;col-sm-10&quot;&gt;
+            &lt;input type=&quot;text&quot; class=&quot;form-control&quot; 
+            id=&quot;mgr&quot; name=&quot;mgr&quot; placeholder=&quot;领导编号&quot;&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+          &lt;label for=&quot;hiredate&quot; 
+          class=&quot;col-sm-2 control-label&quot;&gt;入职日期&lt;/label&gt;
+          &lt;div class=&quot;col-sm-10&quot;&gt;
+            &lt;input type=&quot;date&quot; class=&quot;form-control&quot; 
+            id=&quot;hiredate&quot; name=&quot;hiredate&quot;  
+            placeholder=&quot;入职日期&quot;&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+          &lt;label for=&quot;deptno&quot; 
+          class=&quot;col-sm-2 control-label&quot;&gt;部门编号&lt;/label&gt;
+          &lt;div class=&quot;col-sm-10&quot;&gt;
+            &lt;input type=&quot;text&quot; class=&quot;form-control&quot; 
+            id=&quot;deptno&quot; name=&quot;deptno&quot;  
+            placeholder=&quot;部门编号&quot;&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;  
+        &lt;div class=&quot;form-group&quot;&gt;
+          &lt;label for=&quot;salary&quot; 
+          class=&quot;col-sm-2 control-label&quot;&gt;薪资&lt;/label&gt;
+          &lt;div class=&quot;col-sm-10&quot;&gt;
+            &lt;input type=&quot;number&quot; class=&quot;form-control&quot; 
+            id=&quot;salary&quot; name=&quot;salary&quot;  
+            placeholder=&quot;薪资&quot;&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;  
+        &lt;div class=&quot;form-group&quot;&gt;
+          &lt;label for=&quot;comm&quot; 
+          class=&quot;col-sm-2 control-label&quot;&gt;提成&lt;/label&gt;
+          &lt;div class=&quot;col-sm-10&quot;&gt;
+            &lt;input type=&quot;number&quot; class=&quot;form-control&quot; 
+            id=&quot;comm&quot; name=&quot;comm&quot;  
+            placeholder=&quot;提成&quot;&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;                                
+      &lt;/div&gt;
+      &lt;!-- /.box-body --&gt;
+      &lt;div class=&quot;box-footer&quot;&gt;
+        &lt;button type=&quot;submit&quot; class=&quot;btn btn-info pull-right&quot;&gt;保存&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;!-- /.box-footer --&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+  &lt;!-- /.box --&gt;
+    ...
+</code></pre>
+
+</li>
+<li>
+<p>在EmpDao中添加 save(emp) 方法, 实现增加Emp对象的功能.</p>
+<pre><code>/**
+ * 添加新用户功能
+ * 返回添加的行数
+ */
+public int save(Emp emp) {
+    //将emp对象中的数据保存到 数据库
+    String sql = &quot;insert into t_emp &quot;
+            + &quot;(empno, ename, mgr, hiredate, &quot;
+            + &quot;deptno, salary, comm) values &quot;
+            + &quot;(null, ?,?,?,?,?,? )&quot;;
+    try(Connection conn=DBUtil.getConnection()){
+        PreparedStatement ps = 
+                conn.prepareStatement(sql);
+        ps.setString(1, emp.getEname());
+        ps.setInt(2, emp.getMgr());
+        ps.setDate(3, emp.getHiredate());
+        ps.setInt(4, emp.getDeptno());
+        ps.setDouble(5, emp.getSalary());
+        ps.setDouble(6, emp.getComm());
+        int n = ps.executeUpdate();
+        return n;
+    }catch(Exception e) {
+        e.printStackTrace(); 
+        throw new RuntimeException(e);
+    }
+}
+</code></pre>
+
+</li>
+<li>
+<p>测试  save 方法</p>
+<pre><code>public class TestCase {
+    @Test
+    public void testSaveEmp() {
+        Date date = new Date(System.currentTimeMillis());
+        Emp emp = new Emp(0, &quot;范传奇&quot;, 1, date,
+                1, 1000, 20); 
+        EmpDao dao = new EmpDao();
+        int n = dao.save(emp);
+        System.out.println(n);
+    }
+}
+</code></pre>
+
+</li>
+<li>
+<p>编写Servlet, 处理表单post请求:</p>
+<pre><code>public class SaveEmpServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doPost(
+            HttpServletRequest request, 
+            HttpServletResponse response) 
+        throws ServletException, IOException {
+        //1. 接收表单参数
+        //2. 将表单参数保存到数据
+        //3. 转发到 成功页面
+        request.setCharacterEncoding(&quot;UTF-8&quot;);
+        String ename=request.getParameter(&quot;ename&quot;);
+        String mgrId=request.getParameter(&quot;mgr&quot;);
+        String date =request.getParameter(&quot;hiredate&quot;);
+        String deptId=request.getParameter(&quot;deptno&quot;);
+        String salarys=request.getParameter(&quot;salary&quot;);
+        String comms = request.getParameter(&quot;comm&quot;);
+
+        System.out.println(ename);
+        System.out.println(mgrId);
+        System.out.println(date);
+        System.out.println(deptId);
+        System.out.println(salarys);
+        System.out.println(comms);
+
+        try {
+            //数据类型转换: 将字符串转换为目标数据类型
+            SimpleDateFormat fmt=
+                new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);
+            int mgr = Integer.parseInt(mgrId);
+            Date hiredate = new Date(
+                    fmt.parse(date).getTime());
+            int deptno = Integer.parseInt(deptId);
+            double salary = Double.parseDouble(salarys);
+            double comm = Double.parseDouble(comms);
+            //保存到数据库
+            Emp emp = new Emp(0, ename, mgr, hiredate, deptno, salary, comm);
+            EmpDao dao = new EmpDao();
+            int n = dao.save(emp);
+            if(n==1) {
+                //成功
+                request.setAttribute(&quot;message&quot;, &quot;添加成功!&quot;);
+                request.getRequestDispatcher(
+                        &quot;/WEB-INF/jsp/message.jsp&quot;)
+                        .forward(request, response);
+            }else {
+                //失败
+                request.setAttribute(&quot;message&quot;, &quot;添加失败!&quot;);
+                request.getRequestDispatcher(
+                        &quot;/WEB-INF/jsp/message.jsp&quot;)
+                        .forward(request, response);
+
+            }
+        }catch(Exception e) {
+            e.printStackTrace(); 
+        }
+
+    }
+
+}
+</code></pre>
+
+</li>
+<li>
+<p>配置Servlet</p>
+<pre><code>  &lt;servlet&gt;
+    &lt;description&gt;&lt;/description&gt;
+    &lt;display-name&gt;SaveEmpServlet&lt;/display-name&gt;
+    &lt;servlet-name&gt;SaveEmpServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;day06.SaveEmpServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;SaveEmpServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/save-emp&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+</code></pre>
+
+</li>
+<li>
+<p>利用starter.html 创建 /WEB-INF/jsp/message.jsp 用于显示成功消息</p>
+<pre><code>    ...
+  &lt;p class=&quot;well&quot;&gt;
+    &lt;%=request.getAttribute(&quot;message&quot;)%&gt;
+  &lt;/p&gt;
+    ...
+</code></pre>
+
+</li>
+<li>
+<p>测试...</p>
+</li>
+</ol>
+<h2>转发 与 重定向</h2>
+<ol>
+<li>
+转发: 一次请求
+<ol>
+<li>为了实现 Servlet与JSP协同工作, Sertvlet处理结束以后由JSP负责显示数据, SUN 设计 Servlet到JSP的转发功能.(尽管Servlet到Servlet, JSP到JSP可以转发, 但极少使用)</li>
+<li>一般都在Servlet处理以后, 转发到JSP显示数据!!</li>
+</ol>
+</li>
+<li>
+重定向: 两次请求
+<ol>
+<li>是HTTP协议中设计的一个功能, 浏览器根据服务器的响应结果自动转向(跳转)到一个新的URL地址.</li>
+<li>服务在响应中发送 302 状态码和Location头, 浏览器收到302就会转向到 Location头中设定的URL地址.</li>
+<li>如果服务器端希望重新转向新的URL地址(发起新的GET请求)时候使用重定向.</li>
+</ol>
+</li>
+</ol>
+<p>重构SaveEmpServlet利用重定向显示添加的结果:</p>
+<p><img src="2.png" /></p>
+<pre><code>if(n==1) {
+    String url= request.getContextPath()+&quot;/list-emp&quot;;
+    response.sendRedirect(url); 
+}else {
+    //失败
+    request.setAttribute(&quot;message&quot;, &quot;添加失败!&quot;);
+    request.getRequestDispatcher(
+            &quot;/WEB-INF/jsp/message.jsp&quot;)
+            .forward(request, response);
+}
+</code></pre>
+
+<h2>实现删除功能:</h2>
+<p>原理:</p>
+<p><img src="3.png" /></p>
+<p>步骤:</p>
+<ol>
+<li>
+<p>EmpDao中添加delete方法</p>
+<pre><code>/**
+ * 按照员工号删除员工信息
+ */
+public int delete(int empno) {
+    String sql=&quot;delete from t_emp where empno=?&quot;;
+    try(Connection conn=DBUtil.getConnection()){
+        PreparedStatement ps=
+                conn.prepareStatement(sql);
+        ps.setInt(1, empno);
+        int n = ps.executeUpdate();
+        return n;
+    }catch(Exception e) {
+        e.printStackTrace();
+        throw new RuntimeException(e);
+    }
+}
+</code></pre>
+
+</li>
+<li>
+<p>测试:</p>
+<pre><code>@Test
+public void testDeleteEmp() {
+    EmpDao dao = new EmpDao();
+    int n = dao.delete(4);
+    System.out.println(n); 
+}
+</code></pre>
+
+</li>
+<li>
+<p>修改list-emp2.jsp 添加删除链接:</p>
+<pre><code>&lt;table class=&quot;table table-bordered&quot;&gt;
+&lt;tr&gt;
+  &lt;th style=&quot;width: 10px&quot;&gt;#&lt;/th&gt;
+  &lt;th&gt;姓名&lt;/th&gt;
+  &lt;th&gt;老板&lt;/th&gt;
+  &lt;th&gt;入职日期&lt;/th&gt;
+  &lt;th&gt;部门编号&lt;/th&gt;
+  &lt;th&gt;薪资&lt;/th&gt;
+  &lt;th&gt;提成&lt;/th&gt;
+  &lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;% 
+  List&lt;Emp&gt; list =
+      (List&lt;Emp&gt;)request.getAttribute(&quot;list&quot;);
+%&gt;              
+&lt;%for(Emp emp:list){%&gt;  
+&lt;tr&gt;
+  &lt;td&gt;&lt;%=emp.getEmpno()%&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;%=emp.getEname()%&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;%=emp.getMgr()%&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;%=emp.getHiredate()%&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;%=emp.getDeptno()%&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;%=emp.getSalary()%&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;%=emp.getComm()%&gt;&lt;/td&gt;
+  &lt;!-- onclick中出现&quot;return false&quot; 则会阻止事件
+  -点击事件的响应 --&gt;
+  &lt;td&gt;&lt;a onclick=&quot;return confirm('真的删除?吗?')&quot; 
+    href=&quot;delete?empno=&lt;%=emp.getEmpno()%&gt;&quot; 
+    class=&quot;btn btn-danger btn-xs&quot;
+    &gt;&lt;i class=&quot;fa fa-fw fa-remove&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;%}%&gt;
+&lt;/table&gt;
+</code></pre>
+
+</li>
+<li>
+<p>编写Servlet</p>
+<pre><code>public class DeleteEmpServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(
+            HttpServletRequest request, 
+            HttpServletResponse response) 
+        throws ServletException, IOException {
+        String no = request.getParameter(&quot;empno&quot;);
+        //请自行打桩测试接收到的参数是否有效
+        int empno = Integer.parseInt(no);
+        //调用EmpDao删除数据
+        EmpDao dao = new EmpDao();
+        int n = dao.delete(empno);
+        if(n==1) {
+            //重定向到 员工列表页面, 显示结果
+            String path=request.getContextPath()+
+                    &quot;/list-emp&quot;;
+            response.sendRedirect(path);
+        } else {
+            //转发到message.jsp显示错误消息
+            request.setAttribute(&quot;message&quot;, &quot;删除失败&quot;);
+            request.getRequestDispatcher(
+                    &quot;/WEB-INF/jsp/message.jsp&quot;)
+                    .forward(request, response); 
+        }
+    }
+
+}
+</code></pre>
+
+</li>
+<li>
+<p>测试</p>
+</li>
+</ol>
+<h2>作业</h2>
+<ol>
+<li>实现部门表的web界面: 列表, 添加, 删除功能</li>
+<li>
+实现常见联系人信息的web界面: 列表, 添加, 删除功能
+<ol>
+<li>联系人信息属性: 编号, 姓名, 性别, 年龄, 地址, 电话, IM</li>
+</ol>
+</li>
+<li>思考: 如何实现修改功能</li>
+</ol>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

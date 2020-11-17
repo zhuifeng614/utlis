@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DAY01</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h3>1. Spring框架</h3>
+<h4>1.1. 框架</h4>
+<p>框架是它人编写好的一段程序，可能表现为一系列的jar包，每种框架都解决了某些问题，当需要时，在开发项目时添加相关的jar包，使用这些框架，在开发项目时就可以不必关心某些细节问题。</p>
+<p>许多框架都约定了特定的编程方式，是对传统编程方式的改进，大多数框架可以使得编程更加简单。</p>
+<p>使用框架的同时，也需要遵守框架的运行机制和相关的约定。</p>
+<h4>1.2. 需要掌握的框架</h4>
+<p>主要学习SSM框架，即：Spring + SpringMVC + Mybatis。</p>
+<p>另有SpringBoot框架。</p>
+<h4>1.3. Spring框架的作用</h4>
+<p>Spring框架的主要作用是创建和管理对象！</p>
+<p>Spring框架可以实现项目中各组件的<strong>解耦(解除耦合度)</strong>，<strong>降低<strong>项目中各组件之间的</strong>依赖</strong>关系！</p>
+<p>假设存在用户注册的处理：</p>
+<pre><code>public class UserServlet {
+
+    public UserDao userDao = new UserDao();
+
+    public void doPost() {
+        // 调用UserDao对象的reg()方法实现注册
+        userDao.reg();
+    }
+
+}
+
+public class UserDao {
+
+    public void reg() {
+    }
+
+}
+</code></pre>
+
+<p>在以上代码中，UserServlet本身是不处理JDBC相关操作的，当需要执行注册(向数据库中插入数据)时，将调用UserDao对象的方法来执行，则称之为“UserServlet依赖了UserDao”！</p>
+<p>假设UserDao中的代码有问题，例如编写的执行效率不高，或者有浪费资源，甚至后期需要使用新技术来实现，都可能导致UserDao需要被替换另一个新的例如UserDao2，当出现这种替换需求时，如果原有的代码需要进行较多的改动，则称之为“耦合度较高”，反之，如果原有的代码几乎不需要改动，则称之为“耦合度较低”，通常，提倡使用耦合度低的编码方式！</p>
+<p>以上演示代码中，体现了依赖关系的就是在<code>UserServlet</code>中的：</p>
+<pre><code>public UserDao userDao = new UserDao();
+</code></pre>
+
+<p>如果需要将<code>UserDao</code>替换为<code>UserDao2</code>，则代码需要改为：</p>
+<pre><code>public UserDao2 userDao = new UserDao2();
+</code></pre>
+
+<p>当需要优化此代码时，可以：</p>
+<pre><code>public interface IUserDao {
+    void reg();
+}
+
+public class UserDao implements IUserDao {
+}
+
+public class UserDao2 implements IUserDao {
+} 
+</code></pre>
+
+<p>则原有的代码就可以调整为使用接口声明所需要的对象：</p>
+<pre><code>public IUserDao userDao = new UserDao2();
+</code></pre>
+
+<p>则无论使用哪个实现类，以上代码中的声明部分是不需要调整的！</p>
+<p>另外，还可以通过设计模式中的工厂模式来创建对象：</p>
+<pre><code>public class UserDaoFactory {
+    public static IUserDao newInstance() {
+        return new UserDao2();
+    }
+}
+</code></pre>
+
+<p>然后，代码可以进一步调整为：</p>
+<pre><code>public IUserDao userDao = UserDaoFactory.newInstance();
+</code></pre>
+
+<p>则后续需要使用<code>IUserDao</code>对象时，声明成以上代码即可，如果需要更换具体的实现类对象，也只需要修改工厂类中的返回值，类似以上声明的代码，无论在项目中出现过多少次，都是不需要调整的！</p>
+<p>所以，总的看来，通过工厂来创建对象，前期编写的代码会更多一些，但是，可以实现“解耦”的效果，后期的管理难度会大大的降低！</p>
+<p>在实际项目开发中，不可能为所有的类或者大量的类去设计专属工厂，而Spring框架就相当于一个大工厂，可以生产我们配置的、希望它去生产的所有对象！后续，当需要获取对象时，直接通过Spring获取即可，并不需要自己创建对象，所以，Spring框架也被称之为“Spring容器”。</p>
+<h4>1.4. Spring Demo</h4>
+<p>创建<code>Maven Project</code>，创建时勾选<code>Create a simple project</code>，<strong>Group Id</strong>输入<code>cn.tedu.spring</code>，<strong>Artifact Id<strong>输入<code>SPRING-01</code>(本应该也是包名的一部分，但是，暂且作为项目名)，</strong>Packaging</strong>选择<code>war</code>(也可以是jar，后续实际使用的其实都会是war)。</p>
+<p>创建出来的项目默认没有<strong>web.xml</strong>文件，作为WEB项目来说是错误的，所以，需要先生成该文件。</p>
+<p>然后，需要添加所以依赖的框架，在<strong>pom.xml</strong>中添加<code>&lt;dependencies&gt;</code>节点，然后，在子级中添加<code>spring-webmvc</code>的依赖(其实，目前只要使用<code>spring-context</code>依赖，而<code>spring-webmvc</code>中包含该依赖，后续学习SpringMVC框架时就必须使用<code>spring-webmvc</code>)：</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+    &lt;version&gt;4.3.8.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>如果下载的jar包有问题，可以将版本替换为<code>4.3.0</code>至<code>4.3.16</code>中除了<code>4.3.11</code>和<code>4.3.15</code>以外的任何版本并再次尝试。</p>
+<p>目前，对使用的Spring的要求是<strong>不低于4.2版本</strong>。</p>
+<p>当项目创建完成后，下载http://doc.tedu.cn/config/spring-context.zip文件，将压缩包中的文件<strong>applicationContext.xml</strong>复制到项目中的<strong>src/main/resources</strong>中。</p>
+<p>假设希望通过Spring创建<code>java.util.Date</code>类的对象，则应该在<strong>applicationContext.xml</strong>中添加配置：</p>
+<pre><code>&lt;!-- id:当从Spring容器中获取该对象时使用的名称 --&gt;
+&lt;!-- class:需要创建的类 --&gt;
+&lt;bean id=&quot;date&quot; class=&quot;java.util.Date&quot;&gt;&lt;/bean&gt;
+</code></pre>
+
+<p>接下来，可以通过单元测试查看配置效果，需要先添加单元测试的依赖：</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;version&gt;4.12&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>然后，在<strong>src/test/java</strong>下创建<code>cn.tedu.spring.TestCase</code>测试类：</p>
+<pre><code>public class TestCase {
+
+    @Test
+    public void getDate() {
+        // 1. 加载Spring配置文件，获得Spring容器
+        ClassPathXmlApplicationContext ac
+            = new ClassPathXmlApplicationContext(
+                &quot;applicationContext.xml&quot;);
+
+        // 2. 从Spring容器中获取对象
+        Date date = (Date) ac.getBean(&quot;date&quot;);
+
+        // 3. 测试所获取的对象
+        System.out.println(date);
+
+        // 4. 关闭Spring容器，释放资源
+        ac.close();
+    }
+
+}
+</code></pre>
+
+<h4>1.5. 通过Spring创建对象的方式</h4>
+<p><strong>(a) 类中存在无参数的构造方法（实用，掌握）</strong></p>
+<p>以<code>java.util.Date</code>类为例，当Spring创建对象时，会自动调用其无参数构造方法。</p>
+<p>在Spring的配置文件中，配置方式为：</p>
+<pre><code>&lt;bean id=&quot;date&quot; class=&quot;java.util.Date&quot;&gt;&lt;/bean&gt;
+</code></pre>
+
+<p>如果某个类中并不存在无参数的构造方法，则不可以通过这种方式进行配置。</p>
+<p><strong>(b) 类中存在静态工厂方法（不实用，了解）</strong></p>
+<p>如果某个类中存在某个<code>static</code>修饰的方法，且方法的返回值类型就是当前类的类型，例如<code>java.util.Calendar</code>类就是如此：</p>
+<pre><code>public abstract class Calendar {
+    public static Calendar getInstance() {
+        // ...
+    }
+}   
+</code></pre>
+
+<p>符合这种条件的类，可以配置为：</p>
+<pre><code>&lt;!-- (b) 类中存在静态工厂方法 --&gt;
+&lt;!-- factory-method:工厂方法的名称 --&gt;
+&lt;bean id=&quot;calendar&quot; 
+    class=&quot;java.util.Calendar&quot;
+    factory-method=&quot;getInstance&quot;&gt;
+&lt;/bean&gt;
+</code></pre>
+
+<p><strong>(c) 存在实例工厂方法（更不实用，了解）</strong></p>
+<p>在其他类中，存在某个工厂方法，可以创建指定的类的对象，例如：</p>
+<pre><code>public class Phone {
+    public Phone(String name) {
+    }
+}
+
+public class PhoneFactory {
+    public Phone newInstance() {
+        return new Phone(&quot;HuaWei&quot;);
+    }
+}
+</code></pre>
+
+<p>当需要Spring创建<code>Phone</code>对象时，可以让Spring先创建<code>PhoneFactory</code>的对象(实例)，然后调用该对象的<code>newInstance()</code>方法，即可获取<code>Phone</code>的对象，从而完成对象的创建过程。</p>
+<p>具体配置为：</p>
+<pre><code>&lt;!-- (c) 存在实例工厂方法 --&gt;
+&lt;!-- factory-bean:配置为工厂类的bean-id --&gt;
+&lt;bean id=&quot;phoneFactory&quot; 
+    class=&quot;cn.tedu.spring.PhoneFactory&quot;&gt;
+&lt;/bean&gt;
+&lt;bean id=&quot;phone&quot;
+    class=&quot;cn.tedu.spring.Phone&quot;
+    factory-bean=&quot;phoneFactory&quot;
+    factory-method=&quot;newInstance&quot;&gt;
+&lt;/bean&gt;
+</code></pre>
+
+<p><strong>小结</strong></p>
+<p>一般情况下，应该保证类中存在无参数构造方法，便于Spring创建和管理对象。</p>
+<p>以上列举了3种情况，可以使得Spring创建对象，但是，通过静态工厂方法和通过实例工厂方法创建对象的要求比较苛刻，一般不使用！</p>
+<p>另外，并不代表其他情况下不可以由Spring创建对象，例如某个类的构造方法都是由参数的，也可以通过配置来创建对象（参见后续的知识点：通过构造方法注入属性的值）。</p>
+<h4>1.6. 由Spring管理的对象的作用域与生命周期</h4>
+<p><strong>(a) 由Spring管理的对象的作用域</strong></p>
+<p>单例：单一实例，在某个时刻，可以获取到的同一个类的对象将有且仅有1个，如果反复获取，并不会得到多个实例。</p>
+<p>单例是一种设计模式，其代码格式可以是：</p>
+<pre><code>public class King {
+    private static King king = new King();
+
+    private King() {
+    }
+
+    public static King getInstance() {
+        return king;
+    }
+}
+</code></pre>
+
+<p>以上单例模式也称之为“饿汉式单例模式”，其工作特性为“程序运行初期就已经创建了该类的实例，随时获取实例时，都可以直接获取”，还有另外一种单例模式是“懒汉式单例模式”，其工作特性为“不到逼不得已不会创建类的对象”，其代码是：</p>
+<pre><code>public class King {
+    private static final Object LOCK = new Object();
+
+    private static King king;
+
+    private King() {
+    }
+
+    public static King getInstance() {
+        if (king == null) {
+            synchronized (LOCK) {
+                if (king == null) {
+                    king = new King();
+                }
+            }
+        }
+        return king;
+    }
+}
+</code></pre>
+
+<p>理论上来说，懒汉式的单例模式可能可以节省一部分性能消耗，例如整个系统运行了30分钟之后才获取对象的话，则前30分钟是不需要创建对象的！但是，这种优势只是理论上的优势，在实际应用时，2种单例模式的差异表现的并不明显！</p>
+<p>通过以上单例模式的设计方式，可以发现单例的对象都是使用了<code>static</code>修饰的！所以，具有“唯一、常驻”的特性！</p>
+<p>在Spring管理对象时，可以配置<code>lazy-init</code>属性，以配置是否为懒汉式的单例模式：</p>
+<pre><code>&lt;!-- lazy-init：是否懒加载，取值为true或false(默认) --&gt;
+&lt;bean id=&quot;user&quot; 
+    class=&quot;cn.tedu.spring.User&quot;
+    lazy-init=&quot;true&quot;&gt;
+&lt;/bean&gt;
+</code></pre>
+
+<p>在Spring管理对象时，可以配置<code>scope</code>属性，以配置类的对象是否是单例的：</p>
+<pre><code>&lt;!-- scope:是否单例，取值为singleton(默认，单例)或prototype(非单例) --&gt;
+&lt;bean id=&quot;user&quot; 
+    class=&quot;cn.tedu.spring.User&quot;
+    scope=&quot;prototype&quot;&gt;
+&lt;/bean&gt;
+</code></pre>
+
+<p><strong>(b) 由Spring管理的对象的生命周期</strong></p>
+<p>生命周期描述了某个对象从创建到销毁的整个历程，在这个历程中，会被调用某些方法，这些方法就是生命周期方法，学习生命周期的意义在于了解这些方法的调用特征，例如何时调用、调用次数，以至于开发功能时，可以将正确的代码重写在正确的方法中！</p>
+<p>以Servlet为例，其生命周期方法主要有<code>init()</code>、<code>service()</code>、<code>destroy()</code>，其中，<code>init()</code>和<code>destroy()</code>都是只执行1次的方法，而<code>service()</code>在每次接收到请求时都会被调用，且<code>init()</code>方法是创建对象之后就会执行的方法，<code>destroy()</code>是销毁对象的前一刻执行的方法，所以，如果有某个流对象需要初始化，初始化的代码写在<code>destroy()</code>方法中就是不合适的！反之，如果要销毁流对象，也不能把代码写在<code>init()</code>中！</p>
+<p>由Spring管理的单例对象也并不是开发人员完全可控的，即不知道何时创建的，何时销毁的，所以，Spring提供了“允许自定义初始化方法和销毁方法”的做法，开发人员可以自行定义2个方法分别表示初始化方法和销毁方法：</p>
+<pre><code>public class User {
+
+    public User() {
+        super();
+        System.out.println(&quot;创建User对象……&quot;);
+    }
+
+    public void init() {
+        System.out.println(&quot;初始化方法被调用……&quot;);
+    }
+
+    public void destroy() {
+        System.out.println(&quot;销毁方法被调用……&quot;);
+    }
+
+}
+</code></pre>
+
+<p>配置：</p>
+<pre><code>&lt;!-- init-method：初始化方法的名称 --&gt;
+&lt;!-- destroy-method：销毁方法的名称 --&gt;
+&lt;bean id=&quot;user&quot; 
+    class=&quot;cn.tedu.spring.User&quot;
+    init-method=&quot;init&quot;
+    destroy-method=&quot;destroy&quot;&gt;
+&lt;/bean&gt;
+</code></pre>
+
+<p>注意：生命周期方法的配置是建立在“单例”基础之上的，如果对象并不是单例的，讨论生命周期就没有意义了。</p>
+<h3>-------------------------------------------</h3>
+<h3>附1. 关于下载的jar包错误的解决方案</h3>
+<p><strong>解决方案1</strong></p>
+<p>更换所依赖的版本。</p>
+<p><strong>解决方案2</strong></p>
+<p>在Eclipse的Window菜单中选择Preferences，在弹出的对话框中，左侧选择Maven -&gt; User Settings，右侧的Local Repository就是本地仓库文件夹。</p>
+<p>先关闭Eclipse，本地仓库文件夹后，把错误的jar包文件所在的文件夹删除，然后，再次打开Eclipse，等待启动完成，对项目点击鼠标右键，选择Maven -&gt; Update Project，并在弹出的对话框中勾选<strong>Force Update ...</strong>再更新即可。</p>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

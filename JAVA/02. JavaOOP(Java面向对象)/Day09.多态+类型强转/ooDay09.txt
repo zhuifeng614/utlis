@@ -1,0 +1,574 @@
+Shoot射击游戏第一天:
+1.设计了6个对象类，创建World类并测试
+
+Shoot射击游戏第二天:
+1.给6个对象类添加构造方法，并测试
+
+Shoot射击游戏第三天:
+1.设计小敌机数组、大敌机数组、小蜜蜂数组、子弹数组，并测试
+2.设计FlyingObject超类，6个对象类继承超类
+3.给超类FlyingObject设计两个构造方法，6个派生类分别调用
+
+Shoot射击游戏第四天:
+1.将小敌机、大敌机、小蜜蜂数组合为FlyingObject数组，并测试
+2.在派生类中重写FlyingObject的step()方法
+3.画窗口
+
+Shoot射击游戏第五天:
+1.给类中成员添加访问控制修饰符
+2.给对象添加图片属性----Images图片工具类
+
+Shoot射击游戏第六天:
+1.设计窗口的宽和高为常量，适当地方做修改
+2.画对象:
+  1)想画对象需要先获取对象的图片，每个对象都能获取图片，
+    意味着获取图片行为为共有的行为，设计FlyingObject超类中，
+    每个对象获取图片的行为都是不一样的，所以设计为抽象方法
+    ----在FlyingObject中设计抽象方法getImage()来获取对象的图片
+  2)获取图片时需要考虑对象的状态，因为不同状态下获取的图片是不同的，
+    每个对象都有状态，所以将状态设计在FlyingObject超类中，
+    状态一般都设计为常量，分三个状态:LIFE、DEAD、REMOVE
+    设计state变量表示当前状态(默认LIFE活着的)
+    ----在FlyingObject中设计三个常量，一个变量state表示当前状态
+    在获取图片时需要判断对象的状态，每个对象都需要判断，
+    所以将判断状态行为设计在FlyingObject中，
+    每个对象判断状态的行为都是一样的，所以设计为普通方法
+    ----在FlyingObject中设计isLife()、isDead()、isRemove()
+  3)----重写getImage()获取对象图片
+    3.1)天空Sky，直接返回sky即可
+    3.2)子弹Bullet:
+        3.2.1)若活着呢，直接返回bullet即可
+        3.2.2)若死了呢，直接删除
+    3.3)英雄机Hero:
+        3.3.1)若活着呢，返回heros[0]和heros[1]来回切换
+    3.4)小敌机Airplane:
+        3.4.1)若活着呢，返回airplanes[0]即可
+        3.4.2)若死了呢，依次返回第2张到第5张的图，5后删除
+    3.5)大敌机BigAirplane:
+        3.5.1)若活着呢，返回bigairplanes[0]即可
+        3.5.2)若死了呢，依次返回第2张到第5张的图，5后删除
+    3.6)小蜜蜂Bee:
+        3.6.1)若活着呢，返回bees[0]即可
+        3.7.2)若死了呢，依次返回第2张到第5张的图，5后删除
+  4)图片有了则可以开画了，每个对象都能画，
+    意味着画对象为共有行为，所以设计在FlyingObject超类中，
+    每个对象画的方式都是一样的，所以设计为普通方法
+    ----在FlyingObject中设计paintObject()画对象
+  5)天空Sky需要画两张图，所以需重写超类的paintObject()
+    ----在Sky中重写paintObject()画对象
+  6)----在World中重写paint()，调用paintObject()画对象
+
+Shoot射击游戏第七天:
+1.敌人入场:
+  1)敌人是由窗口产生的，所以在World中设计nextOne()生成敌人对象
+  2)敌人入场为定时发生的，所以在run()中调用enterAction()实现敌人入场
+    在enterAction()中:
+      每400毫秒，获取敌人，enemies扩容，将装在最后一个位置上
+2.子弹入场:
+  1)子弹是由英雄机发射出来的，所以在Hero中设计shoot()生成子弹对象
+  2)子弹入场为定时发生的，所以在run()中调用shootAction()实现子弹入场
+    在shootAction()中:
+      每300毫秒，获取子弹，bullets扩容，数组的追加
+3.飞行物移动:
+  1)飞行物移动为共有行为，所以在FlyingObject中设计step()实现飞行物移动
+  2)飞行物移动为定时发生的，所以在run()中调用stepAction()实现飞行物移动
+    在stepAction()中:
+      天空动，遍历敌人敌人动，遍历子弹子弹动
+
+Shoot射击游戏第八天:
+1.英雄机随着鼠标移动:
+  1)英雄机动为英雄机的行为，所以在Hero中设计moveTo()实现英雄机随着鼠标动
+  2)英雄机移动为事件触发的，所以在侦听器中重写mouseMoved()鼠标移动事件
+    在mouseMoved()中:
+      获取鼠标的x和y坐标，调用Hero的moveTo()即可
+2.删除越界的敌人和子弹:
+  1)在FlyingObject中设计outOfBounds()判断敌人是否越界
+    在Bullet中重写outOfBounds()判断子弹是否越界
+  2)删除越界为定时发生的，所以在run()中调用outOfBoundsAction()删除越界敌人和子弹
+    在outOfBoundsAction()中:
+      声明不越界敌人/子弹数组，
+      遍历enemies/bullets，判断若对象不越界:
+        则将不越界对象添加到不越界敌人/子弹数组中
+      最后将不越界敌人/子弹数组复制到enemies/bullets中
+3.设计接口:
+  1)设计Enemy得分接口，Airplane和BigAirplane实现Enemy接口
+  2)设计Award奖励接口，Bee实现Award接口
+
+Shoot射击游戏第九天:
+1.子弹与敌人的碰撞:
+  1)在FlyingObject中设计hit()实现敌人与子弹的碰撞检测
+    在FlyingObject中设计goDead()实现飞行物去死
+    在Hero中设计addLife()增命、addDoubleFire()增火力
+  2)子弹与敌人的碰撞为定时发生的，所以在run()中调用bulletBangAction()实现子弹与敌人的碰撞
+    在bulletBangAction()中:
+      遍历子弹得子弹，遍历敌人得敌人，判断是否撞上了，
+      若撞上了:
+        敌人去死、子弹去死
+	判断若能得分，则强转为得分接口，玩家得分
+	    若为奖励，则强转为奖励接口，英雄机得奖励
+2.画分和画命:
+  1)在Hero中设计getLife()获取英雄机的命
+  2)在paint()中: 画分和画命
+
+
+
+
+回顾:
+1.接口:
+    引用数据类型，interface定义，只能包含常量和抽象方法
+    不能被实例化，需要被实现，实现类必须重写所有抽象方法
+    一个类可以实现多个接口，用逗号分隔，先继承后实现
+    接口可以继承接口(接口可以继承多个接口的)
+
+设计规则:
+1.将所有派生类所共有的属性和行为，抽到超类中-----抽共性
+2.所有派生类的行为都一样，设计为普通方法
+  所有派生类的行为都不一样，设计为抽象方法
+3.将部分派生类所共有的行为，抽到接口中
+  接口是对继承的单根性的扩展-------------实现多继承
+
+
+笔记:
+1.多态:
+  1)意义:
+    1.1)同一类型的引用，指向不同的对象时，有不同的实现
+        ----行为的多态:cut()、run()、step()、getImage()...
+    1.2)同一个对象，被造型为不同的类型时，有不同的功能
+        ----对象的多态:水、我...
+  2)向上造型/自动类型转换:
+    2.1)超类型的引用指向派生类的对象
+    2.2)能造型成为的数据类型有: 超类+所实现的接口
+    2.3)能点出来什么，看引用的类型
+  3)强制类型转换，成功的条件只有如下两种:
+    3.1)引用所指向的对象，就是该类型
+    3.2)引用所指向的对象，继承了该类或实现了该接口
+  4)强转时若不符合如上条件，则发生ClassCastException类型转换异常
+    建议:在强转之前先通过instanceof来判断引用的对象是否是该类型
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int score = 0; //玩家得分
+//子弹与敌人的碰撞
+public void bulletBangAction() {
+  for(int i=0;i<bullets.length;i++){
+    Bullet b = bullets[i];
+    for(int j=0;j<enemies.length;j++){
+      FlyingObject f = enemies[j];
+      if(f.isLife() && b.isLife() && f.hit(b)){ //撞上了
+        f.goDead();
+	b.goDead();
+
+        //Airplane(1)
+	//BigAirplane(3)
+	//BigYellowBee(8)
+        if(f instanceof Enemy){ //实现Enemy接口的都走这
+	  Enemy e = (Enemy)f;
+          score += e.getScore();
+	}
+
+        //Bee()
+	//BigYellowBee()
+	if(f instanceof Award){ //实现Award接口的都走这
+	  Award a = (Award)f
+	  int type = a.getAwardType();
+	  switch(type){
+	  case Award.DOUBLE_FIRE:
+	    hero.addDoubleFire();
+	    break;
+	  case Award.LIFE:
+	    hero.addLife();
+	    break;
+	}
+
+
+
+
+
+
+        ---------------复用性差，扩展性差，维护性差
+        if(f instanceof Airplane){
+	  Airplane a = (Airplane)f;
+          score += a.getScore();
+	}
+	if(f instanceof BigAirplane){
+	  BigAirplane ba = (BigAirplane)f;
+          score += ba.getScore();
+	}
+	if(f instanceof Bee){
+	  Bee be = (Bee)f;
+          int type = be.getAwardType();
+          switch(type){
+	  case Award.DOUBLE_FIRE:
+	    hero.addDoubleFire();
+	    break;
+	  case Award.LIFE:
+	    hero.addLife();
+	    break;
+	  }
+	}
+        if(f instanceof BigYellowBee){
+	  BigYellowBee byb = (BigYellowBee)f;
+          score += byb.getScore();
+	  int type = byb.getAwardType();
+          switch(type){
+	  case Award.DOUBLE_FIRE:
+	    hero.addDoubleFire();
+	    break;
+	  case Award.LIFE:
+	    hero.addLife();
+	    break;
+	  }
+	}
+
+
+      }
+    }
+  }
+}
+
+
+class BigYellowBee extends FlyingObject implements Enemy,Award{
+  重写getScore(){}
+  重写getAwardType(){}
+}
+
+
+
+
+
+
+
+
+
+
+
+若撞上了:
+1)子弹去死(DEAD)、敌人去死(DEAD)
+2)若被撞敌人为小敌机，则玩家得1分
+              大敌机，则玩家得3分
+              小蜜蜂，则英雄机得奖励(1条命、40火力值)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+子弹与敌人的碰撞:
+英雄机与敌人的碰撞:
+
+class FlyingObject{
+  //敌人撞子弹
+  public boolean hit(FlyingObject obj){
+    this:敌人
+    obj:子弹或英雄机
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+?处为何种数据类型:
+  既能接收子弹对象
+  也能接收英雄机对象
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Aoo o = new Boo(); //向上造型
+Boo o1 = (Boo)o; //符合条件1
+Inter1 o2 = (Inter1)o; //符合条件2
+
+if(o instanceof Boo){ //false
+  Boo o3 = (Boo)o;
+}
+
+//Coo o3 = (Coo)o; //ClassCastException类型转换异常
+
+System.out.println(o instanceof Boo);    //true
+System.out.println(o instanceof Inter1); //true
+System.out.println(o instanceof Coo);    //false
+
+
+interface Inter1{
+}
+class Aoo{
+}
+class Boo extends Aoo implements Inter1{
+}
+class Coo extends Aoo{
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+基本类型之间的强转------不会出错，只是有可能溢出或丢精度
+引用类型之间的强转------有可能发生异常
+
+
+
+
+
+
+
+
+
+
+
+
+//超类大，派生类小
+
+动物 o1 = new 老虎(); //自动类型转换(向上造型)
+
+老虎 o2 = new 动物();
+
+
+
+
+
+
+
+
+
+我 me = new 我();
+讲师        o1 = me;
+孩子他妈    o2 = me;
+老公的老婆  o3 = me;
+o1.授课();
+o2.揍他();
+o3.咬他();
+o3.收工资();
+
+me.授课();
+me.揍他();
+me.咬他();
+me.收工资();
+
+
+interface 讲师{
+  void 授课();
+}
+interface 孩子他妈{
+  void 揍他();
+}
+interface 老公的老婆{
+  void 咬他();
+  void 收工资();
+}
+class 我 implements 讲师，孩子他妈，老公的老婆{
+  public void 授课(){} 
+  public void 揍他(){}
+  public void 咬他(){}
+  public void 收工资(){}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+动物 o1 = new 老虎();
+动物 o2 = new 鱼();
+动物 o3 = new 鸟();
+o1.run(); //地
+o2.run(); //水
+o3.run(); //天
+
+abstract class 动物{
+  abstract void run();
+}
+class 老虎 extends 动物{
+  void run(){ 在地上跑 }
+}
+class 鱼 extends 动物{
+  void run(){ 在水里游 }
+}
+class 鸟 extends 动物{
+  void run(){ 在天上飞 }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+人 p1 = new 理发师();
+人 p2 = new 外科医生();
+人 p3 = new 演员();
+p1.cut(); //剪发
+p2.cut(); //开刀
+p3.cut(); //停止表演
+
+abstract class 人{
+  abstract void cut();
+}
+class 理发师 extends 人{
+  void cut(){ 剪发 }
+}
+class 外科医生 extends 人{
+  void cut(){ 开刀 }
+}
+class 演员 extends 人{
+  void cut(){ 停止表演 }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+项目功能:
+1.子弹与敌人的碰撞
+2.画分和画命
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+interface Inter1{
+}
+interface Inter2{
+}
+interface Inter3 extends Inter1,Inter2{
+}
+
+
+
+
+
+
+
+

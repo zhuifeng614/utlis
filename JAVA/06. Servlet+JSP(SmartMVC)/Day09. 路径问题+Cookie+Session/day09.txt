@@ -1,0 +1,330 @@
+# Servlet/JSP
+
+## 路径问题
+
+Web编程时候有3套路径体系
+
+1. 浏览器视角的Web路径
+2. Java Web 用于程序的路径体系
+3. 本地操作系统文件路径体系(以后讲)
+
+ContextPath路径： Java web应用程序部署在Web服务器时候的部署文件夹。
+
+浏览器视角的路径与Java WEB路径相差了一个ContextPath路径
+
+将Java Web路径映射到浏览器视角的Web路径有多种解决方案：
+
+1. 使用相对路径
+	1. 书写简单，当页面移动显示位置时候会css等资源加载失败出现404错误
+2. 利用 <c:url> 标签解决
+	1. <c:url> 标签就是解决将Java WEB路径转化为 浏览器视角绝对路径而设计的标签
+	2. 这个标签使用比较繁琐
+3. 利用EL表达式在路径前面添加ContextPath，这种方式简洁方便。
+	1. 在Servlet中将 contextPath保存到request中叫 root
+	2. 在页面中将所有 html 标签路径修改为 ${root}/...
+
+案例, 将全部emp功能移动到 /emp 中, 目的是为了后续增加权限管理功能
+
+修改 员工列表功能：
+
+1. 修改web.xml
+
+		<servlet>
+			<description></description>
+			<display-name>ListEmpServlet</display-name>
+			<servlet-name>ListEmpServlet</servlet-name>
+			<servlet-class>day05.ListEmpServlet</servlet-class>
+		</servlet>
+		<servlet-mapping>
+			<servlet-name>ListEmpServlet</servlet-name>
+			<url-pattern>/emp/list</url-pattern>
+		</servlet-mapping>
+	
+	> 此时查看网页/emp/list会看到很多 404 错误，导致很多css、js文件没有加载，因为路径上增加了一层emp造成了浏览器视角路径错误，找不到对应资源了。 
+
+2. 更新 ListEmpServlet, 将contextPath添加到request中，命名为root
+
+		//将context路径保存request中， 用于将
+		//Java WEB目录映射到 浏览器视角WEB目录
+		String contextPath = request.getContextPath();
+		request.setAttribute("root", contextPath);
+
+3. 更新 list-emp2.jsp 将全部html标签中的路径更新为 ${root}/
+
+		<link rel="stylesheet" href="${root}/bower_components/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="${root}/bower_components/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="${root}/bower_components/Ionicons/css/ionicons.min.css">
+		<link rel="stylesheet" href="${root}/dist/css/AdminLTE.min.css">
+		<link rel="stylesheet" href="${root}/dist/css/skins/skin-blue.min.css">
+
+		...
+
+		<!-- jQuery 3 -->
+		<script src="${root}/bower_components/jquery/dist/jquery.min.js"></script>
+		<!-- Bootstrap 3.3.7 -->
+		<script src="${root}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<!-- AdminLTE App -->
+		<script src="${root}/dist/js/adminlte.min.js"></script>
+
+4. 更新 header.jsp 
+
+		<img src="${root}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+		...
+		<img src="${root}/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+		...
+		<img src="${root}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+5. 更新 left-side.jsp
+
+		<img src="${root}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+6. 测试 /emp/list 
+
+更新其他的功能的URL，略
+
+## 状态保持问题: Cookies, Session
+
+由于HTTP协议是无持续状态的协议，所以在 HTTP协议 实现会话状态保持是一个挑战，目前主要的做法是采用 Cookies 和 Session 技术解决。 
+
+HTTP协议是无持续状态的？ 数据发送完毕，连接立即释放。 这种工作方式可以使用服务器的资源充分复用，可以为更多客户端服务。简称：无状态协议
+
+无状态协议：由于服务器服务结束以后，释放了连接，不再与客户端保持状态， 无法记住客户端， 如： 客户是否登录过。 
+
+### Cookies 技术
+
+Cookies 技术，是在HTTP协议基础之上实现状态保持技术，其工作原理与会员卡类似：
+
+1. 在客户端第一次来访时候，发会员卡。
+2. 服务端可以将信息记录到卡上。
+3. 客户端在每次来访时候， 都要带上会员卡用于识别身份。
+4. 状态信息记录在 会员卡 上。
+
+Cookies 原理：
+
+1. 在浏览器第一次来访时候，发Cookies。
+2. 服务器可以将信息记录到Cookies上。
+3. 浏览器在每次来访时候， 都要带上Cookies用于识别身份。
+4. 状态信息记录在 Cookies 上。
+
+> Cookie 饼干，当年 Netscape 公司设计了一个无厘头名字。
+
+Cookies的使用：
+
+1. Cookies 现在作为HTTP协议扩展功能，被浏览器广泛支持。
+2. Cookies 利用 HTTP 协议 消息头传送数据。 
+3. Cookies 是一个HTTP协议扩展标准，其协议头是严格规定的。
+4. Java Servlet API 提供Cookies API，只需要使用这些API就能自动下发Cookies，自动获取上传Cookies。
+
+Cookie中的特殊字符和中文
+
+由于Cookie是在Http协议头部传送的， Http协议头必须是 ISO8859-1 编码，并且不能使用特殊字符和中文。
+
+1. 利用 Escape 编码进行解决，是HTTP协议标准。
+2. 数据加入Cookie之前进行编码即可。
+3. Java 提供了编码API  
+
+		URLEncoder.encode("您好Cookie", "UTF-8")
+
+
+利用Java Servlet API 下发Cookie
+
+下发Cookie，response 对象上有下发Cookies API：
+
+	public class AddCookieServlet extends HttpServlet {
+		private static final long serialVersionUID = 1L;
+		/**
+		 *  请求路径 /add-cookie
+		 */
+		protected void doGet(
+				HttpServletRequest request, 
+				HttpServletResponse response) 
+			throws ServletException, IOException {
+			// 利用response下发一个Cookie到浏览器
+			
+			//1. 创建一个Cookie
+			Cookie cookie = new Cookie("message", 
+				URLEncoder.encode("Hello World!","UTF-8"));
+			Cookie cookie2 = new Cookie("test", 
+				URLEncoder.encode("您好Cookie", "UTF-8"));
+			
+			//2. 下发Cookie
+			response.addCookie(cookie);
+			response.addCookie(cookie2);
+			
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().print("OK"); 
+		}
+	
+	}
+
+## 读取request带回的Cookie
+
+request中提供了读取浏览器带回的Cookie数据方法，必要时候需要解码处理
+
+	public class GetCookieServlet extends HttpServlet {
+		private static final long serialVersionUID = 1L;
+	
+		/**
+		 * 请求路径 /get-cookie
+		 */
+		protected void doGet(HttpServletRequest request, HttpServletResponse response)
+				throws ServletException, IOException {
+			// 读取请求中带回Cookie
+			Cookie[] cookies = request.getCookies();
+			// 如果接收到任何Cookie，getCookies()返回null
+			if (cookies != null) {
+				for (Cookie cookie : cookies) {
+					System.out.print(cookie.getName() + ":");
+					System.out.println(
+						URLDecoder.decode(cookie.getValue(), "UTF-8"));
+				}
+			}
+	
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().println("OK");
+		}
+	
+	}
+
+## Cookie的属性
+
+### Cookie的生命时间
+
+1. 默认情况下， Cookie保存在浏览器内存中，浏览器关闭就会消失，适合保存与当前 浏览器会话 有关的数据。 
+2. 下发时候设置Cookie的存活时间，设置以后Cookie会保存在浏览器的硬盘上， 会长期保存， 再次打开浏览器，Cookie还在！ 适合保存长期有效的数据。 比如登录用户名。
+	1. 如： 记住用户名功能！可以使用Cookie实现
+3. 如果想删除Cookie，则设置存活时间为0 
+
+> 不要使用Cookie保存密码！！！！ 
+
+案例：
+
+	public class CookieAgeServlet extends HttpServlet {
+		private static final long serialVersionUID = 1L;
+		
+		/**
+		 * 请求路径 /cookie-age
+		 */
+		protected void doGet(
+				HttpServletRequest request,
+				HttpServletResponse response) 
+			throws ServletException, IOException {
+			//下发两个 Cookie 一个是默认是Cookie，一个是
+			//一天有效的，不关闭浏览器查看回送情况
+			//再次打开浏览器检查回送情况
+			
+			Cookie c1 = new Cookie("c1", "sort");
+			Cookie c2 = new Cookie("c2", "oneDay");
+			c2.setMaxAge(60*60*24); 
+			
+			//下发Cookie
+			response.addCookie(c1);
+			response.addCookie(c2);
+			
+			response.setContentType("text/html;charset=UTF-8");
+			response.getWriter().print("OK"); 
+		}
+	
+	}
+
+### Cookie的域名和路径
+
+1. 浏览器在保存Cookie时，每个网站保存一组对应Cookie，在发送时候发送到对应的网站。 根据域名区分不同的网站 
+2. 同一个网站的Cookie按照路径分级存储，回传时候按照路径级别回传：
+	1. 目录中可以收到当前目录的Cookie和上级目录的Cookie
+3. 下发Cookie时候，默认情况下按照当前目录层次保存Cookie，可以利用setPath属性设置Cookie的保存路径。
+
+案例：
+
+	public class SubCookieDemo extends HttpServlet {
+		private static final long serialVersionUID = 1L;
+		/**
+		 * 请求路径： /sub/cookie
+		 */
+		protected void doGet(
+				HttpServletRequest request,
+				HttpServletResponse response) 
+						throws ServletException, IOException {
+			//下发子目录 /sub 的Cookie
+			Cookie c3 = new Cookie("c3", "sub");
+			response.addCookie(c3);
+			
+			response.setContentType("text/html;charset=UTF-8");
+			response.getWriter().print("OK"); 
+		}
+	}
+
+## Session 原理
+
+Cookie的问题
+
+1. 不安全，可以被冒用，涂改
+2. 不能存储大量信息，一般不超过4K
+3. 只能存储文本
+4. Cookie保存在客户端不安全，不能存储敏感信息，如: 密码
+
+Session 在Cookie基础之上解决了安全问题。 
+
+Session解决问题的方案类似于 银行卡！
+
+1. Session将数据存储在 服务器 端
+2. Session利用Cookie存储了一个 号码，用于识别用户身份，称为SessionID
+3. 服务端设置了一个集合，这个集合就是Session，并且与SessionID绑定
+4. 第一次创建Session时候，服务器创建Session集合对象并且分配Session的ID，将Session ID自动下发到 浏览器Cookie。
+5. 第二次请求时候浏览器通过Cookie传送回 SessionID，服务器会找到对应Session集合。 为用户提供存储服务。 
+6. 当客户端SessionID丢失时或者浏览器离线以后，服务器会定时销毁Session。 默认是30分钟.
+
+Java 提供了Session API
+
+	HttpSession session = request.getSession();
+	session.setAttribute("msg", "Hello World!");
+
+案例将数据存储到Session中：
+
+	public class SetSessionServlet extends HttpServlet {
+		private static final long serialVersionUID = 1L;
+		/**
+		 * 请求路径 /set-session
+		 */
+		protected void doGet(
+				HttpServletRequest request, 
+				HttpServletResponse response) 
+			throws ServletException, IOException {
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("msg", "Hello World"); 
+			
+			response.setContentType("text/html");
+			response.getWriter().print("OK"); 
+			
+		}
+	
+	}
+
+从session读取数据：
+
+	public class GetSessionServlet extends HttpServlet {
+		private static final long serialVersionUID = 1L;
+	
+		/**
+		 * 请求路径 /get-session
+		 */
+		protected void doGet(
+				HttpServletRequest request, 
+				HttpServletResponse response) 
+			throws ServletException, IOException {
+			HttpSession session = request.getSession();
+			String msg = (String)session.getAttribute("msg");
+			System.out.println(msg);
+			
+			response.setContentType("text/html");
+			response.getWriter().println("OOK");
+		}
+	
+	}
+	
+## 作业
+
+1. 重新编写 员工管理功能，要求增加子目录 /emp
+2. 重构 联系人 管理，要求增加子目录 /contact
+

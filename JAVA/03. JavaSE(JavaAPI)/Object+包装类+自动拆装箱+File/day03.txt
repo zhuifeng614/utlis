@@ -1,0 +1,236 @@
+#内容回顾
+1. StringBuilder
+	1. 用于对字符串进行修改操作的，提供了对字符串编译操作对应的增，删，改，插操作
+		1. append(String)
+		2. delete(int start,int end);
+		3. replace(int start,int end,String str);
+		4. insert(int index,String str)
+		5. reverse()
+		6. toString()
+
+	- StringBuffer和StringBuilder的区别：
+		- 线程安全问题
+
+##正则表达式
+
+1. 字符集
+	1. 如何表示一位上的字符 []
+	2. 预定义字符集：
+		1. .
+		2. \d
+		3. \w
+		4. \s
+		5. \D	
+		6. \W
+		7. \S
+	3. 数量词：
+		1. ？
+		2. +
+		3. *
+		4. {n}
+		5. {n,} 
+		6. {n,m}
+	4. 分组():若想将多个部分当成一个整体
+		1. ()经常和|一起配合使用
+	5. 边界匹配符：
+		1. ^
+		2. $
+			1. String类中提供的matches方法自带边界匹配功能，完成的是完全匹配
+	6. String类提供的对正则的支持：
+		1. matches(regex):boolean
+		2. split(regex):String[]   
+		3. replaceAll(regex,String str):String
+
+
+#大纲
+
+##Object
+
+- Object是java提供的一个类，是所有类的父类
+	- toString()
+		- 返回该对象的字符串表示 
+			- 类名@散列码（整数）
+
+		- 当输出一个对象的引用时，会自动去调用所属类的toString()
+
+				java中建议：子类对toString()最好都进行重写，
+	使其更具有实际意义
+			
+				eclipse中生成toString()的步骤：
+					右键-->source-->Generate toString()
+	
+	- equals()
+		- 在Object类中作用等同于==的作用
+		- java中对此方法给出建议：
+			- 建议在子类中重写此方法，使其更具有实际意义
+				
+
+					Point点对象判断的步骤：
+						1. 写Point类
+							1. 私有的x,y
+							2. 生成公有的set和get方法
+							3. 生成构造方法
+							4. 重写toString()
+						2. 创建2个Point对象进行equals比较，看结果 - 不合符实际逻辑
+						3. 重写point中的equals方法，之后再次比较看结果 
+
+	练习：
+
+		Student:属性：id（学号）  name  age
+		测试类：
+			创建Student1 -- 1001  tom  23
+			创建Student2 -- 1001  tom  23
+
+		比较两个student对象--equals
+		 从代码角度：两个对象比较应该是不相等
+		 从实际意义：两个对象比较应该是相等的
+		
+		要求：student对象比较时，根据id判断是否相等
+
+
+
+##包装类
+
+###什么是包装类：
+
+- java中对8种基本类型都提供了对应的包装类，用于将数据包装成对象
+
+- java是面向对象的语言，基本数据类型不是对象，所以提供了包装类用于将基本类型数据包装成对象使用
+
+8种基本类型对应的包装类：
+
+	byte       Byte
+	short      Short
+	int		   Integer
+	long	   Long
+	float	   Float
+	double	   Double
+	char	   Character
+	boolean    Boolean
+
+8种包装类中实现的功能都类似，我们以Integer为例进行讲解：
+
+
+- 了解：
+	基本类型和包装类型，若用于计算，基本类型计算的比包装类型计算更快
+
+##Integer
+	
+- valueOf(int):Integer
+	- 得到int对应的包装类型对象
+- intValue():
+	- 从包装类型-->基本类型
+- parseInt(String):int
+	- String-->int
+	- 前提：String表示的值一定是可以转换成int类型才可以
+
+###自动拆装箱
+
+1. 装箱：将基本类型数据包装成包装类型
+	1. int-->Integer
+	2. 通过valueOf(int)完成的
+2. 拆箱：将包装类型数据拆成基本类型
+	1. Integer-->int
+	2. 通过intValue()实现的
+
+####自动装箱，自动拆箱
+
+- 自动装箱，自动拆箱是java从JDK1.5开始提供的功能，是编译器实现的
+
+	如何实现：编译过程中，编译器将Integer i = 3;替换成了
+		Integer i = Integer.valueOf(3);
+
+	
+- 案例：
+	
+		Integer i1 = new Integer(23);
+		Integer i2 = i1 + 4;
+		先自动拆箱 将i1拆成基本类型、
+		后自动装箱 将i1+4的结果由int-->Integer
+
+
+
+
+##文件操作-File
+
+- File：实现对文件的操作
+
+- 通过File对象可以实现对文件/目录的以下操作
+	1. 创建，删除文件/目录
+	2. 获取文件/目录的属性信息
+	3. 获取指定目录下的所有子项目
+
+- 构造方法：
+	- File(String path)
+	- File(File parent,String child)
+	- File(String parent,String child)
+
+- 方法：
+	
+	1. 创建文件
+		1. creatNewFile()
+	2. 创建目录
+		1. mkdir():创建一个目录
+		2. mkdirs()：创建多级目录
+
+				思考：如何在当前项目下创建 t/x/a.txt
+				
+				先创建目录，在目录下再创建文件
+
+	3. delete()：
+		1. 删除文件/目录，注意，若删除的目录下还有子文件/目录，删除失败
+	4. getName():String
+		1. 获取文件名称
+	5. length():long
+		1. 获取文件内容的大小（字节）
+		2. 对文件进行读写操作的基本单位是字节
+	6. exists():boolean
+		1. 判断文件是否存在
+		2. 通常和其他方法一起使用
+			1. eg:创建文件
+				1. 如果不存在，创建
+				2. 否则不创建，给出提示
+	7. isFile():boolean
+		1. 判断File对象指向的是否是文件 
+	8. isDirectory():boolean
+		1. 判断File对象指向的是否是目录 
+
+##总结：
+
+1. Object：所有类的父类
+	1. toString()
+		1. 建议在子类中重写此方法
+	2. equals(Object obj):
+		1. 等同于 == 
+		2. 建议重写此方法，根据内容去判断对象是否相等
+
+2. 包装类：
+	1. 8种基本类型都有对应的包装类
+		1. 注意int，char对应的包装类的类名
+	2. Integer:
+		1. valueOf(int):Integer
+		2. intValue():int
+		3. parseInt(String):int
+			1. 前提：String必须是可以转换成int的
+	3. 自动装箱，自动拆箱
+		1. 装箱： int -->Integer
+		2. 拆箱：Integer -- >int
+		3. java 从JDK1.5开始提供了自动拆装箱功能。是编译器实现的：是在编译过程中，将Integer i = 3替换成了
+			1. Integer.valueOf(3)
+
+3. 文件操作 - File
+	1. 构造方法：
+		1. File(String path)
+		2. File(File parent,String child)
+		3. File(String parent,String child)\
+	2. 方法：
+		1. creatNewFile()
+		2. mkdir()
+		3. mkdirs()
+		4. delete()
+		5. getName()
+		6. length()
+		7. exists()
+		8. isFile()
+		9. isDirectory() 
+

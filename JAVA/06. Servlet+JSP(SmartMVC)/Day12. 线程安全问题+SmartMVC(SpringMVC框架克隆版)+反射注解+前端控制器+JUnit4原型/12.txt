@@ -1,0 +1,24 @@
+# Servlet、JSP
+
+## 回顾
+
+1. 过滤器：拦截式编程，可以为软件增加横向功能
+2. ServletContext/Application：
+	1. 代表当前 Web 容器，用途不大
+	2. 共享全局数据，被所有Servlet、JSP共享的数据，常用！！
+	3. 常用方法：
+		1. getContextPath() 
+		2. getAttribute() 
+		3. setAttribute()
+		4. getRealPath() 将Java WEB路径映射到实际文件系统路径，用于调用文件系统操作API： File FileInputStream等
+3. Servlet 生命周期, 面试有人考
+4. 数据共享范围: page < request < session < application
+	1. EL/JSTL 会自动在4个范围按照从小到大依次寻找数据。
+	2. ${root}  ${loginUser.name}
+5. 监听器，由于ServletContextListener的方法是整个应用程序执行最早的，经常用于初始化应用程序环境。
+
+## 线程安全 
+
+
+
+## Smart MVC 

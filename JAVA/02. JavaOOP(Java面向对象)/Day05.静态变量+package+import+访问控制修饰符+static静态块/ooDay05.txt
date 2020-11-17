@@ -1,0 +1,514 @@
+Shoot射击游戏第一天:
+1.设计了6个对象类，创建World类并测试
+
+Shoot射击游戏第二天:
+1.给6个对象类添加构造方法，并测试
+
+Shoot射击游戏第三天:
+1.设计小敌机数组、大敌机数组、小蜜蜂数组、子弹数组，并测试
+2.设计FlyingObject超类，6个对象类继承超类
+3.给超类FlyingObject设计两个构造方法，6个派生类分别调用
+
+Shoot射击游戏第四天:
+1.将小敌机、大敌机、小蜜蜂数组合为FlyingObject数组，并测试
+2.在派生类中重写FlyingObject的step()方法
+3.画窗口
+
+Shoot射击游戏第五天:
+1.给类中成员添加访问控制修饰符
+2.给对象添加图片属性----Images图片工具类
+
+
+
+回顾:
+1.向上造型:
+  1)超类型的引用指向派生类的对象
+  2)能点出来什么，看引用的类型
+2.方法的重写(override):
+  1)发生在父子类中，方法名相同，参数列表相同，方法体不同
+  2)重写方法被调用时，看对象的类型
+3.重写与重载的区别:
+  1)重写:
+    1.1)发生在父子类中，方法名相同，参数列表相同，方法体不同
+    1.2)"运行期"绑定，看对象
+  2)重载:
+    2.1)发生在一个类中，方法名相同，参数列表不同，方法体不同
+    2.2)"编译期"绑定，看参数/引用
+
+
+
+
+
+
+笔记:
+1.package:
+  1)作用:避免类的命名冲突
+  2)包名可以有层次结构 类的全称: 包名.类名
+  3)同包中的类不能同名
+  4)建议:包名所有字母都小写
+  import:
+  1)同包中的类可以直接访问，
+    不同包中的类不能直接访问，想访问如下两种方式:
+    1.1)先import声明类再使用类-------建议
+    1.2)类的全称---------------------太繁琐，不建议
+2.访问控制修饰符:
+  1)public:公开的，任何类
+  2)private:私有的，本类
+  3)protected:受保护的，本类、派生类、同包类
+  4)默认的:什么也不写，本类、同包类
+  说明:
+    1)类的访问控制修饰符只能是public和默认的
+    2)类中成员的访问控制修饰符如上4种都可以
+3.final:最终的、不可改变的-----单独应用率极低
+  1)修饰变量:变量不能被改变
+  2)修饰方法:方法不能被重写
+  3)修饰类:类不能被继承
+4.static:静态的
+  1)静态变量:
+    1.1)由static修饰
+    1.2)属于类，存在方法区中，只有一份
+    1.3)常常通过类名点来访问
+    1.4)何时用:所有对象所共享的数据(图片、音频、视频等)
+  2)静态方法:
+    2.1)由static修饰
+    2.2)属于类，存在方法区中，只有一份
+    2.3)常常通过类名点来访问
+    2.4)静态方法没有隐式this传递的，
+        在静态方法中不能直接访问实例成员
+    2.5)何时用:方法的操作仅与参数相关而与对象无关时
+  3)静态块:
+    3.1)由static修饰
+    3.2)属于类，在类被加载期间自动执行，
+        因类只被加载一次，所以静态块只执行一次
+    3.3)何时用:加载/初始化静态资源(图片、音频、视频等)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+API--------------手册
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+实例变量----------一般在构造方法中做初始化
+静态变量----------一般在静态块中做初始化
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Arrays.sort(arr);
+
+  无论a1,a2,a3,...,a100中的哪一个对象，
+  去sort(arr)，最终的结果都是一样的
+  说明sort()的操作与对象无关而仅与参数相关
+
+
+假设sort()不是静态的:
+  Arrays a1 = new Arrays();
+  a1.sort(arr); //对arr进行升序排列
+
+  Arrays a2 = new Arrays();
+  a2.sort(arr); //对arr进行升序排列
+
+  Arrays a3 = new Arrays();
+  a3.sort(arr); //对arr进行升序排列
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+说明:
+  无论是m1,m2,m3,...,m100中的哪一个对象，
+  去sqrt(25)，最终的结果都是一样的
+  说明sqrt()的操作与对象无关而仅与参数相关
+
+
+假设sqrt()不是静态的:
+  Math m1 = new Math();
+  double a = m1.sqrt(25); //5.0
+
+  Math m2 = new Math();
+  double b = m2.sqrt(25); //5.0
+
+  Math m3 = new Math();
+  double c = m3.sqrt(25); //5.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scanner scan = new Scanner(System.in);
+int a = scan.nextInt();
+double b = scan.nextDouble();-----------实例方法
+
+double c = Math.random();
+double d = Math.sqrt(25);
+Arrays.sort(arr);-----------------------静态方法
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+实例变量多还是静态变量多?------------实例变量多
+实例方法多还是静态方法多?------------实例方法多
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+吃鸡---------------map.png
+百度音乐-----------那个女孩.mp3
+爱奇艺-------------权力游戏第1集.avi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+堆:new出来的对象(包括实例变量)
+栈:局部变量(包括方法的参数)
+方法区:.class字节码文件(包括方法、静态变量)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+成员变量:
+1)实例变量:没有static修饰，属于对象，存在堆中，
+           有几个对象就有几份
+           通过对象名来访问
+2)静态变量:由static修饰，属于类，存在方法区中，
+           只有一份
+	   通过类名点来访问
+
+
+
+
+
+
+
+
+
+
+
+class Aoo{
+  int a;
+  static int b;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+数据(变量)私有化(private)
+行为(方法)公开化(public)
+
+class Card{
+  private String cardId;
+  private String cardPwd;
+  private double balance;
+
+  public boolean payMoney(double money){ //支付金额
+    if(balance>=money){
+      balance-=money;
+      return true;
+    }else{
+      return false;
+    }
+  }
+  public boolean checkPwd(String pwd){ //检测密码
+    if(pwd.equals(cardPwd)){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import java.util.Scanner;
+Scanner scan = new Scanner(System.in);
+int a = scan.nextInt();
+double b = scan.nextDouble();
+String s = scan.nextLine();
+
+package java.util;
+class Scanner{
+  Scanner(Stream s){
+  }
+  int nextInt(){
+  }
+  double nextDouble(){
+  }
+  String nextLine(){
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A公司:
+  package a.b.c;
+  class Aoo{
+  }
+
+B公司:
+  package a.b.c;
+  class Aoo{
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+建议:
+    域名反写  .  项目名称  .  模块名称     .  类名
+    cn.tedu   .  aproject  .  stumanager   .
+    cn.tedu   .  aproject  .  teachmanager .
+
+
+
+
+
+
+
+
+
+
+
+
+    cn.tedu   .  bproject  .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    com.taobao
+    com.baidu
+
+
+
+
+
+package a.b.c.d.e;
+class Aoo{ //a.Aoo
+}
+
+package b.y.s.f.y;
+class Aoo{ //b.Aoo
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Java项目---------------小区
+Java包-----------------楼+单元
+Java类-----------------房子
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

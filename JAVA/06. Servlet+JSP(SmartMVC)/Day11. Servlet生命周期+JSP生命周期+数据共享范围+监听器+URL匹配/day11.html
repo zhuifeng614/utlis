@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>day11</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>Servlet/JSP</h1>
+<h2>回顾</h2>
+<ol>
+<li>
+<p>Cookie  Session</p>
+<ol>
+<li>Cookie 是长期保存在浏览器端的短数据。 适合保存登录用户名，保存长期登录状态，等数据。 不能保存敏感数据。</li>
+<li>Session 利用Cookie实现的用户会话状态保持技术。 Session ID 不是 Session， Session ID 保存在浏览器的Cookie中，Session对象保存在服务器中。 Session 中什么保存，可以保存敏感信息。 每个用户浏览器对应一个Session，无论发生多少次请求，都是对应一个Session。 可以用于会话状态保持，如保存登录状态。</li>
+<li>
+<p>Session超时: 默认30分钟会超时删除。 从最后一次访问开始超过30分钟销毁Session。 可以在 web.xml 中修改Session过期时间。    
+</p>
+<p>&lt;session-config&gt;
+	&lt;session-timeout&gt;20&lt;/session-timeout&gt; 
+&lt;/session-config&gt;</p>
+</li>
+</ol>
+</li>
+<li>
+<p>过滤器： 可以拦截任何Web请求，可以对Web请求添加过滤规则逻辑。</p>
+<ol>
+<li>可以拦截对Servlet请求，可以不改变Servlet情况下，为Servlet扩展功能。 时候增加整体性的拦截功能，如：权限检查。</li>
+</ol>
+</li>
+</ol>
+<h2>过滤器解决授权问题（权限检查）</h2>
+<p>目标： 对于 /emp/* 等路径的请求进行拦截，如果登录了才能使用。 </p>
+<p>Servlet、Filter的路径匹配规则：</p>
+<ol>
+<li>
+精确匹配：精确匹配一个具体的URL
+<ol>
+<li>/emp/list</li>
+<li>/emp/add</li>
+</ol>
+</li>
+<li>
+路径匹配：匹配路径下一系列URL
+<ol>
+<li>/emp/*</li>
+<li>/user/*</li>
+<li>/dept/*</li>
+</ol>
+</li>
+<li>
+后缀匹配或扩展名匹配: 满足后缀条件的被匹配上
+<ol>
+<li>*.html</li>
+<li>*.do</li>
+<li>*.png</li>
+</ol>
+</li>
+<li>
+任意匹配: 全部都匹配
+<ol>
+<li>/</li>
+<li>/* </li>
+</ol>
+</li>
+</ol>
+<p>原理：</p>
+<p><img src="acl.png" /></p>
+<p>案例步骤：</p>
+<ol>
+<li>
+<p>添加过滤器检查权限</p>
+<pre><code>/**
+ * 访问控制过滤器：只有登录的用户才能通过访问
+ */
+public class AccessFilter implements Filter {
+    @Override
+    public void doFilter(
+            ServletRequest request,
+            ServletResponse response, 
+            FilterChain chain)
+            throws IOException, ServletException {
+        //转换request和response对象的类型，这样可以
+        //使用更多的API方法
+        HttpServletRequest req=(HttpServletRequest)request;
+        HttpServletResponse res=(HttpServletResponse)response;
+        HttpSession session = req.getSession();
+        User loginUser = 
+            (User)session.getAttribute(&quot;loginUser&quot;);
+        if(loginUser==null) {
+            System.out.println(&quot;没有登录，转到登录&quot;); 
+            //没有登录，重定向到登录页面，不执行后续链节
+            String login=req.getContextPath()+
+                    &quot;/user/start-login&quot;;
+            res.sendRedirect(login);
+            return; //不执行后续链节
+        }
+        //执行后续链节，就是执行后续的Servlet
+        System.out.println(&quot;登录成功，继续执行&quot;); 
+        chain.doFilter(req, res); 
+    }
+
+    @Override
+    public void init(FilterConfig arg0) throws ServletException {
+    }
+
+    @Override
+    public void destroy() {
+    }
+}
+</code></pre>
+
+</li>
+<li>
+<p>配置：</p>
+<pre><code>&lt;filter&gt;
+    &lt;filter-name&gt;acl&lt;/filter-name&gt;
+    &lt;filter-class&gt;day11.AccessFilter&lt;/filter-class&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;acl&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/emp/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;acl&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/dept/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;acl&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/photo/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+</code></pre>
+
+</li>
+<li>
+<p>测试...</p>
+</li>
+</ol>
+<p>过滤器可以叠加使用，方便灵活的重构</p>
+<p><img src="filter.png" /></p>
+<pre><code>&lt;filter&gt;
+    &lt;filter-name&gt;demo&lt;/filter-name&gt;
+    &lt;filter-class&gt;day10.DemoFilter&lt;/filter-class&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;demo&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/target&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;demo&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/emp/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+</code></pre>
+
+<h2>ServletContext/Application</h2>
+<p>ServletContext： Servlet上下文，也就是当前Servlet的运行环境,就代表当前的容器对象，ServletContext API方法提供了与当前容器有关的方法。</p>
+<p>SertvletContext提供了数据共享功能，其共享范围是全部的Servlet和JSP</p>
+<p>案例 获取当前服务器的版本信息：</p>
+<pre><code>public class ContextDemoServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 演示 ServletContext 的功能
+     * 请求URL /context-demo
+     */
+    protected void doGet(
+        HttpServletRequest request, 
+        HttpServletResponse response) 
+            throws ServletException, IOException {
+        //1. 获得ServletContext: getServletContext()
+        //方法是在 HttpServlet类上定义，调用这个方法
+        //可以获得ServletContext对象， ServletContext对象
+        //是单例对象，任何方法得到的ServletContext对象
+        //都是同一个对象
+        ServletContext ctx = getServletContext();
+        // ServletContext 代表Servlet的工作环境，也就是
+        // 代表当前的Web Server, getServerInfo() 方法
+        // 可以获得当前服务器的 名称和版本
+        String str = ctx.getServerInfo();
+        System.out.println(str);
+        response.setContentType(&quot;text/html;charset=UTF-8&quot;);
+        response.getWriter().print(&quot;OK&quot;); 
+    }
+
+}
+</code></pre>
+
+<h2>Servlet生命周期</h2>
+<p>Servlet对象从创建到使用，以及最后销毁的过程</p>
+<p>原理:</p>
+<p><img src="life.png" /></p>
+<p>利用Servlet init方法解决ContextPath初始化问题：</p>
+<p><img src="ctx.png" /></p>
+<ol>
+<li>
+<p>创建Servlet</p>
+<pre><code>public class InitRootServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public void init() throws ServletException {
+        ServletContext ctx=getServletContext();
+        String contextPath = ctx.getContextPath();
+        //将ContextPath存储到ServletContext中
+        ctx.setAttribute(&quot;root&quot;, contextPath);
+        System.out.println(&quot;初始化了&quot;);
+    }
+
+    @Override
+    public void destroy() {
+        System.out.println(&quot;我还会回来的！&quot;);
+    }
+
+    /**
+     * 在 ServletContext中初始化 root 变量
+     * 请求URL： /init-root
+     */
+    protected void doGet(
+            HttpServletRequest request, 
+            HttpServletResponse response) 
+            throws ServletException, IOException {
+
+        response.setContentType(&quot;text/html;charset=UTF-8&quot;); 
+        response.getWriter().print(&quot;OK&quot;); 
+    }
+
+}
+</code></pre>
+
+</li>
+<li>
+<p>配置：</p>
+<pre><code>&lt;servlet&gt;
+    &lt;description&gt;&lt;/description&gt;
+    &lt;display-name&gt;InitRootServlet&lt;/display-name&gt;
+    &lt;servlet-name&gt;InitRootServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;day11.InitRootServlet&lt;/servlet-class&gt;
+    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;InitRootServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/init-root&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+
+<blockquote>
+<p>注意： 设置<code>&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</code>可以在Web容器启动时候执行Servlet init()方法。 实现容器启动时候初始化ContextPath。 </p>
+</blockquote>
+</li>
+<li>
+<p>删除所有Servlet中初始化 ContextPath 的代码。</p>
+</li>
+<li>启动应用测试软件功能，在控制台观察打桩输出结果。</li>
+</ol>
+<p>JSP 也是Servlet，其生命周期类似</p>
+<ol>
+<li>JSP在第一次请求时候先翻译为Servlet 源文件</li>
+<li>然后编译为.class</li>
+<li>与Servlet生命周期相同 </li>
+</ol>
+<h2>数据共享范围（scope）</h2>
+<p>共享数据方法： setAttribute， getAttribute，removeAttribute</p>
+<ol>
+<li>pageContext 可以共享数据</li>
+<li>request 可以共享数据</li>
+<li>session 可以共享数据</li>
+<li>servletContext == application 可以共享数据</li>
+</ol>
+<p>如上4种对象其共享数据范围不同。 </p>
+<p><img src="scope.png" /></p>
+<ol>
+<li>pageContext 简称 page 范围，其共享范围仅限于 JSP 页面内部，相当于JSP内部的局部变量。 </li>
+<li>request 范围，是一次请求过程范围</li>
+<li>session 范围，是一次用户会话过程范围，浏览器不关闭与服务器的多次请求的范围。</li>
+<li>application 范围，是最大的共享范围，一个Web应用的全体Servlet、JSP共享的范围。 适合保存公共静态数据。 </li>
+</ol>
+<p>使用建议：</p>
+<ol>
+<li>数据共享范围越小越好，最常用的是 request</li>
+<li>与当前用户有关的数据，共享到 session，比如用户登录状态</li>
+<li>全局数据，可以共享到 application</li>
+</ol>
+<p>EL表达式，会自动的按照由小到大搜索数据:</p>
+<pre><code>${root} 检索顺序
+pageContext.getAttribute(&quot;root&quot;);
+request.getAttribute(&quot;root&quot;);
+session.getAttribute(&quot;root&quot;);
+application.getAttribute(&quot;root&quot;);
+</code></pre>
+
+<p>利用session数据范围，在页面上显示登录用户信息：</p>
+<p>更新header.jsp:</p>
+<pre><code>${loginUser.name}
+</code></pre>
+
+<h2>监听器</h2>
+<p>什么是监听器： Java EE 设计了一系列回调函数接口，在Web服务器的特定工作节点时候，执行回调方法。 利用这些方法可以在服务器特定工作点插入功能。</p>
+<p>特点工作点包含：</p>
+<ol>
+<li>
+特殊对象的创建和销毁
+<ol>
+<li>ServletContext对象创建和销毁时候执行 ServletContextListener的方法。</li>
+<li>HttpSession对象创建和销毁时候执行 HttpSessionListener 的方法</li>
+<li>ServletRequest对象的创建和销毁时候执行 ServletRequestListener 的方法。</li>
+</ol>
+</li>
+<li>
+数据的绑定和删除
+<ol>
+<li>在 ServletContext对象 中共享数据，销毁数据时候执行 ServletContextAttributeListener 的方法</li>
+<li>在 HttpSession对象 中共享数据，销毁数据时候执行 HttpSessionAttributeListener 的方法
+...</li>
+</ol>
+</li>
+</ol>
+<p>举个栗子： </p>
+<p>利用监听器检测 ServletContext 对象何时创建，何时销毁：</p>
+<ol>
+<li>实现 ServletContextListener 接口；</li>
+<li>在web.xml 中配置 Listener，使监听器生效。 </li>
+</ol>
+<p>使用监听器, ServletContextListener 监听器的使用。</p>
+<p>监听器案例：</p>
+<ol>
+<li>
+<p>创建监听器对象:</p>
+<pre><code>public class ContextDemoListener 
+    implements ServletContextListener{
+    // context 上下文， Initialized 初始化完成了
+    // 此方法会在 ServletContext对象初始化完成以后执行
+    @Override
+    public void contextInitialized(
+            ServletContextEvent e) {
+        System.out.println(&quot;初始化完成&quot;);
+    }
+    // Destroyed 销毁完成了
+    // 此方法会在ServletContext对象销毁完成以后执行
+    @Override
+    public void contextDestroyed(
+            ServletContextEvent e) {
+        System.out.println(&quot;销毁以后&quot;);
+    }
+}
+</code></pre>
+
+</li>
+<li>
+<p>配置 web.xml</p>
+<pre><code>&lt;listener&gt;
+    &lt;listener-class&gt;day11.ContextDemoListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+</code></pre>
+
+</li>
+<li>
+<p>测试： 由于 ServletContext对象在容器启动时候创建，在容器关闭时候销毁，所以在容器启动时候和关闭时候能够看到打桩语句的输出。</p>
+</li>
+</ol>
+<p>ServletContextListener 可以用于初始化或者销毁全局资源</p>
+<ol>
+<li>如初始化：在ServletContext对象初始化以后，立即绑定 root=ContextPath 更加合理。</li>
+<li>如销毁：在ServletContext对象销毁以后，关闭数据库连接池，保证数据库连接池可靠关闭所有连接。 </li>
+</ol>
+<p>总之，Listener的使用非常灵活，需要根据情况适当使用。</p>
+<p>案例：</p>
+<ol>
+<li>
+<p>创建Listener</p>
+<pre><code>/**
+ * 初始化和销毁应用程序的全局资源
+ * 1. ServletContext 创建时候 初始化 root=ContextPath
+ * 2. ServletContext 销毁时候 关闭数据库连接池
+ */
+public class ResourceInitDestroyListener
+    implements ServletContextListener {
+
+    public void contextInitialized(
+            ServletContextEvent e)  { 
+        ServletContext ctx = e.getServletContext();
+        String contextPath = ctx.getContextPath();
+        ctx.setAttribute(&quot;root&quot;, contextPath); 
+        System.out.println(&quot;初始化了 root=&quot;+contextPath); 
+    }
+
+    public void contextDestroyed(
+            ServletContextEvent e)  { 
+        //关闭数据库连接池
+        DBUtil.close(); 
+        System.out.println(&quot;关闭了数据库连接池！&quot;); 
+    }
+}
+</code></pre>
+
+</li>
+<li>
+<p>配置 web.xml</p>
+<pre><code>&lt;listener&gt;
+    &lt;listener-class&gt;day11.ResourceInitDestroyListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+</code></pre>
+
+</li>
+</ol>
+<h2>线程安全</h2>
+<h2>作业</h2>
+<ol>
+<li>
+重构联系人管理项目
+<ol>
+<li>添加权限过滤器</li>
+<li>利用ServletContextListener初始化 root=ContextPath</li>
+</ol>
+</li>
+<li>测试 HttpSessionListener 的方法</li>
+</ol>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

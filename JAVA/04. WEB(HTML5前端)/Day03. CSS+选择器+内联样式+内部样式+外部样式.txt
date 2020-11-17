@@ -1,0 +1,181 @@
+###课程回顾
+1. 内容标题 h1-h6  独占一行 字体加粗 有上下边距  align=left/right/center
+2. 段落标签 p 独占一行 有上下边距
+3. 水平分割线 hr
+4. 换行  br
+5. 列表标签
+- 无序列表  ul:type   li
+- 有序列表  ol:type start reversed   li
+- 定义列表  dl dt  dd
+- 列表嵌套 有序和无序可以任意无限嵌套
+6. 分区标签
+- div: 独占一行 
+- span: 共占一行
+- h5 新增  header  article  footer
+7. 标签分类
+- 块级标签: 独占一行   包括:h1-h6 div hr p  
+- 行内标签: 共占一行  包括:span  strong和b em和i del和s u
+8. 实体引用
+- 空格  &nbsp;
+- 小于号  &lt;
+- 大于号  &gt;
+9. 图片标签 img
+- src:路径   相对路径:访问站内资源 同目录直接写文件名,上级目录 ../文件名,下级目录 文件夹名/图片名 和绝对路径:访问站外资源 节省本站资源,有可能会访问不到图片
+- alt:图片不能正常显示时 显示的文本
+- title: 鼠标悬停时显示的文本
+- width/height:  1.像素  2.上级元素的百分比
+10. 图片地图 map
+- 属性  name 唯一标识
+- 子元素  area: shape(rect/circle) coords坐标(矩形两个对角线点的坐标,圆形圆心坐标和半径) href:资源路径 页面资源和文件资源
+####day02
+1. 超链接a
+- 如果不写href属性则是纯文本
+- 有文本超链接和图片超链接
+- target=_blank 在新的窗口中显示页面
+- 页面内部跳转 ,目的地有标签则直接给标题添加id属性 如果没有标签则添加一个空的a标签作为锚    
+2. 表格table
+- 子元素 tr  td  th  caption    thead tbody tfoot
+- 属性  table:border cellspacing:单元格与单元号的间距或单元格和表格边框的间距    cellpadding:单元格距内容的距离   td:rowspan跨行  colspan跨列 
+3. 表单form
+- 属性 action 提交地址
+- 各种控件:
+	1. 文本框:  input type=text   name  value  placeholder占位文本 maxlength最大长度  readonly只读  
+	2. 密码框: type=password  name value placeholder占位文本 maxlength最大长度  readonly只读  
+	3. 单选框: type=radio   name  value checked  id    label
+	4. 多选框: type=checkbox  name  value checked  id    label
+	5. 日期: type=date name
+	6. 文件: type=file name
+	7. 隐藏域: type=hidden  name value
+	8. 下拉选: select:name       option:value selected
+	9. 文本域: textarea: name rows  cols   placeholder
+	10. 提交按钮: type=submit   value
+	11. 重置按钮: type=reset  value
+	12. 自定义按钮: type=button value 
+###CSS
+- Casecading层叠 Style样式 Sheet表, 用于美化页面
+####CSS的引入方式
+1. 内联样式:在标签的内部添加style属性,在属性内部添加css样式代码,弊端:不能复用
+2. 内部样式:在head标签内部添加style标签,通过选择器给元素添加样式,好处可以复用 弊端:只能在当前页面复用
+3. 外部样式:在单独的css文件中通过选择器给元素添加样式,在html页面中通过link标签引入样式文件, 好处:可以多页面复用
+
+####三种引入方式的优先级
+1. 内联优先级最高
+2. 内部和外部优先级相同,后执行覆盖先执行
+####选择器
+1. 标签名选择器
+- 格式:  标签名{样式代码}
+- 选取页面中所有的指定标签
+2. id选择器
+- 格式: #id{样式代码}
+- 当需要选择页面中的某一个元素时使用id选择器
+3. class选择器
+- 格式: .class{样式代码}
+- 当需要选取页面中某一类元素(多个)时使用class选择器
+4. 属性选择器
+- 格式: 标签名[属性名='属性值']{样式代码}
+- 通过标签的属性去选择元素
+5. 分组选择器
+- 格式:  div,#id,.class{样式代码}
+- 将多个选择器合并成一个选择器
+6. 子孙后代选择器
+- 格式: div span{样式代码}
+- 选取div里面所有的span(包括子元素和所有后代元素)
+7. 子元素选择器
+- 格式: div>span{样式代码}
+- 选取div里面所有的子元素span
+8. 伪类选择器
+- 用于选取元素的状态 
+- 未访问状态link/访问过状态visited/点击状态active/悬停状态hover
+9. 任意元素选择器
+- 格式:  *{样式代码}
+- 选中页面中所的元素
+####颜色赋值 
+- 三原色:rgb red green blue  红 绿 蓝    每个颜色的取值是0-255 
+1. 通过6位16进制赋值   #ff0000 
+2. 通过3位16进制赋值   #f00 
+3. 通过3位10进制赋值   rgb(0-255,0-255,0-255)
+4. 通过4位10进制赋值   rgba(0-255,0-255,0-255,0-1)     a=alpha 透明度 值越小越透明
+
+####背景图片
+		/* 设置背景图片 */
+		background-image: url("../imgs/a.jpg");
+		background-size: 100px 100px;
+		/* 禁止重复 */
+		background-repeat: no-repeat; 
+		/* 控制背景图片的位置 
+			left right top bottom center*/
+		background-position: 10% 10%;
+####盒子模型
+- 盒子模型由 宽高+外边距+内边距+边框组成
+#####盒子模型之宽高
+- 两种赋值方式:
+	1. 像素
+	2. 上级元素的百分比
+- 行内元素不能修改宽高 宽高由内容决定
+#####盒子模型之外边距
+- 什么是外边距:元素距上级元素或相邻兄弟元素的距离称为外边距
+- 赋值方式:
+	margin-left/top/bottom/right:20px;
+	margin:10px; 四个方向10px
+	margin:10px 20px; 上下10 左右20
+	margin:0 auto; 水平居中
+	margin:10px 20px 30px 40px; 上右下左 顺时针 
+- 行内元素上下外边距无效
+- 左右相邻相加  上下取最大
+- 当元素的上边缘和上级元素的上边缘重叠时会出现粘连问题,在上级元素中添加overflow:hidden 解决
+
+###课程回顾
+1. CSS 层叠样式表 作用:美化页面
+2. 三种引入方式:
+- 内联:在标签中添加style属性 在属性值里面写样式代码, 弊端:不能复用
+- 内部:在head标签中添加style标签 通过选择器给标签添加样式,可以当前页面复用不能多页面复用
+- 外部:在单独的css文件中写样式代码,在html页面中通link标签引入css文件,可以多页面复用, 可以将css和html分离
+3. 引入方式的优先级:
+- 内联优先级最高 
+- 内部和外部相同,后执行覆盖先执行的
+4. 选择器
+- 标签名    div{}
+- id       #id{}
+- class    .class{}
+- 属性     标签名[属性名='属性值']{}
+- 分组     div,#id{}
+- 子孙后代   div span{}
+- 子元素     div>span{}
+- 伪类      未访问link  访问过visited  悬停hover 点击active
+- 任意元素   *{}
+5. 颜色复制
+- 颜色单词 
+- 6位16进制  #ff0000
+- 3位16进制  #f00
+- 3位10进制  rgb(255,0,0)
+- 4位10进制  rgba(255,0,0,0-1)
+6. 背景图片
+- background-image:url("路径")
+- background-size:100px 200px;
+- background-repeat:no-repeat;
+- background-position: left/right/top/bottom/center  和 百分比
+7. 盒子模型= 外边距+边框+内边距+宽高
+8. 宽高 width/height   两种方式:1.像素 2.上级元素的百分比
+	行内元素不能修改宽高,由内容决定
+9. 外边距:元素距上级元素或相邻兄弟元素的距离
+	margin-left/right/top/bottom:
+	margin:10px; 
+	margin:10px 20px; 上下10 左右20
+	margin:0 auto;  居中
+	margin:10px 20px 30px 40px; 上右下左
+- 上下相邻取最大 左右相邻相加
+- 行内元素上下外边距无效
+- 粘连问题:当元素的上边缘和上级元素的上边缘重叠时会出现粘连问题,给上级元素添加overflow:hidden解决
+
+
+
+
+
+
+
+
+
+
+
+
+ 

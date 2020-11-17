@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>day12</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>Servlet、JSP</h1>
+<h2>回顾</h2>
+<ol>
+<li>过滤器：拦截式编程，可以为软件增加横向功能</li>
+<li>
+ServletContext/Application：
+<ol>
+<li>代表当前 Web 容器，用途不大</li>
+<li>共享全局数据，被所有Servlet、JSP共享的数据，常用！！</li>
+<li>
+常用方法：
+<ol>
+<li>getContextPath() </li>
+<li>getAttribute() </li>
+<li>setAttribute()</li>
+<li>getRealPath() 将Java WEB路径映射到实际文件系统路径，用于调用文件系统操作API： File FileInputStream等</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Servlet 生命周期, 面试有人考</li>
+<li>
+数据共享范围: page &lt; request &lt; session &lt; application
+<ol>
+<li>EL/JSTL 会自动在4个范围按照从小到大依次寻找数据。</li>
+<li>${root}  ${loginUser.name}</li>
+</ol>
+</li>
+<li>监听器，由于ServletContextListener的方法是整个应用程序执行最早的，经常用于初始化应用程序环境。</li>
+</ol>
+<h2>获取实际路径</h2>
+<p>将Java WEB路径映射到实际文件系统路径，用于调用文件系统操作API： File FileInputStream等</p>
+<p>案例：</p>
+<pre><code>public class RealPathServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 演示，获取java web路径对应的实际存储位置
+     */
+    protected void doGet(
+            HttpServletRequest request, 
+            HttpServletResponse response) 
+            throws ServletException, IOException {
+
+        String webpath = &quot;/WEB-INF/jsp&quot;;
+
+        ServletContext ctx=getServletContext();
+        //找到 java web 路径的实际存储路径位置
+        String realpath = ctx.getRealPath(webpath);
+        System.out.println(realpath);
+        //遍历一下 jsp 文件夹中的内容
+        File dir = new File(realpath);
+        //遍历（列出）文件夹内容
+        File[] files = dir.listFiles();
+        for (File file : files) {
+            System.out.println(file);
+        }
+        response.setContentType(&quot;text/html;charset=UTF-8&quot;);
+        response.getWriter().println(&quot;OK&quot;); 
+    }
+
+}
+
+//配置
+
+&lt;servlet&gt;
+    &lt;description&gt;&lt;/description&gt;
+    &lt;display-name&gt;RealPathServlet&lt;/display-name&gt;
+    &lt;servlet-name&gt;RealPathServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;day12.RealPathServlet&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;RealPathServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/real-path&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+
+<h2>线程安全</h2>
+<p><img src="thread.png" /></p>
+<ol>
+<li>Servlet对象是单例的，其service（包含被其调用的doGet、doPost）方法是被Tomcat线程并发调用的。</li>
+<li>service方法是存在线程安全问题。</li>
+<li>
+一般情况下，不要在Servlet中定义可读写变量！保持Servlet是无状态的类。 “定义无状态的Servlet”
+<ol>
+<li>无状态的类： 没有可以读写变量的类称为无状态类！可以有只读变量。</li>
+</ol>
+</li>
+<li>如果定义了有状态的Servlet，进行适当同步（加锁），解决线程安全问题。</li>
+</ol>
+<p>案例：</p>
+<pre><code>public class SetNameServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    private String name;
+    /**
+     * 线程并发安全性演示
+     */
+    protected void doGet(
+        HttpServletRequest request, 
+        HttpServletResponse response) 
+        throws ServletException, IOException {
+        //获取执行当前doGet方法的线程，这个线程
+        //由Tomcat的线程池管理，用于处理当前http请求
+        Thread t = Thread.currentThread();
+        System.out.println(t); 
+
+        String n = request.getParameter(&quot;n&quot;);
+        name = n;
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        response.setContentType(&quot;text/html;charset=UTF-8&quot;);
+        response.getWriter().println(&quot;name:&quot;+name); 
+    }
+
+}
+</code></pre>
+
+<p>解决线程安全问题</p>
+<pre><code>public class SetNameServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    private String name;
+    /**
+     * 线程并发安全性演示
+     */
+    protected void doGet(
+        HttpServletRequest request, 
+        HttpServletResponse response) 
+        throws ServletException, IOException {
+        //获取执行当前doGet方法的线程，这个线程
+        //由Tomcat的线程池管理，用于处理当前http请求
+        Thread t = Thread.currentThread();
+        System.out.println(t); 
+
+        synchronized (this) {
+            String n = request.getParameter(&quot;n&quot;);
+            name = n;
+
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            response.setContentType(&quot;text/html;charset=UTF-8&quot;);
+            response.getWriter().println(&quot;name:&quot;+name); 
+        }
+    }
+
+}
+</code></pre>
+
+<h2>Smart MVC</h2>
+<p>SmartMVC 是Spring MVC 框架克隆版。</p>
+<p>设计目标： 将复杂的Web编程封装起来，使开发更加快速便捷。</p>
+<p>原理：</p>
+<p><img src="mvc.png" /></p>
+<h3>控制器与业务功能拆分：</h3>
+<ol>
+<li>
+<p>创建前端控制器：</p>
+<pre><code>public class DispatcherServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(
+            HttpServletRequest request, 
+            HttpServletResponse response) throws ServletException, IOException {
+        //检查request\response引用的对象类型
+        Class cls1 = request.getClass();
+        Class cls2 = response.getClass();
+        System.out.println(cls1);
+        System.out.println(cls2);
+
+        //调用业务方法，根据业务方法的返回值转发到JSP
+        BizController controller=new BizController();
+        //执行业务方法，得到转发的目标页面名称
+        String target = controller.execute(request);
+        //将目标页面名称前后增加 JSP文件的位置和后缀
+        String path = &quot;/WEB-INF/jsp/&quot;+target+&quot;.jsp&quot;;
+        request.getRequestDispatcher(path)
+            .forward(request, response); 
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+
+}
+</code></pre>
+
+</li>
+<li>
+<p>配置 web.xml，使前端控制器可以处理任何 *.do 请求</p>
+<pre><code>&lt;servlet&gt;
+    &lt;description&gt;&lt;/description&gt;
+    &lt;display-name&gt;DispatcherServlet&lt;/display-name&gt;
+    &lt;servlet-name&gt;DispatcherServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;mvc.DispatcherServlet&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;DispatcherServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;*.do&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+
+</li>
+<li>
+<p>编写控制器类，封装业务功能</p>
+<pre><code>/**
+ * 控制器类， 用于封装业务功能， 
+ */
+public class BizController {
+
+    /**
+     * 第一个业务功能，Hello World! 
+     * @return 目标页面名称
+     */
+    public String execute(HttpServletRequest request) {
+        System.out.println(&quot;Hello World!&quot;);
+        request.setAttribute(&quot;msg&quot;, &quot;Hello&quot;); 
+        return &quot;hello&quot;; 
+    }
+}
+</code></pre>
+
+</li>
+<li>
+<p>编写 /WEB-INF/jsp/hello.jsp</p>
+<pre><code>&lt;%@ page 
+  language=&quot;java&quot; 
+  contentType=&quot;text/html; charset=UTF-8&quot;
+  pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt; 
+&lt;title&gt;Hello&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello World！&lt;/h1&gt;
+  &lt;p&gt;${msg}&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+</li>
+<li>
+<p>测试：</p>
+<pre><code>http://localhost:8080/Servlet12/test.do
+</code></pre>
+
+</li>
+</ol>
+<h2>反射，注解解析</h2>
+<p>目标：实现JUnit4的原型，执行某个类中标注了 @Test 注解的方法。</p>
+<p>反射： Java提供的动态执行API</p>
+<ol>
+<li>可以动态解析对象的类型，动态解析类的结构（属性、方法、构造器等）</li>
+<li>
+动态加载类：
+<ol>
+<li>Class cls = Class.forName(类名);</li>
+</ol>
+</li>
+<li>
+动态创建对象
+<ol>
+<li>cls.newInstance();</li>
+</ol>
+</li>
+<li>动态解析注解： 在运行期间检查类上、方法上标注的注解。</li>
+<li>
+动态执行方法(invoke: 调用)
+<ol>
+<li>method.invoke(包含方法的对象，调用参数...) 执行方法</li>
+</ol>
+</li>
+</ol>
+<p>案例1，动态检查对象的类型和其类的内部结构</p>
+<pre><code>public class Demo03 {
+
+    public static void main(String[] args) {
+        test(&quot;123&quot;);
+        test(123);
+        test(123.0);
+    }
+
+    public static void test(Object obj) {
+        //obj变量的类型是Object，obj引用的对象是什么类型？
+        //在程序中检查 obj 引用的对象的类型？
+        //obj.getClass() 是java在Object类型上定义的
+        //方法， 可以动态获取当前对象的类型！
+        Class cls = obj.getClass();
+        System.out.println(cls); 
+
+        //Class 类型上提供检查类的内部结构方法
+        //Field: 字段，就是类中声明的成员变量
+        //Declared: 声明的 
+        // getDeclaredFields 获取cls类型的上声明的
+        // 全部成员变量，包含静态变量和实例变量
+        Field[] fields = cls.getDeclaredFields();
+        for (Field field : fields) {
+            System.out.println(field); 
+        }
+        // Method: 方法
+        // getDeclaredMethods 返回cls类的定义的全部方法
+        Method[] methods = cls.getDeclaredMethods();
+        for (Method method : methods) {
+            System.out.println(method);
+        }
+        //cls.getDeclaredConstructors() 全部构造器
+        System.out.println(&quot;------------&quot;); 
+        //
+    }
+
+}
+</code></pre>
+
+<p>案例2，利用反射API 动态加载类，动态创建对象：</p>
+<pre><code>public class Demo04 {
+
+    public static void main(String[] args)
+        throws Exception {
+        /**
+         * 动态加载类，动态创建对象
+         * 运行期间才加载类，创建对象
+         */
+        Scanner in = new Scanner(System.in);
+        System.out.print(&quot;输入类名：&quot;);
+        String className = in.nextLine();
+        //根据类名className动态加载类
+        //如果类名错误，会出现类没有找到异常
+        Class cls = Class.forName(className);
+        System.out.println(cls);
+        //动态创建 cls 对应的对象，cls必须包含无参数构造器
+        //如果没有无参数构造器，则抛出 无此方法异常
+        Object obj = cls.newInstance();
+        System.out.println(obj); 
+    }
+
+}
+</code></pre>
+
+<p>案例3， 利用反射API找到方法上标注的注解：</p>
+<pre><code>import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+// Retention 用于声明注解 @Test 的保留范围
+@Retention(RetentionPolicy.RUNTIME)
+//Target 用于声明 注解的标注位置，当设置为METHOD以后
+// 注解 @Test 就只能在方法上标注使用 
+@Target(ElementType.METHOD) 
+public @interface Test {
+
+}
+
+public class TestCase {
+
+    public void t() {
+        System.out.println(&quot;t&quot;);
+    }
+
+    @Test //自定义注解
+    public void testHello() {
+        System.out.println(&quot;Hello World!&quot;);
+    }
+
+    @Test
+    public void demo() {
+        System.out.println(&quot;demo!&quot;);
+    }
+
+}
+
+
+public class Demo05 {
+
+    public static void main(String[] args)
+        throws Exception {
+        /**
+         * 利用反射API找到方法上标注的注解
+         */
+        String className = &quot;day12.TestCase&quot;;
+        //动态加载类
+        Class cls=Class.forName(className);
+        //动态获得类上声明的全部方法
+        Method [] methods=cls.getDeclaredMethods();
+        for (Method method : methods) {
+            System.out.println(method);
+            //Method 的API，可以检测方法上标注的注解
+            Annotation[] anns=method.getAnnotations();
+            for (Annotation ann : anns) {
+                System.out.println(ann); 
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>案例4，利用反射API动态执行方法</p>
+<pre><code>public class Demo06 {
+
+    public static void main(String[] args)
+        throws Exception{
+        /**
+         * 利用反射API动态执行方法
+         * 根据动态输入的类名和方法名， 利用反射API
+         * 加载类，找到方法，创建对象，调用方法。
+         */
+        //动态输入类名和方法名
+        Scanner in = new Scanner(System.in);
+        System.out.print(&quot;输入类名：&quot;);
+        String className = in.nextLine();
+        System.out.print(&quot;输入方法名:&quot;);
+        String methodName=in.nextLine();
+        //加载类
+        Class cls = Class.forName(className);
+        //利用API在cls上找到要调用的方法
+        //getDeclaredMethod 在类上根据methodName寻找
+        //一个 Method 对象，如果找不到抛出异常
+        Method method=
+          cls.getDeclaredMethod(methodName);
+        //动态创建一个cls的对象
+        Object obj = cls.newInstance();
+        //执行方法, invoke 就是执行方法，但是必须提供
+        //包含方法的对象, 如果对象上不包含方法则抛出异常
+        Object val = method.invoke(obj);
+        System.out.println(val); 
+    }
+
+}
+</code></pre>
+
+<p>案例5， JUnit4 原型</p>
+<pre><code>public class JUnit4Demo07 {
+    public static void main(String[] args)
+        throws Exception{
+        /**
+         * JUnit4 的原型: 执行某个类中标注了 @Test 注解的方法。
+         */
+        Scanner in = new Scanner(System.in);
+        System.out.print(&quot;输入测试案例类名:&quot;);
+        String className = in.nextLine();
+        Class cls = Class.forName(className);
+        Method[] methods = cls.getDeclaredMethods();
+        Object obj = cls.newInstance();
+        for (Method method : methods) {
+            //查找方法上的某个注解getAnnotation(注解类)
+            //如果找到指定注解，则返回一个注解对象
+            //如果找不到指定注解，则返回null
+            Annotation ann=method.getAnnotation(Test.class);
+            if(ann==null) continue;
+            method.invoke(obj);
+        }
+    }
+}
+</code></pre>
+
+<h2>作业</h2>
+<ol>
+<li>完成JUnit4 原型</li>
+<li>设计注解 @RequestMapping，标注到一个类的方法上，再利用反射找到这些注解。</li>
+</ol>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

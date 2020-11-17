@@ -1,0 +1,160 @@
+###1. 项目分析
+
+首先，分析这个项目可能用到哪些种类的数据。本项目中：用户，商品，商品种类，收货地址，收藏，购物车，订单。
+
+	1. 企业中这个阶段必须分析的尽量详尽
+	2. 学习阶段这个过程适可而止
+
+然后，确定这些数据相关的功能的开发顺序，优先开发基础数据和简单数据相关的功能。
+
+	基础数据：和其他数据没有关联，是其他数据存在的基础
+	简单数据：字段少，逻辑清晰，和其他表关联少
+因此，上面数据的开发顺序：用户 > 收货地址 > 商品种类 > 商品 > 收藏 >购物车 > 订单 
+
+接下来，分析1个数据相关的功能：注册，登录，修改密码，修改个人资料，上传头像
+
+分析完成后，确定以上功能的开发顺序，一般按照“增 查 删 改”，因此“用户”相关的功能的开发顺序：注册 > 登录 > 修改密码 > 修改个人资料 > 上传头像
+
+针对一个功能，确定开发顺序：创建数据表 > 创建实体类 > 持久层 > 业务层 > 控制器层 > 前端界面
+
+###2. 用户-创建数据库表
+
+创建数据库
+
+	CREATE DATABASE tedu_store;
+
+使用数据库
+
+	USE tedu_store;
+
+创建“用户”表
+
+	CREATE TABLE t_user(
+		uid INT AUTO_INCREMENT COMMENT '用户id',
+		username VARCHAR(50) UNIQUE NOT NULL COMMENT '用户名',
+		password CHAR(32) NOT NULL COMMENT '密码',
+		salt CHAR(36) COMMENT '盐值',
+		is_delete INT COMMENT '是否删除，0代表未删除，1代表已删除',
+		phone VARCHAR(20) COMMENT '电话号码',
+		email VARCHAR(50) COMMENT '邮箱',
+		gender INT COMMENT '性别,0代表女，1代表男',
+		avatar VARCHAR(100) COMMENT '头像',
+		created_user VARCHAR(50) COMMENT '创建用户',
+		created_time DATETIME COMMENT '创建时间',
+		modified_user VARCHAR(50) COMMENT '最后修改用户',
+		modified_time DATETIME COMMENT '最后修改时间',
+		PRIMARY KEY (uid)
+	)DEFAULT CHARSET=utf8;
+
+###3. 用户-创建实体类
+
+初始化springboot项目：
+
+1. 在`https://start.sprint.io`网站上初始化一个sprintboot项目
+	1. war
+	2. 关联mysql驱动，mybatis框架
+2. 将下载好的压缩文件解压缩，将文件夹拷贝到工作空间下
+3. 在Eclipse通过"Import"-》"Existing Maven Projects"导入该项目
+4. 修改pom.xml，springboot版本修改为2.1.3
+5. 使用“Maven”->"Update Project..."->勾选Fource up....
+6. 如果直接使用`src/test/java`中的测试类测试，会抛出异常，需要引入数据库的配置
+7. 将之前配置的数据库连接信息拷贝到新项目中，再次测试，测试通过
+8. 在默认测试类中开发一个测试方法`getConnection()`，获取一个数据库连接对象，测试数据库连接是否正常：
+
+	@Autowired
+	DataSource ds;
+
+	@Test
+	public void getConnection() throws SQLException {
+		Connection conn=ds.getConnection();
+		System.err.println(conn);
+	}
+
+首先，创建`cn.tedu.store.entity.BaseEntity`类，作为所有实体类的父类，封装所有实体类共同的属性，该类应该实现`Serializable`接口。
+
+	abstract class BaseEntity implements Serializable{
+		private String createdUser;
+		private Date createdTime;
+		private String modifiedUser;
+		private Date modifiedTime;
+
+	}
+
+
+创建`cn.tedu.store.entity.User`用户实体类，继承自`BaseEntity`，并提供必要的GET/SET方法，基于uid生成`hashCode()`和`equals()`方法。
+
+	public class User{
+
+		private Integer uid;
+		private String username;
+		private String password;
+		private String salt;
+		private Integer isDelete;
+		private String phone;
+		private String email;
+		private Integer gender;
+		private String avatar;
+
+		//GET/SET/基于uid生成hashCode和equals方法/toString()
+	}
+
+
+###4. 用户-注册-持久层
+
+###5. 用户-注册-业务层
+
+###6. 用户-注册-控制器层
+
+###7. 用户-注册-前端界面
+
+###8. 用户-登录-持久层
+
+###9. 用户-登录-业务层
+
+###10. 用户-登录-控制器层
+
+###11. 用户-登录-前端界面
+
+###12. 用户-修改密码-持久层
+
+###13. 用户-修改密码-业务层
+
+###14. 用户-修改密码-控制器层
+
+###15. 用户-修改密码-前端界面
+
+
+
+
+
+
+
+
+
+### 课程介绍
+1. 内容
+	1. 使用springboot完成一个商城类项目
+	2. 大概12-13天
+
+2. 为什么学
+	1. 积累项目开发经验
+	2. 一些必须有业务场景的知识点，会在这里补充
+	3. 掌握项目开发的流程和思路
+
+3. 怎么学
+	1. 尽量不要跟着敲代码，听思路，自己敲，对照
+	2. 每天的代码必须完成，即使复制粘贴，也要保证前一天的代码是完整
+	3. 有余力的同学，可以同时自己写1个项目
+		1. 选题：百度“计算机专业毕业设计题目”
+		2. 时间：慢慢写，在面试阶段也可以每天写
+
+
+
+###自我介绍
+
+陈天竺
+
+chentianzhu@tedu.cn
+
+优先发微信公众号上面
+标注一下属于哪个班

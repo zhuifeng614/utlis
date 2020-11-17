@@ -1,0 +1,372 @@
+回顾:
+1.循环结构:
+  3)for:固定次数循环
+2.break:跳出循环
+  continue:跳过循环体中剩余语句而进入下一次循环
+3.适用情况:
+    固定次数-----for
+    不固定次数:
+      要素1与要素3相同-----do...while
+      要素1与要素3不同-----while
+4.嵌套循环:
+    循环中套循环，外层走一次，内层走所有次，
+    层数越少越好，break只能跳出一层循环
+5.数组:
+    相同数据类型元素的集合
+    是一种数据类型(引用类型)
+    int[] arr = new int[3];
+    int[] arr = {1,4,6};
+    int[] arr = new int[]{1,4,6};
+    arr[0] = 100;
+    arr[3] = 300; //数组下标越界异常
+    System.out.println(arr[arr.length-1]);
+    for(int i=0;i<arr.length;i++){
+      arr[i] = (int)(Math.random()*100);
+      System.out.println(arr[i]);
+    }
+
+
+笔记:
+1.数组:
+  7)数组的复制:
+    7.1)System.arraycopy(a,1,a1,0,4);
+    7.2)int[] a1 = Arrays.copyOf(a,6);
+        a = Arrays.copyOf(a,a.length+1); //数组的扩容
+  8)数组的排序:
+    8.1)Arrays.sort(arr);
+2.方法:函数、过程
+  1)封装一段特定的业务逻辑功能
+  2)尽可能独立，一个方法只干一件事
+  3)方法可以被反复多次的调用
+  4)减少代码的重复，有利于代码的维护，有利于团队的协作
+3.方法的定义:
+    修饰词 返回值类型 方法名(参数列表){
+      方法体
+    }
+4.方法的调用:
+  1)无返回值: 方法名(有参传参);
+  2)有返回值: 数据类型 变量 = 方法名(有参传参);
+5.return:
+  1)return;    //1.1)结束方法的执行
+  2)return 值; //2.1)结束方法的执行 2.2)返回结果给调用方
+
+
+
+练习:
+1.完成经典案例:-------------至少两次
+  1)MaxOfArray求最大值并放在最后一个元素的下一个位置
+2.完成课后作业
+3.预习GuessingGame猜字符小游戏
+
+public static void main(String[] args){
+  say();
+  sayHi("zhangsan");
+  sayHello("zhangsan",25);
+  double a = getNum(); 输出a
+  int b = plus(5,6); 输出b
+  int m=5,n=6; int c = plus(m,n); 输出c
+}
+public static void say(){}
+public static void sayHi(String name){}
+public static void sayHello(String name,int age){}
+public static double getNum(){
+  return 8.88;
+}
+public static int plus(int num1,int num2){
+  return num1+num2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+方法可以有参也可以无参
+-----有参可以使方法更灵活
+
+
+int    a = scan.      nextInt();
+double b = scan.      nextDouble();
+double c = Math.      random();----------------无参数
+
+System.out.           println("HelloWorld");
+System.               arraycopy(a,1,a1,0,4);
+Arrays.               sort(arr);
+int[] a1 = Arrays.    copyOf(a,6);-------------有参数
+
+
+
+
+double c = Math.random(); //0.0到0.99999999999999...
+
+假设random()有参:
+  double c = Math.random(1,1000);
+  double c = Math.random(0,99);
+  double c = Math.random(100,500);
+
+
+
+
+
+
+
+
+
+
+
+
+
+方法可以有返回值也可以没有返回值:
+1)无返回值时，将返回值类型设计为void
+2)有返回值时，将返回值类型设计为特定的数据类型即可
+
+何时有返回值？何时没有返回值?
+  方法调用结束后:
+  1)若还需要用到方法中的某个数据-----有返回值
+  2)若不需要用到方法中的某个数据-----无返回值
+
+
+
+System.out.println("HelloWorld");
+System.arraycopy(a,1,a1,0,4);
+Arrays.sort(arr);-------------------------无返回值
+
+int    a = scan.nextInt();
+double b = scan.nextDouble();
+double c = Math.random();
+int[] a1 = Arrays.copyOf(a,6);------------有返回值
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+冒泡排序(){
+  6句话
+}
+
+
+
+冒泡排序(6句话)-----10个地方
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+main(){
+  调存款-----------1行
+  调取款-----------1行
+  调转帐-----------1行
+  调查询余额-------1行
+}
+存款(){
+  500行
+}
+取款(){
+  500行-----------调验证密码()
+}
+转帐(){
+  1000行----------调验证密码()
+}
+查询余额(){
+  200行-----------调验证密码()
+}
+验证密码(){
+  100行
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+计时操作
+
+long a = System.currentTimeMillis();
+再换一种方式实现
+long b = System.currentTimeMillis();
+
+System.out.println(b-a); //3
+
+
+
+
+
+
+优化-----提高效率
+
+
+效率要求是比较高的
+
+
+
+
+
+
+
+
+
+
+
+
+1)当数据不同时，用不同的排序方式，效率也是不同的
+    这30万个数据--------------插入排序最快
+    另30万个数据--------------冒泡排序最快
+    另30万个数据--------------快速排序最快
+2)有一种排序方式，一直是最快的
+    Arrays.sort(arr);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int[] arr = {23,45,87,2};
+
+找最大值算法:
+1)假设第1个元素为最大值:
+    int max = arr[0];
+2)遍历剩余元素，将剩余元素与max做对比，
+  若剩余元素大于max，则修改max的值为较大的
+    for(int i=1;i<arr.length;i++){
+      if(arr[i]>max){
+        max=arr[i];
+      }
+    }
+
+
+
+int[] a = {10,20,30,40,50};
+int[] a1 = new int[6]; //0,0,0,0,0,0
+
+for(int i=0;i<a.length;i++){
+  a1[i] = a[i];
+}
+
+
+
+a1[0] = a[0];
+a1[1] = a[1];
+a1[2] = a[2];
+a1[3] = a[3];
+a1[4] = a[4];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int i=1;
+while(i<=10){
+  i++;
+}
+System.out.println(i); //11
+
+
+
+
+
+int i;
+for(i=1;i<=10;i++){
+}
+System.out.println(i); //11
+
+
+
+
+
+
+
+
+
+
+
+
+

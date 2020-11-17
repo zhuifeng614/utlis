@@ -1,0 +1,402 @@
+# Servet/JSP
+
+## 回顾
+
+1. Tomcat Java WEB 服务器, 可以独立使用
+	1. 安装JDK, 必须配置环境变量!!!
+	2. Windows 执行 TOMCAT_HOME/bin/startup.bat  
+	3. Linux 
+		1. chmod +x *.sh
+		2. ./startup.sh 
+2. 将Tomcat整合到Eclipse中使用. 开发调试使用.
+3. 开始Servlet
+	1. 创建maven war(Web)项目, war 项目会自动按照JAVAEE标准创建目录结构.
+	2. 生成部署描述文件
+	3. 导入 Tomcat 目标运行环境(Servlet API, 包含Servlet接口)
+	4. 创建类, 实现Servlet接口.
+	5. 配置web.xml(部署描述文件)
+	6. 部署到Tomcat服务器  
+	7. 测试
+
+## 请求与响应
+
+请求与响应的原理:
+
+![](req-res.png)
+
+### HttpServletRequest
+
+HttpServletRequest 简称 request 对象, 其父类型是 ServletRequest
+
+1. request 对象在Tomcat收到用户请求时候创建, 其内部封装的全部的用户浏览器请求信息. 
+2. ServletRequest类型定义的方法少, 转换为HttpServletRequest方法更多, 使用更加方便. 
+3. request对象提供了API方法, 利用这些方法可以读取用户浏览器请求的请求信息.
+	1. req.getMethod() 读取请求行中的请求方式信息 GET/POST 等
+	2. req.getRequestURI() 获取请求行中的 URI
+	3. req.getProtocol() 获取请求行中的HTTP版本
+	4. req.getHeader(请求头名) 获取请求头信息
+	5. req.getHeaderNames() 获取全部的请求头名字
+	6. ...
+
+案例:
+
+1. 创建Servlet类:
+
+		public class RequestDemoServlet 
+			implements Servlet{
+			
+			public void service(
+					ServletRequest request, 
+					ServletResponse response) 
+				throws ServletException, IOException {
+				//由于getMethod方法是HttpServletRequest对象的方法
+				//所以需要将ServletRequest对象强制转型才能调用
+				HttpServletRequest req=
+						(HttpServletRequest)request;
+				//获取请求行中的请求方式(GET/POST) 
+				String method=req.getMethod();
+				//获取请求行中的 URI
+				String uri = req.getRequestURI();
+				//获取请求行中的HTTP版本
+				String http = req.getProtocol();
+				System.out.println(method+" "+uri+" "+http);
+				
+				//获取请求头中的信息
+				String host=req.getHeader("Host");
+				String ua=req.getHeader("User-Agent");
+				
+				System.out.println(host);
+				System.out.println(ua);
+				//获取全部的请求头信息:
+				//Enumeration 与 Iterator 功能相同 
+				Enumeration<String> em=req.getHeaderNames();
+				//em.hasMoreElements() 与 it.hasNext() 相同
+				//em.nextElement();    与 it.next() 相同
+				while(em.hasMoreElements()) {
+					String name=em.nextElement();
+					System.out.println(
+							name+":"+req.getHeader(name));
+				}
+				
+				response.setContentType("text/html");
+				response.getWriter().println("OK"); 
+			}
+			
+			public void destroy() {
+				
+			}
+		
+			public ServletConfig getServletConfig() {
+				return null;
+			}
+		
+			public String getServletInfo() {
+				return null;
+			}
+		
+			public void init(ServletConfig arg0) throws ServletException {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		}
+
+2. 配置web.xml
+
+		  <servlet>
+		  	<servlet-name>req</servlet-name>
+		  	<servlet-class>day02.RequestDemoServlet</servlet-class>
+		  </servlet>  
+		  <servlet-mapping>
+		  	<servlet-name>req</servlet-name>
+		  	<url-pattern>/request-demo</url-pattern>
+		  </servlet-mapping>
+
+### HttpServletResponse
+
+HttpServletResponse 简称Response 其父类型是 ServletResponse 
+
+1. Response用于处理服务器到客户端的响应, 其内部有一个缓冲, 用来保存响应信息. 
+2. ServletResponse 是父类型, 提供的方法没有 HttpServletResponse 多, 使用没有HttpServletResponse方便. 所以 HttpServletResponse 使用更多.
+3. request提供的API用来处理向客户端发送的响应信息:
+	1. res.setStatus(200) 设置状态码, 也就是设置状态行
+	2. res.setContentType设置Content-Type响应头, 用来通知浏览器采用何种方式处理 响应Body.
+	3. res.setContentLength 设置 Content-Length 响应头
+	4. res.getOutputStream().write() 设置响应消息正文Body
+	5. res.getPrintWriter() 获得设置了编码的输出流, 调用之前必须使用setContentType设置编码.
+	6. res.setHeader() 设置自定义的响应头
+
+案例:
+
+1. 编写Servlet类
+		
+		public class ResponseDemoServlet 
+			implements Servlet{
+		
+			public void service(
+					ServletRequest request, 
+					ServletResponse response) 
+				throws ServletException, IOException {
+				//为了调用子类型的方法, 先进行类型转换
+				HttpServletRequest req=
+						(HttpServletRequest)request;
+				HttpServletResponse res=
+						(HttpServletResponse)response;
+				//利用response对象, 处理对用户浏览器的响应
+				//设置响应状态码, 默认状态码就是200
+				res.setStatus(200); //400 500 302 等
+		
+				//设置响应头, 设置UTF-8支持中文
+				res.setContentType("text/html; charset=utf-8");
+				String str = "<html><body><h1>"
+						+ "今天天气不错!"
+						+ "</h1></body></html>";
+				byte[] bytes = str.getBytes("utf-8");
+				//设置消息正文长度
+				res.setContentLength(bytes.length); 
+				//添加一个自定义的响应头
+				res.setHeader("msg", "Hello World!"); 
+				
+				//发送消息正文
+				res.getOutputStream().write(bytes); 
+				//将response中的信息刷出, 反馈到浏览器
+				//如果不调用这个方法, Tomcat会自动调用!
+				res.flushBuffer();
+			}
+			public void destroy() {
+				
+			}
+		
+			public ServletConfig getServletConfig() {
+				return null;
+			}
+		
+			public String getServletInfo() {
+				return null;
+			}
+		
+			public void init(ServletConfig arg0) throws ServletException {
+				
+			}
+		
+			
+		}
+
+2. 配置 web.xml
+
+		  <servlet>
+		    <servlet-name>res</servlet-name>
+		    <servlet-class>day02.ResponseDemoServlet</servlet-class>
+		  </servlet>
+		  <servlet-mapping>
+		    <servlet-name>res</servlet-name>
+		    <url-pattern>/response-demo</url-pattern>
+		  </servlet-mapping>
+
+
+3. 测试: 检查浏览器中收到的响应头信息, 是否包含自定义响应头
+
+
+Response提供了更加简便的API, 可以替代如上的API:
+
+1. 采用默认的状态码200
+2. 先设置 Content-Type 头, 包含chaeset编码
+3. 在创建 PrintWriter对象, printWriter对象会自动处理文本的编码,并且会自动的设置Content-Length
+
+案例:
+
+1. 编写Servlet类
+
+		public class ResponseDemo2Servlet
+			implements Servlet{
+			
+			public void service(ServletRequest request, 
+					ServletResponse response) 
+				throws ServletException, IOException {
+				HttpServletRequest req = 
+						(HttpServletRequest) request;
+				HttpServletResponse res = 
+						(HttpServletResponse) response;
+				
+				//1 响应状态码 200 时候可以不设置, 默认就是200
+				//2 设置ContentType响应头, 通知浏览器正文内容和编码
+				res.setContentType(
+						"text/html;charset=utf-8");
+				//3 获取 PrintWriter 对象, 字符流, 封装字符
+				//  的编码功能. 按照ContentType设置编码utf-8
+				PrintWriter out = res.getWriter();
+				//4 设置消息正文内容
+				out.print("<html><body><h1>"
+						+ "简单版本"
+						+ "</h1></body></html>");
+				//PrintWriter 会自动处理文字编码,设置ContentLength
+			}
+			
+			public void destroy() {
+			}
+		
+			public ServletConfig getServletConfig() {
+				return null;
+			}
+		
+			public String getServletInfo() {
+				return null;
+			}
+		
+			public void init(ServletConfig arg0) throws ServletException {
+			}
+		
+		
+		}
+
+2. 配置web.xml
+
+		  <servlet>
+		    <servlet-name>res2</servlet-name>
+		    <servlet-class>day02.ResponseDemo2Servlet</servlet-class>
+		  </servlet>
+		  <servlet-mapping>
+		    <servlet-name>res2</servlet-name>
+		    <url-pattern>/response2-demo</url-pattern>
+		  </servlet-mapping>
+
+3. 测试
+
+## HttpServlet
+
+实现Servlet接口创建Servlet非常繁琐, Servlet API 为了简化编程提供了更加简洁的API: HttpServlet.
+
+HttpServlet实现了Servlet接口, 继承HttpServlet 就间接实现Servlet接口. 
+
+HttpServlet已经完整实现Servlet接口, 只需要简单重写 doGet或者doPost就可以方便的实现Servlet. 
+
+HttpServlet根据用户请求类型, 调用对应的doGet或者doPost方法.
+
+原理: 
+
+![](http.png)
+
+案例:
+
+1. 创建Servlet类
+
+		public class HttpDemoServlet extends HttpServlet{
+			
+			@Override
+			protected void doGet(
+					HttpServletRequest req,
+					HttpServletResponse resp) 
+				throws ServletException, IOException {
+				
+				resp.setContentType("text/html; charset=utf-8");
+				PrintWriter out=resp.getWriter();
+				out.print("<html><body><h1>");
+				out.print("第一个HttpServlet");
+				out.print("</h1></body></html>");
+			}
+			
+		}
+
+2. 配置web.xml
+
+		  <servlet>
+		    <servlet-name>httpdemo</servlet-name>
+		    <servlet-class>day02.HttpDemoServlet</servlet-class>
+		  </servlet>
+		  <servlet-mapping>
+		    <servlet-name>httpdemo</servlet-name>
+		    <url-pattern>/http-demo</url-pattern>
+		  </servlet-mapping>
+
+3. 测试: 可以看出来 继承HttpServlet可以大大简化Servlet编码
+
+利用Eclipse开发工具提供的Servlet向导可以快速创建Servlet, 这个功能了解即可. 
+
+### Request 接收表单参数
+
+Request功能很多, 其主要作用就是处理浏览器请求. 用户通过表单提交的参数可以通过Request对象提供的API方法读取
+
+	String name = request.getParamter("name");
+
+原理:
+
+![](parameter.png)
+
+案例:
+
+1. 编写表单 webapp/login.html
+
+		<!DOCTYPE html>
+		<html>
+		<head>
+		<meta charset="UTF-8">
+		<title>登录表单</title>
+		</head>
+		<body>
+			<h1>登录</h1>
+			<p>使用request对象接收表单参数</p>
+			<!-- 向 login url发起post请求 -->
+			<form action="login" method="post">
+				<div>
+					<label>用户</label>
+					<input type="text" name="user"> 
+				</div>
+				<div>
+					<label>密码</label>
+					<input type="password" name="pwd"> 
+				</div>
+				<input type="submit" value="登录">   
+			</form>
+		</body>
+		</html>
+		
+2. 测试显示表单
+3. 编写Servlet
+
+		public class LoginServlet extends HttpServlet {
+			private static final long serialVersionUID = 1L;
+		
+		
+			protected void doPost(
+					HttpServletRequest request,
+					HttpServletResponse response) 
+				throws ServletException, IOException {
+				//利用request的API获取表单参数
+				String name = request.getParameter("user");
+				String pwd = request.getParameter("pwd");
+				System.out.println(name+","+pwd);
+				
+				response.setContentType(
+						"text/html; charset=utf-8"); 
+				PrintWriter out=response.getWriter();
+				out.print("OK"); 
+			}
+		
+		}
+
+4. 测试
+
+> 注意: 这个案例中有中文编码问题, 是下一节课程的内容. 
+
+
+
+## 回顾
+
+### request response
+
+1. Request 对象: 接收浏览器请求消息, 提供了读取请求消息的API
+2. Response 对象: 用于缓冲响应消息, 提供API设置修改响应消息.
+3. Tomcat负责解析请求, 创建Request 对象
+4. Tomcat负责创建Response 对象, Tomcat负责将Response对象中信息, 发送到浏览器. 
+
+### 创建Servlet的方式:
+
+1. 实现Servlet接口: 繁琐
+2. 继承HttpServlet: 简单
+3. 开发工具提供了创建Servlet向导(知道就行!)
+
+### Request 接收表单参数
+
+
+
+

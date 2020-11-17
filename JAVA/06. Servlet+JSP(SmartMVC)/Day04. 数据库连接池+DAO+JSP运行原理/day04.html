@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>day04</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>Servlet</h1>
+<h2>回顾</h2>
+<p>使用 Servlet+JDBC 实现员工列表.</p>
+<p>问题:</p>
+<ol>
+<li>代码繁琐</li>
+<li>不便于维护</li>
+</ol>
+<h2>数据库连接池</h2>
+<p>数据库连接池负责分配、管理和释放数据库连接，它允许应用程序重复使用一个现有的数据库连接，而不是再重新建立一个；</p>
+<p>在需求数据连接数超过可连接总数时候可以控制最大连接数, 避免连接过载, 保护数据库连接资源.</p>
+<p>这项技术能明显提高对数据库操作的性能, 同时限制数据库连接总数避免资源过载.</p>
+<p>数据库连接池的管理策略</p>
+<ol>
+<li>初始时候会创建一定数量的连接</li>
+<li>在用户获取连接时候直接重用已有连接</li>
+<li>在连接需求数量超过最大连接数时候, 控制连接总数</li>
+<li>在连接池中的空闲连接较多时候, 会关闭连接多余的连接, 保持空闲连接数量</li>
+</ol>
+<p>使用步骤</p>
+<ol>
+<li>
+<p>导入DBCP, MySQL JDBC, JUnit </p>
+<pre><code>    &lt;dependency&gt;
+      &lt;groupId&gt;commons-dbcp&lt;/groupId&gt;
+      &lt;artifactId&gt;commons-dbcp&lt;/artifactId&gt;
+      &lt;version&gt;1.4&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;mysql&lt;/groupId&gt;
+      &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+      &lt;version&gt;5.1.47&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;junit&lt;/groupId&gt;
+      &lt;artifactId&gt;junit&lt;/artifactId&gt;
+      &lt;version&gt;4.12&lt;/version&gt;
+    &lt;/dependency&gt;
+</code></pre>
+
+</li>
+<li>
+<p>编写测试案例:</p>
+<pre><code>public class TestCase {
+
+    @Test
+    public void testDBCP() throws Exception {
+        //BasicDataSource 就是Apache提供的数据库
+        //连接池组件, 使用步骤:
+        //1. 创建连接池对象
+        //2. 设置4个必须的连接池参数
+        //    driverClass, url, username, password
+        //3. 设置可选的数据库连接管理策略参数
+        //    初始连接数: 先创建的连接数量
+        //    最大连接数: 最多创建的连接数量
+        //    空闲连接数: 连接用完以后保持连接数
+        //    ...
+        BasicDataSource ds = 
+                new BasicDataSource();
+        //设置必须参数
+        ds.setDriverClassName(&quot;com.mysql.jdbc.Driver&quot;); 
+        ds.setUrl(&quot;jdbc:mysql://localhost:3306/web&quot;); 
+        ds.setUsername(&quot;root&quot;);
+        ds.setPassword(&quot;root&quot;);
+        //设置可选参数
+        ds.setInitialSize(5); //Initial: 初始的
+        ds.setMaxActive(50);  //最大连接数
+        ds.setMaxIdle(10);    //最大空闲(Idle)连接数
+        //要合理设置可选参数. 
+
+        //从数据库连接池中拿到数据库连接
+        Connection conn = ds.getConnection();
+        String sql = &quot;select 'Hello World' as s&quot;;
+        Statement st = conn.createStatement();
+        ResultSet rs=st.executeQuery(sql);
+        while(rs.next()) {
+            String s = rs.getString(&quot;s&quot;);
+            System.out.println(s); 
+        }
+        //执行close()方法, 将连接归还到连接池 
+        conn.close();
+    }
+}
+</code></pre>
+
+</li>
+<li>
+<p>测试:</p>
+</li>
+</ol>
+<p>利用数据库连接池重构 DBUtil</p>
+<ol>
+<li>
+<p>编写配置文件 db.properties</p>
+<pre><code>driver=com.mysql.jdbc.Driver
+url=jdbc:mysql://localhost:3306/web?characterEncoding=utf8&amp;useUnicode=true&amp;useSSL=false
+username=root
+password=root
+initial=5
+max=50
+idle=10
+</code></pre>
+
+</li>
+<li>
+<p>编写DBUtil类</p>
+<pre><code>public class DBUtil {
+    private static BasicDataSource ds;
+    static {
+        ds = new BasicDataSource();
+        //读取配置文件, 初始化连接池对象
+        Properties cfg = new Properties();
+        try {
+            InputStream in = DBUtil.class.getClassLoader()
+                .getResourceAsStream(&quot;db.properties&quot;);
+            cfg.load(in);
+            in.close();
+            String driver=cfg.getProperty(&quot;driver&quot;);
+            String url=cfg.getProperty(&quot;url&quot;);
+            String username=cfg.getProperty(&quot;username&quot;);
+            String password=cfg.getProperty(&quot;password&quot;);
+            int initial=Integer.parseInt(
+                    cfg.getProperty(&quot;initial&quot;));
+            int max = Integer.parseInt(
+                    cfg.getProperty(&quot;max&quot;));
+            int idle = Integer.parseInt(
+                    cfg.getProperty(&quot;idle&quot;)); 
+            ds.setDriverClassName(driver);
+            ds.setUrl(url);
+            ds.setUsername(username);
+            ds.setPassword(password);
+            ds.setInitialSize(initial);
+            ds.setMaxActive(max);
+            ds.setMaxIdle(idle);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+    public static Connection getConnection() 
+        throws SQLException {
+        return ds.getConnection();
+    }
+    public static void close(Connection conn) {
+        try {
+            if(conn!=null) conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+
+</li>
+<li>
+<p>编写测试案例</p>
+<pre><code>@Test
+public void testDBUitl() throws Exception {
+    //测试 DBUtil管理的连接池对象是否能够连接到数据库
+    //从连接池拿到连接
+    Connection conn = DBUtil.getConnection();
+    String sql = &quot;select 'DBCP' as s&quot;;
+    Statement st = conn.createStatement();
+    ResultSet rs = st.executeQuery(sql);
+    while(rs.next()) {
+        String str = rs.getString(&quot;s&quot;);
+        System.out.println(str);
+    }
+    DBUtil.close(conn); //归还连接
+}
+</code></pre>
+
+</li>
+<li>
+<p>测试</p>
+</li>
+</ol>
+<h2>DAO 数据访问对象</h2>
+<p>利用DAO将页面表现和数据访问进行分离</p>
+<ol>
+<li>将数据访问和页面表现加以分离</li>
+<li>数据访问逻辑集中管理,方便维护</li>
+<li>页面表现集中管理方便维护</li>
+</ol>
+<p>步骤</p>
+<ol>
+<li>
+<p>创建Emp类, 用于封装数据:</p>
+<pre><code>/**
+ * 创建员工类, 封装员工数据 
+ * 业务实体(entity)类, 封装业务数据的类 
+ * 生成 有参构造器,  get set 方法, 生成toString
+ */
+public class Emp {
+    private int empno;
+    private String ename;
+    private int mgr;
+    private Date hiredate;
+    private int deptno;
+    private double salary;
+    private double comm;
+
+    public Emp() {
+    }
+
+    public Emp(int empno, String ename, int mgr, Date hiredate, int deptno, double salary, double comm) {
+        super();
+        this.empno = empno;
+        this.ename = ename;
+        this.mgr = mgr;
+        this.hiredate = hiredate;
+        this.deptno = deptno;
+        this.salary = salary;
+        this.comm = comm;
+    }
+
+    public int getEmpno() {
+        return empno;
+    }
+
+    public void setEmpno(int empno) {
+        this.empno = empno;
+    }
+
+    public String getEname() {
+        return ename;
+    }
+
+    public void setEname(String ename) {
+        this.ename = ename;
+    }
+
+    public int getMgr() {
+        return mgr;
+    }
+
+    public void setMgr(int mgr) {
+        this.mgr = mgr;
+    }
+
+    public Date getHiredate() {
+        return hiredate;
+    }
+
+    public void setHiredate(Date hiredate) {
+        this.hiredate = hiredate;
+    }
+
+    public int getDeptno() {
+        return deptno;
+    }
+
+    public void setDeptno(int deptno) {
+        this.deptno = deptno;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public double getComm() {
+        return comm;
+    }
+
+    public void setComm(double comm) {
+        this.comm = comm;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Emp [empno=&quot; + empno + &quot;, ename=&quot; + ename + &quot;, mgr=&quot; + mgr + &quot;, hiredate=&quot; + hiredate + &quot;, deptno=&quot;
+                + deptno + &quot;, salary=&quot; + salary + &quot;, comm=&quot; + comm + &quot;]&quot;;
+    }
+
+}
+</code></pre>
+
+</li>
+<li>
+<p>创建EmpDAO封装数据访问逻辑</p>
+<pre><code>/**
+ * 封装对 Emp 表的数据访问功能 
+ */
+public class EmpDao {
+    /**
+     * 从数据库中查询全部的员工数据, 封装到List
+     * 返回, list中的每个元素是一个Emp对象
+     * @return 全部的员工数据
+     */
+    public List&lt;Emp&gt; findAll(){
+        String sql = &quot;select empno, ename, mgr, &quot;
+                + &quot;hiredate, deptno, salary, comm &quot;
+                + &quot;from t_emp&quot;;
+        Connection conn = null;
+        try {
+            conn = DBUtil.getConnection();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            List&lt;Emp&gt; list = new ArrayList&lt;&gt;();
+            while(rs.next()) {
+                int empno = rs.getInt(&quot;empno&quot;);
+                String ename = rs.getString(&quot;ename&quot;);
+                int mgr = rs.getInt(&quot;mgr&quot;);
+                Date hiredate=rs.getDate(&quot;hiredate&quot;);
+                int deptno = rs.getInt(&quot;deptno&quot;);
+                double salary = rs.getDouble(&quot;salary&quot;);
+                double comm = rs.getDouble(&quot;comm&quot;);
+                Emp emp = new Emp(empno, ename, mgr, hiredate, deptno, salary, comm);
+                list.add(emp);
+            }
+            return list;//正常结果
+        } catch (Exception e) {
+            e.printStackTrace();
+            //错误情况!
+            throw new RuntimeException(e); //错误结果
+        } finally {
+            DBUtil.close(conn); 
+        }
+    }
+}
+</code></pre>
+
+</li>
+<li>
+<p>测试:</p>
+<pre><code>@Test
+public void testEmpDao() {
+    EmpDao dao = new EmpDao();
+    List&lt;Emp&gt; list = dao.findAll();
+    for (Emp emp : list) {
+        System.out.println(emp); 
+    }
+}
+</code></pre>
+
+</li>
+</ol>
+<h2>利用EmpDao显示员工列表</h2>
+<ol>
+<li>
+<p>编写Servlet</p>
+<pre><code>public class ListServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(
+            HttpServletRequest request,
+            HttpServletResponse response) 
+        throws ServletException, IOException {
+        //获取全部需要显示的数据
+        EmpDao dao = new EmpDao();
+        List&lt;Emp&gt; list = dao.findAll();
+
+        //输出页面显示数据
+        response.setContentType(&quot;text/html;charset=utf-8&quot;);
+        PrintWriter out = response.getWriter();
+        out.println(&quot;&lt;!DOCTYPE html&gt;&quot;);
+        out.println(&quot;&lt;html&gt;&quot;);
+        out.println(&quot;&lt;head&gt;&quot;);
+        out.println(&quot;&lt;meta charset=\&quot;UTF-8\&quot;&gt;&quot;);
+        out.println(&quot;&lt;/head&gt;&quot;);
+        out.println(&quot;&lt;body&gt;&quot;);
+        out.println(&quot;&lt;h1&gt;员工列表&lt;/h1&gt;&quot;);
+
+        //遍历 list 集合拼接表格
+        out.println(&quot;&lt;table border='1'&gt;&quot;);
+        out.println(&quot;&lt;tr&gt;&quot;);
+        out.println(&quot;&lt;td&gt;编号&lt;/td&gt;&quot;);
+        out.println(&quot;&lt;td&gt;姓名&lt;/td&gt;&quot;);
+        out.println(&quot;&lt;td&gt;领导&lt;/td&gt;&quot;);
+        out.println(&quot;&lt;td&gt;入职日期&lt;/td&gt;&quot;);
+        out.println(&quot;&lt;td&gt;部门号&lt;/td&gt;&quot;);
+        out.println(&quot;&lt;td&gt;薪资&lt;/td&gt;&quot;);
+        out.println(&quot;&lt;td&gt;提成&lt;/td&gt;&quot;);
+        out.println(&quot;&lt;/tr&gt;&quot;);
+        for(Emp emp : list) {
+            out.println(&quot;&lt;tr&gt;&quot;);
+            out.println(&quot;&lt;td&gt;&quot;+emp.getEmpno()+&quot;&lt;/td&gt;&quot;);
+            out.println(&quot;&lt;td&gt;&quot;+emp.getEname()+&quot;&lt;/td&gt;&quot;);
+            out.println(&quot;&lt;td&gt;&quot;+emp.getMgr()+&quot;&lt;/td&gt;&quot;);
+            out.println(&quot;&lt;td&gt;&quot;+emp.getHiredate()+&quot;&lt;/td&gt;&quot;);
+            out.println(&quot;&lt;td&gt;&quot;+emp.getDeptno()+&quot;&lt;/td&gt;&quot;);
+            out.println(&quot;&lt;td&gt;&quot;+emp.getSalary()+&quot;&lt;/td&gt;&quot;);
+            out.println(&quot;&lt;td&gt;&quot;+emp.getComm()+&quot;&lt;/td&gt;&quot;);
+            out.println(&quot;&lt;/tr&gt;&quot;);
+        }
+        out.println(&quot;&lt;/table&gt;&quot;);
+
+        out.println(&quot;&lt;/body&gt;&quot;);
+        out.println(&quot;&lt;/html&gt;&quot;);
+    }
+
+}
+</code></pre>
+
+</li>
+<li>
+<p>配置 web.xml</p>
+<pre><code>  &lt;servlet&gt;
+    &lt;description&gt;&lt;/description&gt;
+    &lt;display-name&gt;ListServlet&lt;/display-name&gt;
+    &lt;servlet-name&gt;ListServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;day04.ListServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;ListServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/list&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+</code></pre>
+
+</li>
+<li>
+<p>部署测试:</p>
+<pre><code>http://localhost:8080/Servlet04/list
+</code></pre>
+
+</li>
+</ol>
+<h2>JSP</h2>
+<p>JSP: Java服务器页面</p>
+<pre><code>J-Java
+S-Server
+P-Page
+</code></pre>
+
+<ol>
+<li>历史上 微软公司首先提供了 ASP 技术, 很受欢迎</li>
+<li>SUN根据ASP的风格基于Servlet技术, 设计了JSP</li>
+<li>JSP就是Servlet</li>
+</ol>
+<p>JSP编程好处:</p>
+<ol>
+<li>JSP 页面基于HTML页面, 传统的HTML开发工具可以写JSP</li>
+<li>在运行时候 JSP 被翻译成 .java 文件(Servlet) 再编译为.class</li>
+<li>执行时候执行class文件.</li>
+<li>JSP自动部署, 不用写web.xml</li>
+</ol>
+<blockquote>
+<p>JSP 的优势在于 使用HTML风格编码编写Servlet类! JSP非常适合显示网页符数据.</p>
+</blockquote>
+<h3>JSP Hello World!</h3>
+<pre><code>&lt;%@ page language=&quot;java&quot; 
+    contentType=&quot;text/html; charset=utf-8&quot;
+    pageEncoding=&quot;utf-8&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;title&gt;第一个JSP&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;第一个JSP&lt;/h1&gt;
+    &lt;!-- JSP 中可以嵌入 &quot;Java 程序脚本&quot; --&gt;
+    &lt;%
+        String str = &quot;Hello World!&quot;;
+    %&gt;
+    &lt;!-- JSP 表达式, 用于计算表达式值 --&gt;
+    &lt;p&gt;&lt;%=str%&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h2>JSP运行原理</h2>
+<p>JSP运行过程:</p>
+<ol>
+<li>
+第一次请求JSP时候
+<ol>
+<li>先将JSP翻译为一个 Servlet 源程序(.java)</li>
+<li>再将Servlet源程序编译为.class文件</li>
+<li>创建Servlet对象</li>
+<li>执行Servlet对象的 service 方法, 处理请求与响应</li>
+</ol>
+</li>
+<li>
+第二次请求JSP时候
+<ol>
+<li>如果JSP被编辑过则重新走流程 1</li>
+<li>如果JSP没有被编辑过, 则执行执行Servlet对象的 service 方法</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>这么处理JSP性能好</p>
+</blockquote>
+<p><img src="jsp.png" /></p>
+<h2>JSP 中的Java</h2>
+<ol>
+<li>
+<p>Java 脚本 : 用于处理程序逻辑, 可以写任意语句, 流程控制等</p>
+<pre><code>&lt;%
+    //Java 脚本 
+    long now = System.currentTimeMillis();
+    long year = now/1000/60/60/24/365 + 1970;
+%&gt;
+</code></pre>
+
+<blockquote>
+<p>Java 脚本中的语句会翻译到 service 方法中的语句</p>
+</blockquote>
+</li>
+<li>
+<p>Java 表达式: 用于计算并且输出表达式</p>
+<pre><code>&lt;!-- JSP 表达式, 用于计算表达式值并且在网页上输出--&gt;
+&lt;p&gt;&lt;%=now/1000%60%&gt;&lt;/p&gt;
+&lt;p&gt;&lt;%=year%&gt;&lt;/p&gt;
+&lt;p&gt;&lt;%=add(times, 1)%&gt;&lt;/p&gt;
+</code></pre>
+
+</li>
+<li>
+<p>Java 声明: 用于为Servlet声明成员</p>
+<pre><code>&lt;!-- JSP 中的&quot;声明&quot;,  --&gt;
+&lt;%!
+    //用于为当前类声明 属性/方法/静态成员等
+    //编译以后会成为 Servlet 中的成员
+    int times = 55;
+    int add(int a, int b){
+        return a+b;
+    }
+%&gt;
+</code></pre>
+
+</li>
+</ol>
+<p>案例:</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; 
+    contentType=&quot;text/html; charset=utf-8&quot;
+    pageEncoding=&quot;utf-8&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;title&gt;Java 程序&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;JSP中的Java&lt;/h1&gt;
+    &lt;!-- JSP 中的&quot;声明&quot;,  --&gt;
+    &lt;%!
+        //用于为当前类声明 属性/方法/静态成员等
+        //编译以后会成为 Servlet 中的成员
+        int times = 55;
+        int add(int a, int b){
+            return a+b;
+        }
+    %&gt;
+    &lt;%
+        //Java 脚本 
+        long now = System.currentTimeMillis();
+        long year = now/1000/60/60/24/365 + 1970;
+    %&gt;
+    &lt;!-- JSP 表达式, 用于计算表达式值并且在网页上输出--&gt;
+    &lt;p&gt;&lt;%=now/1000%60%&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;%=year%&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;%=add(times, 1)%&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h2>JSP内置对象</h2>
+<h2>page 指令</h2>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

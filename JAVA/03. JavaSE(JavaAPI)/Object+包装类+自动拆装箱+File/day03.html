@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>day03</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>内容回顾</h1>
+<ol>
+<li>
+<p>StringBuilder</p>
+<ol>
+<li>
+<p>用于对字符串进行修改操作的，提供了对字符串编译操作对应的增，删，改，插操作</p>
+<ol>
+<li>append(String)</li>
+<li>delete(int start,int end);</li>
+<li>replace(int start,int end,String str);</li>
+<li>insert(int index,String str)</li>
+<li>reverse()</li>
+<li>toString()</li>
+</ol>
+</li>
+<li>
+<p>StringBuffer和StringBuilder的区别：</p>
+<ul>
+<li>线程安全问题</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h2>正则表达式</h2>
+<ol>
+<li>
+字符集
+<ol>
+<li>如何表示一位上的字符 []</li>
+<li>
+预定义字符集：
+<ol>
+<li>.</li>
+<li>\d</li>
+<li>\w</li>
+<li>\s</li>
+<li>\D	</li>
+<li>\W</li>
+<li>\S</li>
+</ol>
+</li>
+<li>
+数量词：
+<ol>
+<li>？</li>
+<li>+</li>
+<li>*</li>
+<li>{n}</li>
+<li>{n,} </li>
+<li>{n,m}</li>
+</ol>
+</li>
+<li>
+分组():若想将多个部分当成一个整体
+<ol>
+<li>()经常和|一起配合使用</li>
+</ol>
+</li>
+<li>
+边界匹配符：
+<ol>
+<li>^</li>
+<li>
+$
+<ol>
+<li>String类中提供的matches方法自带边界匹配功能，完成的是完全匹配</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+String类提供的对正则的支持：
+<ol>
+<li>matches(regex):boolean</li>
+<li>split(regex):String[]   
+</li>
+<li>replaceAll(regex,String str):String</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h1>大纲</h1>
+<h2>Object</h2>
+<ul>
+<li>
+<p>Object是java提供的一个类，是所有类的父类</p>
+<ul>
+<li>
+<p>toString()</p>
+<ul>
+<li>
+<p>返回该对象的字符串表示 </p>
+<ul>
+<li>类名@散列码（整数）</li>
+</ul>
+</li>
+<li>
+<p>当输出一个对象的引用时，会自动去调用所属类的toString()</p>
+<pre><code>java中建议：子类对toString()最好都进行重写，
+</code></pre>
+
+<p>使其更具有实际意义</p>
+<pre><code>eclipse中生成toString()的步骤：
+    右键--&gt;source--&gt;Generate toString()
+</code></pre>
+
+</li>
+</ul>
+</li>
+<li>
+<p>equals()</p>
+<ul>
+<li>在Object类中作用等同于==的作用</li>
+<li>
+<p>java中对此方法给出建议：</p>
+<ul>
+<li>
+<p>建议在子类中重写此方法，使其更具有实际意义</p>
+<pre><code>Point点对象判断的步骤：
+    1. 写Point类
+        1. 私有的x,y
+        2. 生成公有的set和get方法
+        3. 生成构造方法
+        4. 重写toString()
+    2. 创建2个Point对象进行equals比较，看结果 - 不合符实际逻辑
+    3. 重写point中的equals方法，之后再次比较看结果 
+</code></pre>
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>练习：</p>
+<pre><code>Student:属性：id（学号）  name  age
+测试类：
+    创建Student1 -- 1001  tom  23
+    创建Student2 -- 1001  tom  23
+
+比较两个student对象--equals
+ 从代码角度：两个对象比较应该是不相等
+ 从实际意义：两个对象比较应该是相等的
+
+要求：student对象比较时，根据id判断是否相等
+</code></pre>
+
+</li>
+</ul>
+<h2>包装类</h2>
+<h3>什么是包装类：</h3>
+<ul>
+<li>
+<p>java中对8种基本类型都提供了对应的包装类，用于将数据包装成对象</p>
+</li>
+<li>
+<p>java是面向对象的语言，基本数据类型不是对象，所以提供了包装类用于将基本类型数据包装成对象使用</p>
+</li>
+</ul>
+<p>8种基本类型对应的包装类：</p>
+<pre><code>byte       Byte
+short      Short
+int        Integer
+long       Long
+float      Float
+double     Double
+char       Character
+boolean    Boolean
+</code></pre>
+
+<p>8种包装类中实现的功能都类似，我们以Integer为例进行讲解：</p>
+<ul>
+<li>
+了解：
+基本类型和包装类型，若用于计算，基本类型计算的比包装类型计算更快
+</li>
+</ul>
+<h2>Integer</h2>
+<ul>
+<li>
+valueOf(int):Integer
+<ul>
+<li>得到int对应的包装类型对象</li>
+</ul>
+</li>
+<li>
+intValue():
+<ul>
+<li>从包装类型--&gt;基本类型</li>
+</ul>
+</li>
+<li>
+parseInt(String):int
+<ul>
+<li>String--&gt;int</li>
+<li>前提：String表示的值一定是可以转换成int类型才可以</li>
+</ul>
+</li>
+</ul>
+<h3>自动拆装箱</h3>
+<ol>
+<li>
+装箱：将基本类型数据包装成包装类型
+<ol>
+<li>int--&gt;Integer</li>
+<li>通过valueOf(int)完成的</li>
+</ol>
+</li>
+<li>
+拆箱：将包装类型数据拆成基本类型
+<ol>
+<li>Integer--&gt;int</li>
+<li>通过intValue()实现的</li>
+</ol>
+</li>
+</ol>
+<h4>自动装箱，自动拆箱</h4>
+<ul>
+<li>
+<p>自动装箱，自动拆箱是java从JDK1.5开始提供的功能，是编译器实现的</p>
+<p>如何实现：编译过程中，编译器将Integer i = 3;替换成了
+	Integer i = Integer.valueOf(3);</p>
+</li>
+<li>
+<p>案例：</p>
+<pre><code>Integer i1 = new Integer(23);
+Integer i2 = i1 + 4;
+先自动拆箱 将i1拆成基本类型、
+后自动装箱 将i1+4的结果由int--&gt;Integer
+</code></pre>
+
+</li>
+</ul>
+<h2>文件操作-File</h2>
+<ul>
+<li>
+<p>File：实现对文件的操作</p>
+</li>
+<li>
+<p>通过File对象可以实现对文件/目录的以下操作</p>
+<ol>
+<li>创建，删除文件/目录</li>
+<li>获取文件/目录的属性信息</li>
+<li>获取指定目录下的所有子项目</li>
+</ol>
+</li>
+<li>
+<p>构造方法：</p>
+<ul>
+<li>File(String path)</li>
+<li>File(File parent,String child)</li>
+<li>File(String parent,String child)</li>
+</ul>
+</li>
+<li>
+<p>方法：</p>
+<ol>
+<li>
+创建文件
+<ol>
+<li>creatNewFile()</li>
+</ol>
+</li>
+<li>
+<p>创建目录</p>
+<ol>
+<li>mkdir():创建一个目录</li>
+<li>
+<p>mkdirs()：创建多级目录</p>
+<pre><code>思考：如何在当前项目下创建 t/x/a.txt
+
+先创建目录，在目录下再创建文件
+</code></pre>
+
+</li>
+</ol>
+</li>
+<li>
+<p>delete()：</p>
+<ol>
+<li>删除文件/目录，注意，若删除的目录下还有子文件/目录，删除失败</li>
+</ol>
+</li>
+<li>
+getName():String
+<ol>
+<li>获取文件名称</li>
+</ol>
+</li>
+<li>
+length():long
+<ol>
+<li>获取文件内容的大小（字节）</li>
+<li>对文件进行读写操作的基本单位是字节</li>
+</ol>
+</li>
+<li>
+exists():boolean
+<ol>
+<li>判断文件是否存在</li>
+<li>
+通常和其他方法一起使用
+<ol>
+<li>
+eg:创建文件
+<ol>
+<li>如果不存在，创建</li>
+<li>否则不创建，给出提示</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+isFile():boolean
+<ol>
+<li>判断File对象指向的是否是文件 </li>
+</ol>
+</li>
+<li>
+isDirectory():boolean
+<ol>
+<li>判断File对象指向的是否是目录 </li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<h2>总结：</h2>
+<ol>
+<li>
+<p>Object：所有类的父类</p>
+<ol>
+<li>
+toString()
+<ol>
+<li>建议在子类中重写此方法</li>
+</ol>
+</li>
+<li>
+equals(Object obj):
+<ol>
+<li>等同于 == </li>
+<li>建议重写此方法，根据内容去判断对象是否相等</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>包装类：</p>
+<ol>
+<li>
+8种基本类型都有对应的包装类
+<ol>
+<li>注意int，char对应的包装类的类名</li>
+</ol>
+</li>
+<li>
+Integer:
+<ol>
+<li>valueOf(int):Integer</li>
+<li>intValue():int</li>
+<li>
+parseInt(String):int
+<ol>
+<li>前提：String必须是可以转换成int的</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+自动装箱，自动拆箱
+<ol>
+<li>装箱： int --&gt;Integer</li>
+<li>拆箱：Integer -- &gt;int</li>
+<li>
+java 从JDK1.5开始提供了自动拆装箱功能。是编译器实现的：是在编译过程中，将Integer i = 3替换成了
+<ol>
+<li>Integer.valueOf(3)</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>文件操作 - File</p>
+<ol>
+<li>
+构造方法：
+<ol>
+<li>File(String path)</li>
+<li>File(File parent,String child)</li>
+<li>File(String parent,String child)\</li>
+</ol>
+</li>
+<li>
+方法：
+<ol>
+<li>creatNewFile()</li>
+<li>mkdir()</li>
+<li>mkdirs()</li>
+<li>delete()</li>
+<li>getName()</li>
+<li>length()</li>
+<li>exists()</li>
+<li>isFile()</li>
+<li>isDirectory() </li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

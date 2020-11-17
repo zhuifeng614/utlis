@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>day01</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<p>花倩  QQ：2533897869</p>
+<h1>JAVASE:</h1>
+<h2>JDK-API</h2>
+<h2>文档注释：</h2>
+<h4>格式：</h4>
+<pre><code>/**
+*  注释内容
+*/
+</code></pre>
+
+<h4>作用的位置：</h4>
+<p>只能作用在3个位置：</p>
+<ul>
+<li>类的上方</li>
+<li>方法的上方</li>
+<li>常量的上方</li>
+</ul>
+<h3>java中三种注释功能</h3>
+<ul>
+<li>单行，多行注释可以作用在任何代码的上方，用于程序员交互的</li>
+<li>
+<p>文档注释是用于说明类，方法，常量的功能的 --用于导出文档时使用</p>
+<ul>
+<li>以后写代码的时候，类，方法，常量随时添加注释、</li>
+<li>
+<p>导出doc文档步骤：-了解即可，不要求掌握</p>
+<ol>
+<li>File--&gt;Export</li>
+<li>搜索javadoc</li>
+<li>点击下一步即可</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h2>String：</h2>
+<h3>String是不可变对象</h3>
+<p>java中规定String一旦创建就不可以改变了。</p>
+<ul>
+<li>
+<p>案例：</p>
+<pre><code>public static void main(String[] args) {
+    String str = &quot;abc&quot;;
+    str += &quot;def&quot;;
+    System.out.println(str);  //abcdef
+}
+
+总结：String对象创建后是不可变的，上题中其实是str引用指向发生了改
+变，在内存中新创建了一个String对象“abcdef”,str重新指向了此对象;
+原对象“abc”是没有发生改变的
+</code></pre>
+
+<p><img src="1.png" /></p>
+</li>
+</ul>
+<p>Debug步骤：</p>
+<pre><code>1. 定义String str = &quot;abc&quot;;
+2. str += &quot;def&quot;;
+3. 打印输出str
+4. 在第一行双击打端点，然后Debug as运行，看参数指向对象地址的变化
+</code></pre>
+
+<p>Debug界面布局重置方式：</p>
+<pre><code>Window--&gt;Perspection--&gt;Reset perspection
+</code></pre>
+
+<h2>String的本质</h2>
+<p>String的本质：底层封装了一个字符数组。</p>
+<h3>String的创建：2种方式</h3>
+<h3>方式1：</h3>
+<p>String str = new String(&quot;abc&quot;);</p>
+<p>通过new创建String对象，常用的构造方法有：</p>
+<pre><code>1. new  String(String)
+2. new  String(char[])
+</code></pre>
+
+<p>问题：</p>
+<pre><code>String str = new String(&quot;hello&quot;);
+String str1 = new String(&quot;hello&quot;);
+str == str1  ?   false
+
+注意点：一旦new，就创建一个新对象，不论内容是否相同
+</code></pre>
+
+<h3>字符串对象创建的第二种方式：</h3>
+<ul>
+<li>
+<p>String str = &quot;hello&quot;;  -- 字符串字面量，是new String（“”）的简写</p>
+</li>
+<li>
+<p>作用都是创建字符串对象，第二种方式更简单，推荐使用。</p>
+</li>
+<li>
+<p>第二种方式优点：</p>
+<ul>
+<li>字符串字面量是被复用的</li>
+</ul>
+</li>
+<li>
+<p>如何实现的？</p>
+<ul>
+<li>java底层提供了一个常量池机制，实现了字符串字面量的复用</li>
+</ul>
+<p>题目：</p>
+<pre><code>String s1 = &quot;ab&quot;,s2=&quot;cd&quot;,s3=&quot;ab&quot;;
+String s4 = new String(&quot;ab&quot;);
+
+s1==s3?  true
+s1==s4?  false
+</code></pre>
+
+</li>
+<li>
+<p>问题：</p>
+<pre><code>String s1=&quot;a&quot;;
+String s2=&quot;b&quot;;
+String s3=&quot;ab&quot;;
+String s4=s1+s2;
+String s5 = &quot;a&quot;+&quot;b&quot;;
+
+s3==s4  ?  false
+s3==s5  ?  true 编译器优化了
+</code></pre>
+
+</li>
+</ul>
+<h5>注意点：</h5>
+<ol>
+<li>
+<p>java中字符串字面量之间的拼接，编译器在编译期会进行优化，在.class文件中保存的是拼接后的结果</p>
+</li>
+<li>
+<p>字符串变量之间的拼接，编译器不会优化，底层采用new的方式创建了一个新的String对象</p>
+</li>
+</ol>
+<h4>面试题：</h4>
+<p>String str = new String(&quot;abc&quot;); 创建了几个String对象？</p>
+<pre><code>2个,分别是
+    new出来的String对象和“abc”
+</code></pre>
+
+<p>升级版面试题：</p>
+<pre><code>String str = new String(&quot;a&quot;+&quot;b&quot;);创建了几个String对象？
+    2个  
+    注意：字面量间的拼接编译器会优化
+</code></pre>
+
+<h2>String 方法操作:</h2>
+<ul>
+<li>length():获取字符串的长度</li>
+<li>
+<p>indexOf系列：</p>
+<ul>
+<li>indexOf(String str):int 获取指定子字符串在本字符串中第一次出现的索引</li>
+<li>indexOf(String str,int fromIndex):int </li>
+<li>lastIndexOf(String str):int</li>
+</ul>
+<p>eclipse清除缓存步骤：
+	project--&gt;clean--&gt;可以全选/可以选中某个要清除的项目--&gt;clean即可</p>
+</li>
+<li>
+<p>substring系列方法：</p>
+<ul>
+<li>substring(int fromIndex):String</li>
+<li>substring(int start,int end):String</li>
+</ul>
+</li>
+<li>
+<p>trim():String</p>
+<ul>
+<li>去掉字符串开头和结尾部分的空白</li>
+</ul>
+</li>
+<li>
+<p>charAt(int):char</p>
+<p>练习题:判断字符串是否是回文
+	上海自来水来自海上</p>
+<pre><code>/*
+ * 判断字符串是否是回文
+ */
+String str = &quot;上海自来水来自海上&quot;;
+boolean flag = false;
+
+for(int i=0;i&lt;str.length()/2;i++) {
+    char c1 = str.charAt(i);
+    char c2 = str.charAt(str.length()-1-i);
+    if(c1!=c2) {
+        System.out.println(&quot;不是回文&quot;);
+        flag = true;
+        break;
+    }
+}
+if(!flag) { // !flag 等同于flag为false
+    System.out.println(&quot;是回文&quot;);
+}
+</code></pre>
+
+</li>
+</ul>
+<h2>总结：</h2>
+<ol>
+<li>JAVAapi - api文档</li>
+<li>
+<p>文档注释：功能注释 </p>
+<ol>
+<li>作用于3个位置：类，方法，常量</li>
+</ol>
+</li>
+<li>
+<p>String：</p>
+<ol>
+<li>String对象是不可变对象</li>
+<li>String对象本质是包装了字符数组</li>
+<li>
+<p>String对象创建的2种方式</p>
+<ol>
+<li>new String(String);new String(char[])</li>
+<li>
+&quot;abc&quot;--字符串字面量
+<ol>
+<li>这种对象的创建方式比第一种简单，推荐使用的</li>
+<li>
+优点：字面量被复用的
+<ol>
+<li>考点：String引用之间的==比较</li>
+<li>注意：字面量之间的拼接编译器会进行优化，而如果拼接中有变量，编译器不会优化，其底层采用new的方式创建了新的String对象</li>
+<li>String str = new String(&quot;abc&quot;)</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>方法操作（api）：</p>
+<ol>
+<li>length()</li>
+<li>indexOf(String):int</li>
+<li>indexOf(String,int index):int</li>
+<li>lastIndexOf(String):int</li>
+<li>substring(int index):String</li>
+<li>
+<p>substring(int start,int end):String</p>
+<ol>
+<li>包头不包尾</li>
+</ol>
+</li>
+<li>
+<p>trim():String</p>
+</li>
+<li>charAt(int):char</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>作业题：截取域名：</p>
+<pre><code>www.baidu.com
+www.tarena.com.cn
+</code></pre>
+
+<p>提示：截取两个.之间的内容</p>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

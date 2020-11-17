@@ -1,0 +1,308 @@
+# Servlet/JSP
+
+## 回顾
+
+1. 数据库连接池
+	1. 重用(复用)数据库连接, 提高连接性能
+	2. 保护数据库连接资源, 避免连接数过载
+2. 线程池
+	1. 重用(复用)线程, 提高线程的响应性能
+	2. 保护线程总数, 避免系统资源过载
+3. 对象池 
+	1. 重用(复用)对象, 提高对象的创建性能
+	2. 保护对象总数, 避免系统资源过载
+
+> 线程池\连接池: 管理策略类似, 但是被管理的对象不同, 算法也不相同
+
+Servlet 拆分
+
+1. 数据层访问组件 DAO 用于封装 数据访问功能
+2. 将页面部分利用JSP重构
+3. Servlet 整合数据访问和JSP实现功能. 
+
+形成了: MVC模式
+
+1. M称为模型, 也是就DAO等 管理业务数据状态
+2. V称为视图, 也是就是JSP, 用于呈现数据
+3. C成功控制器, 也是就是Servlet, 整合 M 和 V
+
+## JSP
+
+## page 指令
+
+使用 <%@ page %> 声明page 指令
+
+1. 必须写在JSP的第一行
+2. 属性:
+	- language=java 可以省略, 省略就是Java, 只能Java
+	- contentType="text/html; charset=UTF-8" 就是 response.setContentType(...) 设置浏览器端的解析编码
+	- pageEncoding="UTF-8" 页面编码, 是告诉Tomcat读取当前网页时候的编码
+	- import="java.util.*,java.sql.*" 导入组件 
+
+## JSP内置对象
+
+就是JSP中预先定义的引用, 引用了与JSP功能相关的对象. 
+
+可以随时使用引用调用对象的方法, 实现功能
+
+一共有9个对象: 经常成为9大内置对象.
+
+常用:
+
+1. request   HttpServletResuest 
+2. response  HttpServletResponse
+3. out       JspWriter 功能与 PrintWriter 一致
+
+> 考点: JSP out对象的类型: JspWriter
+
+比较常用:
+
+4. session      HttpSession 类型, 用于存储与"用户会话"有关的数据.(以后讲)
+5. application  ServletContext 类型, 用于存储与当前Servlet容器有关的数据(后续专门讲)
+6. pageContext  PageContext, 页面"上下文Context". PageContext是当前页面上下文, 是当前页面的大管家, 内部包含与JSP有关的全部资源.
+
+		pageContext.getRequest() 返回的对象就是 request对象
+		pageContext.getResponse()  返回的对象就是 response对象
+
+不常用(不用):
+
+7. config  : ServletConfig 用于读取 web.xml 的内容
+8. page    : Object类型, 是当前JSP对象(Servlet对象)的引用, 就是this
+9. exception : Exception 类型, 当前网页是错误页面时候, 用于获取异常信息. 
+
+案例:
+
+	<%@ page 
+		language="java" 
+		contentType="text/html; charset=UTF-8"
+	    pageEncoding="UTF-8"
+	    import="java.util.*,java.sql.*" 
+	%>
+	<%
+		List<String> list=new ArrayList<String>();
+		//演示request对象的功能: 读取请求中的数据
+		String ua = request.getHeader("User-Agent");
+		//演示response对象功能: 处理响应信息
+		response.setHeader("message", "Hello World!"); 
+	%>
+	<!DOCTYPE html>
+	<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	</head>
+	<body>
+		<h1>内置对象功能演示</h1>
+		<p>User-Agent:
+		<%
+			//在p标签里面显示ua信息
+			out.println(ua); 
+		%>
+		</p>
+		<%
+			//pageContext 页面上下文, 包含当前页面全部相关信息
+			// pageContext.getOut() 返回对象就是 out 对象
+			// 其功能与out对象相同
+			JspWriter o = pageContext.getOut();
+		%>
+		<p>User-Agent: <% o.println(ua); %> </p>
+	</body>
+	</html>
+ 
+## 利用request对象共享数据
+
+request内部封装了一个集合, 用于在一个请求期间共享数据.
+
+主要用于在Servlet与JSP之间共享数据.
+
+其主要API方法:
+
+	request.setAttribute(key, value);
+	Object value = request.getAttribute(key);
+	request.removeAttribute(key);
+
+原理
+
+案例:
+
+	<%@ page 
+		language="java" 
+		contentType="text/html; charset=UTF-8"
+	    pageEncoding="UTF-8"
+	    import="java.util.*,java.sql.*" 
+	%>
+	<%
+		//将数据存储到 request中
+		request.setAttribute("msg", "Hello World!");
+		request.setAttribute("price", 1234.0);
+	%>
+	<!DOCTYPE html>
+	<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	</head>
+	<body>
+		<h1>利用request共享/传送数据</h1>
+		<%
+			//接收request传递/共享的数据
+			String s = (String)request.getAttribute("msg");
+			Double d = (Double)request.getAttribute("price");
+			//删除request中共享的数据
+			request.removeAttribute("msg");
+			request.removeAttribute("price");
+		%>
+		<p>msg:<%=s%> price:<%=d%></p>
+	</body>
+	</html>
+
+## 转发
+
+利用请求协作对象, 从Servlet转发到JSP
+
+SUN为了能够实现Servlet处理业务功能, 由JSP显示业务处理结果, 而设计了Servlet到JSP的转发功能. 
+
+原理:
+
+
+案例:
+
+	public class DemoServlet extends HttpServlet {
+		private static final long serialVersionUID = 1L;
+	
+		protected void doGet(
+			HttpServletRequest request, 
+			HttpServletResponse response) 
+				throws ServletException, IOException {
+			//测试 从Servlet转发到JSP
+			
+			//1. 保存数据到 request 对象
+			request.setAttribute("msg", "Hello World!");
+			//2. 利用请求协作对象转发到一个JSP页面
+			RequestDispatcher rd=request
+					.getRequestDispatcher("demo03.jsp");
+			rd.forward(request, response);
+			//注意!! 转发以后不能再处理网页内容, 
+			//包括向response输出信息, 或者再次转发!!
+		}
+	
+	}
+	
+	  <servlet>
+	    <description></description>
+	    <display-name>DemoServlet</display-name>
+	    <servlet-name>DemoServlet</servlet-name>
+	    <servlet-class>day05.DemoServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	    <servlet-name>DemoServlet</servlet-name>
+	    <url-pattern>/demo</url-pattern>
+	  </servlet-mapping>
+	
+	
+	<%@ page 
+		language="java" 
+		contentType="text/html; charset=UTF-8"
+	    pageEncoding="UTF-8"
+	    import="java.util.*,java.sql.*" 
+	%>
+	<!DOCTYPE html>
+	<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	</head>
+	<body>
+		<h1>从Servlet转发到JSP</h1>
+		<p><%=request.getAttribute("msg")%></p> 
+	</body>
+	</html>
+	
+
+## 实现MVC版本的员工列表:
+
+1. DBUtil, Emp 等略
+2. 编写Servlet
+
+		public class ListEmpServlet extends HttpServlet {
+			private static final long serialVersionUID = 1L;
+		       
+			protected void doGet(
+					HttpServletRequest request, 
+					HttpServletResponse response) 
+				throws ServletException, IOException {
+				//利用Dao获取数据
+				EmpDao dao = new EmpDao();
+				List<Emp> list = dao.findAll();
+				//利用request共享数据
+				request.setAttribute("list", list); 
+				//转发到 list-emp.jsp, 显示员工列表
+				RequestDispatcher rd=request
+						.getRequestDispatcher("list-emp.jsp");
+				rd.forward(request, response); 
+			}
+		}
+
+2. 配置
+
+		  <servlet>
+		    <description></description>
+		    <display-name>ListEmpServlet</display-name>
+		    <servlet-name>ListEmpServlet</servlet-name>
+		    <servlet-class>day05.ListEmpServlet</servlet-class>
+		  </servlet>
+		  <servlet-mapping>
+		    <servlet-name>ListEmpServlet</servlet-name>
+		    <url-pattern>/list-emp</url-pattern>
+		  </servlet-mapping>
+
+3. 编写JSP
+
+		<%@ page 
+			language="java" 
+			contentType="text/html; charset=UTF-8"
+		    pageEncoding="UTF-8"
+		    import="java.util.*,entity.*"
+		%>
+		<!DOCTYPE html>
+		<html>
+		<head>
+		<meta charset="utf-8">
+		<title>员工列表</title>
+		</head>
+		<body>
+			<h1>员工列表</h1>
+			<table border="1">
+				<tr>
+					<td>编号</td>
+					<td>姓名</td>
+					<td>领导</td>
+					<td>入职日期</td>
+					<td>部门号</td>
+					<td>薪资</td>
+					<td>提成</td>
+				</tr>
+		<% 
+			List<Emp> list = 
+				(List<Emp>)request.getAttribute("list");
+		%>
+				<%for(Emp emp:list){ %>
+				<tr>
+					<td><%=emp.getEmpno()%></td>
+					<td><%=emp.getEname()%></td>
+					<td><%=emp.getMgr()%></td>
+					<td><%=emp.getHiredate()%></td>
+					<td><%=emp.getDeptno()%></td>
+					<td><%=emp.getSalary()%></td>
+					<td><%=emp.getComm()%></td>
+				</tr>
+				<%}%>
+			</table>
+		</body>
+		</html>
+
+
+
+
+
+

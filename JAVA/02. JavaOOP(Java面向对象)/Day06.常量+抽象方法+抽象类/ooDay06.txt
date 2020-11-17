@@ -1,0 +1,307 @@
+Shoot射击游戏第一天:
+1.设计了6个对象类，创建World类并测试
+
+Shoot射击游戏第二天:
+1.给6个对象类添加构造方法，并测试
+
+Shoot射击游戏第三天:
+1.设计小敌机数组、大敌机数组、小蜜蜂数组、子弹数组，并测试
+2.设计FlyingObject超类，6个对象类继承超类
+3.给超类FlyingObject设计两个构造方法，6个派生类分别调用
+
+Shoot射击游戏第四天:
+1.将小敌机、大敌机、小蜜蜂数组合为FlyingObject数组，并测试
+2.在派生类中重写FlyingObject的step()方法
+3.画窗口
+
+Shoot射击游戏第五天:
+1.给类中成员添加访问控制修饰符
+2.给对象添加图片属性----Images图片工具类
+
+Shoot射击游戏第六天:
+1.设计窗口的宽和高为常量，适当地方做修改
+2.画对象:
+  1)想画对象需要先获取对象的图片，每个对象都能获取图片，
+    意味着获取图片行为为共有的行为，设计FlyingObject超类中，
+    每个对象获取图片的行为都是不一样的，所以设计为抽象方法
+    ----在FlyingObject中设计抽象方法getImage()来获取对象的图片
+  2)获取图片时需要考虑对象的状态，因为不同状态下获取的图片是不同的，
+    每个对象都有状态，所以将状态设计在FlyingObject超类中，
+    状态一般都设计为常量，分三个状态:LIFE、DEAD、REMOVE
+    设计state变量表示当前状态(默认LIFE活着的)
+    ----在FlyingObject中设计三个常量，一个变量state表示当前状态
+    在获取图片时需要判断对象的状态，每个对象都需要判断，
+    所以将判断状态行为设计在FlyingObject中，
+    每个对象判断状态的行为都是一样的，所以设计为普通方法
+    ----在FlyingObject中设计isLife()、isDead()、isRemove()
+  3)----重写getImage()获取对象图片
+    3.1)天空Sky，直接返回sky即可
+    3.2)子弹Bullet:
+        3.2.1)若活着呢，直接返回bullet即可
+        3.2.2)若死了呢，直接删除
+    3.3)英雄机Hero:
+        3.3.1)若活着呢，返回heros[0]和heros[1]来回切换
+    3.4)小敌机Airplane:
+        3.4.1)若活着呢，返回airplanes[0]即可
+        3.4.2)若死了呢，依次返回第2张到第5张的图，5后删除
+    3.5)大敌机BigAirplane:
+        3.5.1)若活着呢，返回bigairplanes[0]即可
+        3.5.2)若死了呢，依次返回第2张到第5张的图，5后删除
+    3.6)小蜜蜂Bee:
+        3.6.1)若活着呢，返回bees[0]即可
+        3.7.2)若死了呢，依次返回第2张到第5张的图，5后删除
+  4)图片有了则可以开画了，每个对象都能画，
+    意味着画对象为共有行为，所以设计在FlyingObject超类中，
+    每个对象画的方式都是一样的，所以设计为普通方法
+    ----在FlyingObject中设计paintObject()画对象
+  5)天空Sky需要画两张图，所以需重写超类的paintObject()
+    ----在Sky中重写paintObject()画对象
+  6)----在World中重写paint()，调用paintObject()画对象
+
+步骤一: 1/2/3步(准备图片)
+步骤二: 4/5步(画对象)
+步骤三: 6步(调用画对象)
+
+回顾:
+1.package和import:
+2.访问控制修饰符:
+  1)public:任何类
+  2)private:本类
+  3)protected:本类、派生类、同包类
+  4)默认的:本类、同包类
+3.final:最终的、不可改变的
+  1)修饰变量:变量不能被改变
+  2)修饰方法:方法不能被重写
+  3)修饰类:类不能被继承
+4.static:
+  1)静态变量:
+      static，类，方法区，一份，类名点来访问
+      所有对象所共享的数据(图片、音频、视频等)
+  2)静态方法:
+      static，类，方法区，一份，类名点来访问
+      没有隐式this，所以不能直接访问实例成员
+      方法的操作与对象无关而仅与参数有关
+  3)静态块:
+      static，类，类被加载期间自动执行，一次
+      初始化静态资源(图片、音频、视频等)
+
+
+
+笔记:
+1.static final常量:
+  1)必须声明同时初始化
+  2)由类名点来访问，并且不能被改变
+  3)建议:常量名所有字母都大写，多个单词用_分隔
+  4)编译器在编译时将常量直接替换为具体的值，效率高
+  5)何时用:数据永远不变、并且经常使用
+2.抽象方法:
+  1)由abstract修饰
+  2)只有方法的定义，没有具体的实现(连{}都没有)
+3.抽象类:
+  1)由abstract修饰
+  2)包含抽象方法的类必须是抽象类
+    不包含抽象方法的类也可以声明为抽象类------我乐意
+  3)抽象类不能被实例化
+  4)抽象类是需要被继承的，派生类:
+    4.1)重写所有抽象方法--------常用
+    4.2)也声明为抽象类----------一般不这么做
+  5)抽象类的意义:
+    5.1)封装派生类所共有的属性和行为---------代码复用
+    5.2)给所有派生类提供统一的类型-----------向上造型
+    5.3)可以包含抽象方法，为所有派生类提供统一的入口
+        派生类的具体行为不同，但入口是一致的
+
+
+设计规则:
+1)将派生类所共有的属性和行为，抽到超类中--------抽共性
+2)所有派生类的行为都一样，设计普通方法
+  所有派生类的行为都不一样，设计为抽象方法
+3)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+abstract class Aoo{
+  int a;
+  double b;
+  void show(){
+    ...
+  }
+}
+
+
+
+
+
+
+
+
+FlyingObject a = new Airplane();
+FlyingObject b = new Bee();
+FlyingObject c = new Hero();
+FlyingObject d = new Sky();
+...
+...
+
+
+
+
+
+
+
+
+
+
+new FlyingObject();  //创建FlyingObject对象
+
+new FlyingObject[5]; //创建FlyingObject数组对象
+
+
+
+
+
+
+
+
+
+
+
+
+
+abstract class FlyingObject{
+  width,height,x,y
+  abstract void step();
+}
+class Airplane extends FlyingObject{
+  void step(){
+    y向下
+  }
+}
+class Bee extends FlyingObject{
+  void step(){
+    x和y都改变
+  }
+}
+
+
+
+
+
+
+
+
+
+new FlyingObject(); //编译错误
+FlyingObject o; //正确
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+abstract class FlyingObject{ //不完整
+  width,height,x,y
+  abstract void step(); //不完整
+}
+class Airplane extends FlyingObject{
+  void step(){ //重写抽象方法---变不完整为完整
+    y向下
+  }
+}
+class Bee extends FlyingObject{
+  void step(){
+    x变、y变
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+new FlyingObject(); //编译错误
+FlyingObject o; //正确
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NAME
+STUDENT_NAME
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+案例:
+1.
+2.画对象
+
+
+
+
+
+
+
+
+
+
+
+

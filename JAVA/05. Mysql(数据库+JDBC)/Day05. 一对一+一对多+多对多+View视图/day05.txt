@@ -1,0 +1,464 @@
+# 关系
+
+1. 一对一
+2. 一对多
+3. 多对多
+
+## 一对一 
+
+为了提高数据查询性能,经常将概要信息和详细信息进行分表存储, 两个表中数据是一对一关系.
+
+![](one2one.png) 
+
+1. 创建商品表
+ 
+		create table t_product(
+			id int,
+			name varchar(30),
+			abstract varchar(100),
+			price decimal(8,2)
+		);
+	
+		create table t_product_info(
+			id int,
+			cpu varchar(20),
+			ram varchar(20),
+			hdd varchar(20)
+		);
+
+2. 添加数据
+ 
+		insert into t_product (id, name, abstract, price) 
+		values (1, "P30", "Top 1 Mobile", 500.00);
+	
+		insert into t_product_info (id, cpu, ram, hdd)
+		values (1, "960", "6GB RAM", "128GB");
+  
+3. 查询商品概要信息	
+ 
+		select id, name from t_product;
+ 
+4. 查询商品详细信息, 两个表连接查询
+ 
+		select p.id, name, cpu, ram, hdd 
+		from t_product p join t_product_info i 
+		on p.id = i.id;
+	 
+## 一对多关系
+
+一个表中的一行关联对应另外一个表中的多行, 称为一对多关系. 在表中采用外键关联实现, 在多方增加一个列, 其取值来自于另外一个表的主键. 
+
+
+订单与订单项目构成一对多关系
+
+![](one2many.png)
+
+1. 创建表
+
+		create table t_order(
+			id int,
+			username varchar(50)
+		);
+
+		create table t_order_item(
+			id int,
+			oid int,
+			product varchar(100),
+			price double
+		);
+
+	> oid 是外键,关联到 t_order 表单的id主键
+	
+	> 外键关联: 一个表中的一个列取值于另外一个表的主键,称为外键关联关系, 逻辑上就是一对多关系.
+
+2. 插入数据
+
+		insert into t_order (id, username) 
+		values (1, '范传奇');
+		
+		insert into t_order_item (id, oid, product, price)
+		values (1, 1, '大黄蜂', 500);
+		insert into t_order_item (id, oid, product, price)
+		values (2, 1, '擎天柱', 1500);
+		insert into t_order_item (id, oid, product, price)
+		values (3, 1, '威震天', 200);
+
+3. 查询订单编号为1的完整订单
+
+		select o.id, username, product, price 
+		from t_order o 
+		join t_order_item i
+		on o.id = i.oid
+		where o.id=1;
+
+案例: 完成 部门-员工的一对多关系, 建表及插入数据并且查询, 部门属性和员工数据请自行合理推测
+
+## 特殊一对多关系: 自关联关系
+
+商品分类问题?
+
+利用自关联关系实现多级无限分类. 
+
+![](category.png)
+
+1. 建表 
+
+		create table t_category(
+			id int,
+			pid int,
+			name varchar(100)
+		);
+
+2. 插入数据
+
+		-- 根分类
+		insert into t_category (id, pid, name) 
+		values (0, null, '主分类');
+
+		-- 一级分类
+		insert into t_category (id, pid, name) 
+		values (1, 0, '家电');
+		insert into t_category (id, pid, name) 
+		values (2, 0, '数码');
+		insert into t_category (id, pid, name) 
+		values (3, 0, '服装');
+
+		-- 二级分类
+		insert into t_category (id, pid, name) 
+		values (4, 1, '电视');
+		insert into t_category (id, pid, name) 
+		values (5, 1, '冰箱');
+
+		-- 三级分类
+		insert into t_category (id, pid, name) 
+		values (6, 4, '数码电视');
+		insert into t_category (id, pid, name) 
+		values (7, 4, '黑白电视');
+	
+3. 查询一级分类:
+
+		select id, pid, name from t_category 
+		where pid = 0;
+
+4. 查询家电的二级分类
+	
+		select id, pid, name from t_category 
+		where pid = 1;
+
+## 多对多关系
+
+软件业务中经常存在多对多关系, 如: 
+
+- 讲师和教过学生之间是多对多关系
+- 学生和选修的课程之间的关系
+- 用户和群组之间的关系
+
+采用增加关系表的方式, 可以实现多对多的关联关系
+
+### 讲师和教过学生之间是多对多关系
+
+![](teacher.png)
+
+1. 建表
+
+		create table t_teacher(
+			id int,
+			name varchar(100)	
+		);
+		
+		create table t_student(
+			id int,
+			name varchar(100)
+		);
+
+		create table t_teach(
+			tid int,
+			sid int	
+		);	
+	
+2.  插入数据
+
+		-- 老师数据
+		insert into t_teacher (id, name)
+		values (1, '范传奇');
+		insert into t_teacher (id, name)
+		values (2, '刘国斌');
+		
+		-- 学生数据
+		insert into t_student (id, name)
+		values (1, '莫小贝');
+		insert into t_student (id, name)
+		values (2, '白展堂');
+		insert into t_student (id, name)
+		values (3, '吕秀才');
+		insert into t_student (id, name)
+		values (4, '李大嘴');
+
+		-- 多对多关系数据
+		-- 范传奇教过的学生
+		insert into t_teach (tid, sid) 
+		values (1, 1);		
+		insert into t_teach (tid, sid) 
+		values (1, 2);		
+		insert into t_teach (tid, sid) 
+		values (1, 3);		
+		-- 刘国斌老师教过的学生
+		insert into t_teach (tid, sid) 
+		values (2, 2);
+		insert into t_teach (tid, sid) 
+		values (2, 3);
+		insert into t_teach (tid, sid) 
+		values (2, 4);
+		
+3. 查询
+
+	> 验证多对多的可用性
+	
+	- 范传奇讲授了哪些学生:
+		
+			select t.name as teacher, s.name as student
+			from t_teacher t 
+			join t_teach tt	on t.id = tt.tid  
+			join t_student s on tt.sid=s.id
+			where t.id=1;
+
+4. 测试任务: 添加老师数据 王克晶, 教过所有学生, 并且查询验证
+	
+		-- 添加讲师数据	
+		insert into t_teacher (id, name) 
+		values (3, '王克晶');
+		-- 添加关联关系数据
+		insert into t_teach (tid, sid)
+		values (3, 1);
+		insert into t_teach (tid, sid)
+		values (3, 2);
+		insert into t_teach (tid, sid)
+		values (3, 3);
+		insert into t_teach (tid, sid)
+		values (3, 4);
+		-- 验证查询
+		select t.name as teacher, s.name as student
+		from t_teacher t 
+		join t_teach tt	on t.id = tt.tid  
+		join t_student s on tt.sid=s.id
+		where t.id=3;
+
+5. 查询 莫小贝 的老师有哪些: 
+
+		select t.name as teacher, s.name as student
+		from t_teacher t 
+		join t_teach tt	on t.id = tt.tid  
+		join t_student s on tt.sid=s.id
+		where s.id=1;
+
+### 学生和选修的课程之间的关系
+
+![](student.png)
+
+1. 建表
+
+		create table t_student(
+			id int,
+			name varchar(100)	
+		);
+		
+		create table t_course(
+			id int,
+			name varchar(100)
+		);
+
+		create table t_choose(
+			sid int,
+			cid int	
+		);	
+	
+2.  插入数据
+
+	
+		-- 学生数据
+		insert into t_student (id, name)
+		values (1, '莫小贝');
+		insert into t_student (id, name)
+		values (2, '白展堂');
+		insert into t_student (id, name)
+		values (3, '吕秀才');
+		insert into t_student (id, name)
+		values (4, '李大嘴');
+
+		-- 课程数据
+		insert into t_course (id, name)
+		values (1, 'Java');
+		insert into t_course (id, name)
+		values (2, 'PHP');
+		insert into t_course (id, name)
+		values (3, 'Python');
+		insert into t_course (id, name)
+		values (4, 'Cpp');
+		
+		-- 学生课程关系
+		insert into t_choose (sid, cid)
+		values (1, 1);
+		insert into t_choose (sid, cid)
+		values (1, 4);
+		insert into t_choose (sid, cid)
+		values (2, 1);
+		insert into t_choose (sid, cid)
+		values (2, 3);
+	
+3. 查询莫小贝上了哪些课
+
+		select s.name as student, c.name as course
+		from t_student s 
+		join t_choose cc	on s.id = cc.sid  
+		join t_course c on cc.cid=c.id
+		where s.id=1;	
+
+### 用户-角色-功能 的关系
+
+由两个多对多关系连接而成:
+
+![](user-role.png)
+		
+1. 编写表
+
+		create database db5;
+		use db5;
+			
+		create table t_user(
+			id int,
+			name varchar(100)	
+		);
+		
+		create table t_role(
+			id int,
+			name varchar(100)
+		);
+
+		create table t_function(
+			id int,
+			name varchar(100)	
+		);	
+
+		create table t_user_role(
+			uid int,
+			rid int	
+		);	
+
+		create table t_role_function(
+			rid int,
+			fid int
+		);			
+
+2. 插入数据
+
+		-- 用户表插入数据
+		insert into t_user (id, name)
+		values (1, '范老');
+		insert into t_user (id, name)
+		values (2, '王老');
+		insert into t_user (id, name)
+		values (3, '刘老');
+
+		-- 角色表插入数据
+		insert into t_role (id, name)
+		values (1, '消费者');
+		insert into t_role (id, name)
+		values (2, '店家');
+		insert into t_role (id, name)
+		values (3, '店小二');
+		insert into t_role (id, name)
+		values (4, '管理员');
+
+		-- 功能表插入数据
+		insert into t_function (id, name)
+		values (1, '购买商品');
+		insert into t_function (id, name)
+		values (2, '搜索商品');
+		insert into t_function (id, name)
+		values (3, '上货');
+		insert into t_function (id, name)
+		values (4, '管理用户');
+
+		-- 用户角色关系
+		insert into t_user_role (uid, rid)
+		values (1, 1);
+		insert into t_user_role (uid, rid)
+		values (1, 2);
+		insert into t_user_role (uid, rid)
+		values (2, 3);
+
+		-- 角色功能关系
+		insert into t_role_function (rid, fid)
+		values (1, 1);
+		insert into t_role_function (rid, fid)
+		values (2, 2);
+		insert into t_role_function (rid, fid)
+		values (2, 3);
+		insert into t_role_function (rid, fid)
+		values (3, 3);
+		insert into t_role_function (rid, fid)
+		values (4, 4);
+		
+3. 查询: 范老有哪些角色和功能
+
+		select u.name as user, r.name as role, f.name as function
+		from t_user u 
+		join t_user_role ur on u.id=ur.uid
+		join t_role r on ur.rid=r.id 
+		join t_role_function rf on rf.rid=r.id
+		join t_function f on f.id=rf.fid
+		where u.id=1;
+
+## View (视图)
+
+利用一个查询语句构建一个虚拟表. 如果需要查询就可以通过查询视图获得结果.
+
+利用视图可以重用复杂的查询功能, 简化二次查询工作
+
+![](view.png)
+
+视图不是表, 视图中不存储数据, 数据是通过内部封装的SQL语句动态查询得到的. 视图的本质是"复用复杂查询"!!!
+
+1. 创建视图
+
+		create view student_course as (
+			select s.name as student, c.name as course
+			from t_student s 
+			join t_choose cc	on s.id = cc.sid  
+			join t_course c on cc.cid=c.id	
+		);
+
+2. 利用视图进行查询:
+
+		select student, course from student_course 
+		where student = '莫小贝'; 
+
+		select student, course from student_course 
+		where student = '白展堂'; 
+	
+3. 管理view
+	- 创建 create view 视图名 as 查询
+	- 查询全部视图SHOW FULL TABLES WHERE TABLE_TYPE LIKE 'VIEW';
+	- 删除视图 drop view 视图名
+	- 视图可以嵌套使用
+
+## 回顾
+
+1. 关系
+	1. 一对一, 性能优化
+	2. 一对多, 解决业务关系, 使用最多
+		1. 自关联 一对多 分类树 * 
+	3. 多对多: 中间的关系表
+		1. 用户和角色
+2. 视图 不是真实表, 是虚拟的表, 可以当做表用
+	1. 最重要的目的是"重用复杂查询"
+		
+## 作业
+
+1. 创建表,并且完成查询
+	1. 设计表存储 存储红包记录相关信息, 包括发红包的联系人(属性: 编号, 姓名, 性别, 电话) 红包记录信息(属性: 时间, 金额), 其中每个联系人可以发生多笔红包记录, 红包记录包含收到红包和发出红包
+	2. 查询一段时间内, 收到红包总数和发出红包总数.
+
+
+
+

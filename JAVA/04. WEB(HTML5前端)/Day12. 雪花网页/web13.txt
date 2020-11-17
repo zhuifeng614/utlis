@@ -1,0 +1,99 @@
+###课程回顾
+1. jQuery js框架,  可以写更少实现的更多
+2. 引入方式 和普通js文件一样的引入方式
+3. js对象和jq对象互相转换
+- js->jq:  var jq = $(js);
+- jq->js:  var js = jq[0];
+4. 选择器
+- 基础选择器
+	1. 标签名      div
+	2. id          #id
+	3. class       .class
+	4. 分组        div,#id,.class
+	5. 任意元素     *
+- 层级选择器
+	1. div span    div里面所有的span
+	2. div>span  div里面所有的span子元素
+	3. div+span   div的弟弟元素span
+	4. div~span  div的弟弟们span元素
+	5. .siblings()  兄弟们
+	6. .prev()    哥哥
+	7. .prevAll()  哥哥们
+	8. .next()    弟弟
+	9. .nextAll() 弟弟们
+	10. .children()  儿子们
+	11. .parent()    父元素
+- 过滤选择器
+	1. div:first   第一个
+	2. div:last   最后一个
+	3. div:even   偶数
+	4. div:odd    奇数
+	5. div:lt(n)   小于n
+	6. div:gt(n)   大于n
+	7. div:eq(n)   等于n
+	8. div:not(xxx)  不等于xxx条件
+- 内容选择器
+	1. div:has(p)   包含p子元素的div
+	2. div:empty    空的div
+	3. div:parent   非空的div
+	4. div:contains('xxx')  包含xxx文本的div
+- 可见选择器
+	1. div:hidden  匹配隐藏的div
+	2. div:visible  匹配显示的div
+	3. .show()   显示
+	4. .hide()   隐藏
+	5. .toggle()  显示隐藏切换
+- 属性选择器
+	1. div[id]  包含id属性的div
+	2. div[id='xxx'] 包含id值为xxx的div
+	3. div[id!='xxx'] 包含id值不等于xxx的div
+- 子元素选择器
+	1. div:first-child  第一个div子元素
+	2. div:last-child   最后一个div子元素
+	3. div:nth-child(n)  第n个div子元素
+- 表单选择器
+	1. :input   表单内所有控件
+	2. :password   密码框
+	3. :radio    单选
+	4. :checkbox  多选
+	5. :checked   选中的单选 多选和下拉选
+	6. input:checked 选中的单选和多选
+	7. :selected   选中的下拉选
+5. 创建元素对象
+	var d = $("<div></div>")
+6. 添加
+	父元素.append(新元素);  最后面
+	父元素.prepend(新元素); 最前面
+7. 插入
+	弟弟.before(新元素);
+	哥哥.after(新元素);
+8. 删除
+	元素.remove();
+9. 获取和修改文本内容
+	.text()  获取
+	.text("xxx")  修改
+10. 获取和修改html内容
+	.html()  获取
+	.html("<xxx>yyy</xxx>") 修改
+11. 获取和修改样式
+	.css("样式名") 获取
+	.css("样式名","值") 赋值
+	.css({"":"","":""})
+12. 获取和修改属性
+	.attr("属性名") 获取
+	.attr("属性名","值") 修改
+
+###jQuery事件相关
+1. 常见事件
+- 鼠标事件: 点击事件 click 鼠标移入 mouseover 鼠标移出mouseout 鼠标按下mousedown 鼠标抬起mouseup 鼠标移动mousemove
+- 键盘事件: 键盘按下 keydown  键盘抬起 keyup
+- 状态改变事件: 页面加载完成 $(function(){xxxx}) 值改变change 表单提交submit  获取焦点focus  失去焦点blur 窗口尺寸改变resize
+2. 事件模拟 
+	元素.trigger("事件名称");
+3. 鼠标移入移出事件合并
+	元素.hover(function(){鼠标移入时执行},function(){鼠标移出执行});
+###动画相关
+
+
+
+

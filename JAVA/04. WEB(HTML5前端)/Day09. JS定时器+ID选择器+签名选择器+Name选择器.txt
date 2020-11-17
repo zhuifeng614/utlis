@@ -1,0 +1,68 @@
+###通过标签名获取元素们
+	var arr = document.getElementsByTagName("标签名");
+
+###Low版轮播图步骤
+1. 页面中添加div在div里面添加三个img
+2. 通过样式让div和img设置相同的宽高200*150
+3. 让所有图片隐藏(脱离文档流的隐藏)
+4. 在页面加载完成的时候获取第一张图片 并让其显示 
+5. 开启定时器准备一个递增的全局变量x然后在定时器的方法中让其对3取余数
+6. 获取所有的图片数组,遍历数组,遍历时判断如果i等于第5步取到的余数时让当前遍历的图片显示 其它的隐藏
+###定时器
+- 开启   var timer = setInterval(方法,时间间隔);
+- 停止   clearInterval(timer);
+###只执行一次的定时器
+- setTimeout(方法,时间间隔);
+
+###DOM Document Object Model文档对象模型
+- 和页面相关的内容
+####查找页面元素的方法
+1. 通过id查找
+	document.getElementById()
+2. 通过标签名查找
+	document.getElementsByTagName()
+3. 通过标签的name属性查找
+	document.getElementsByName()
+4. 通过标签的class属性查找 
+	document.getElementsByClassName();
+5. 获取页面的body元素
+	document.body
+####创建新元素
+- var d = document.createElement("div");
+	d.innerText="abc";
+####添加到页面
+-  父元素.appendChild(新元素);
+	document.body.appendChild(d);
+####插入元素
+-  父元素.insertBefore(新元素,弟弟元素);
+####删除元素
+- 父元素.removeChild(被删除的元素);
+
+
+###代码介绍
+1. 定时器移动图片
+2. 添加数字练习
+3. 循环添加三张图片
+4. low版轮播图
+5. 高级版轮播图 ***
+6. 倒计时练习
+7. dom相关练习
+8. 北上广练习 
+###高级版轮播图步骤:
+1. 搭建页面，通过css给图片和div设置相同的宽高
+2. 修改图片的定位为绝对定位，并且在上级div里添加相对定位
+3. 在页面加载完成的时候得到所有的图片数组，遍历数组，让数组里面图片的left值为i*200
+4. 创建1秒执行100次的定时器 在定时器里面获取所有图片数组，遍历数组，得到当前遍历图片的left值 让其-=2 把新的值再次给到图片
+5. 在移动图片时 如果left值<=-200时 让left值=400
+6. 让上级div超出范围不显示
+7. 让定时器通过一个moveTimer记录 ，在判断left值<=-200时让定时器停止 
+8. 把移动一张 图片定时器的所有代码封装到一个方法中，再开启另外一个定时器，每隔2秒调用次方法
+9. 给div添加鼠标悬停事件悬停时调用stop方法 方法中停止2秒执行的定时器
+10. div添加鼠标移出事件 调用start方法 方法中再次开启2秒执行的定时器。
+11. 当页面失去焦点时调用 stop方法 当页面获取焦点时调用 start方法 
+13. 在start方法中调用stop方法 为了避免重复开启定时器  
+
+
+
+
+

@@ -1,0 +1,111 @@
+# JDBC
+
+## 回顾 
+
+1. Properties 配置文件
+2. DBUtil
+3. Statement: 执行没有参数的SQL
+4. PreparedStatement: 执行有参数SQL
+5. 批量: 大量SQL执行的问题
+	1. 一组SQL 使用 Statement: addBatch()  executeBatch()
+	2. SQL一样, 批量参数 PreparedStatement
+
+## 批量:批量参数
+
+PreparedStatement
+
+1. 将SQL发送到服务器创建执行计划 
+2. 绑定参数
+3. 将绑定参数添加到 批处理 
+4. 重复 2 3 n次 
+5. 执行: 将一批参数发送到服务器
+
+案例:
+
+	public class BatchDemo01 {
+	
+		public static void main(String[] args) {
+			/**
+			 * 将批量参数传递到数据库执行
+			 */
+			String sql=
+				"insert into t_user (id, name) values (?,?)";
+			Connection conn = null;
+			try {
+				conn = DBUtil.getConnection();
+				PreparedStatement ps=conn.prepareStatement(sql);
+				ps.setInt(1, 100);
+				ps.setString(2, "user1");
+				//将上述参数添加到ps的参数缓冲区中
+				ps.addBatch();
+				
+				ps.setInt(1, 101);
+				ps.setString(2, "user2");
+				//将上述参数添加到ps的参数缓冲区中
+				ps.addBatch();
+				
+				//将缓冲区中的参数一批发送到服务器执行
+				int[] arr = ps.executeBatch();
+				System.out.println(Arrays.toString(arr)); 
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				DBUtil.close(conn);
+			}
+		}
+	
+	}
+
+## JDBC事务处理
+
+使用JDBC API 调用数据库事务
+
+1. begin     -- conn.setAutoCommit(false) 关闭自动提交
+2. commit    -- conn.commit()
+3. rollback  -- conn.rollback() 
+
+原理:
+
+![](tx.png)
+
+案例:
+
+1. 创建数据库表
+
+		create table acc(
+			id int,
+			name varchar(100),
+			balance double
+		);
+
+		insert into acc (id, name, balance) 	
+		values (1, '范传奇', 1000);
+		insert into acc (id, name, balance) 	
+		values (2, '刘国斌', 200);
+
+2. 案例:
+
+
+
+## 读取自增主键
+
+问题: 添加一个战队数据
+
+	create table team(
+		id int primary key auto_increment,
+		name varchar(10)
+	);
+	create table player(
+		id int primary key auto_increment,
+		name varchar(10),
+		team_id int
+	);
+
+
+## 元数据
+
+
+# Servlet 
+
+## Servlet Hello World
+

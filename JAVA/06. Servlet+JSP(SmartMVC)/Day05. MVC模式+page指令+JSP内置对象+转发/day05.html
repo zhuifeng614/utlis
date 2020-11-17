@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>day05</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>Servlet/JSP</h1>
+<h2>回顾</h2>
+<ol>
+<li>
+数据库连接池
+<ol>
+<li>重用(复用)数据库连接, 提高连接性能</li>
+<li>保护数据库连接资源, 避免连接数过载</li>
+</ol>
+</li>
+<li>
+线程池
+<ol>
+<li>重用(复用)线程, 提高线程的响应性能</li>
+<li>保护线程总数, 避免系统资源过载</li>
+</ol>
+</li>
+<li>
+对象池 
+<ol>
+<li>重用(复用)对象, 提高对象的创建性能</li>
+<li>保护对象总数, 避免系统资源过载</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>线程池\连接池: 管理策略类似, 但是被管理的对象不同, 算法也不相同</p>
+</blockquote>
+<p>Servlet 拆分</p>
+<ol>
+<li>数据层访问组件 DAO 用于封装 数据访问功能</li>
+<li>将页面部分利用JSP重构</li>
+<li>Servlet 整合数据访问和JSP实现功能. </li>
+</ol>
+<p>形成了: MVC模式</p>
+<ol>
+<li>M称为模型, 也是就DAO等 管理业务数据状态</li>
+<li>V称为视图, 也是就是JSP, 用于呈现数据</li>
+<li>C成功控制器, 也是就是Servlet, 整合 M 和 V</li>
+</ol>
+<h2>JSP</h2>
+<h2>page 指令</h2>
+<p>使用 &lt;%@ page %&gt; 声明page 指令</p>
+<ol>
+<li>必须写在JSP的第一行</li>
+<li>
+属性:
+<ul>
+<li>language=java 可以省略, 省略就是Java, 只能Java</li>
+<li>contentType=&quot;text/html; charset=UTF-8&quot; 就是 response.setContentType(...) 设置浏览器端的解析编码</li>
+<li>pageEncoding=&quot;UTF-8&quot; 页面编码, 是告诉Tomcat读取当前网页时候的编码</li>
+<li>import=&quot;java.util.<em>,java.sql.</em>&quot; 导入组件 </li>
+</ul>
+</li>
+</ol>
+<h2>JSP内置对象</h2>
+<p>就是JSP中预先定义的引用, 引用了与JSP功能相关的对象. </p>
+<p>可以随时使用引用调用对象的方法, 实现功能</p>
+<p>一共有9个对象: 经常成为9大内置对象.</p>
+<p>常用:</p>
+<ol>
+<li>request   HttpServletResuest </li>
+<li>response  HttpServletResponse</li>
+<li>out       JspWriter 功能与 PrintWriter 一致</li>
+</ol>
+<blockquote>
+<p>考点: JSP out对象的类型: JspWriter</p>
+</blockquote>
+<p>比较常用:</p>
+<ol>
+<li>session      HttpSession 类型, 用于存储与&quot;用户会话&quot;有关的数据.(以后讲)</li>
+<li>application  ServletContext 类型, 用于存储与当前Servlet容器有关的数据(后续专门讲)</li>
+<li>
+<p>pageContext  PageContext, 页面&quot;上下文Context&quot;. PageContext是当前页面上下文, 是当前页面的大管家, 内部包含与JSP有关的全部资源.</p>
+<pre><code>pageContext.getRequest() 返回的对象就是 request对象
+pageContext.getResponse()  返回的对象就是 response对象
+</code></pre>
+
+</li>
+</ol>
+<p>不常用(不用):</p>
+<ol>
+<li>config  : ServletConfig 用于读取 web.xml 的内容</li>
+<li>page    : Object类型, 是当前JSP对象(Servlet对象)的引用, 就是this</li>
+<li>exception : Exception 类型, 当前网页是错误页面时候, 用于获取异常信息. </li>
+</ol>
+<p>案例:</p>
+<pre><code>&lt;%@ page 
+    language=&quot;java&quot; 
+    contentType=&quot;text/html; charset=UTF-8&quot;
+    pageEncoding=&quot;UTF-8&quot;
+    import=&quot;java.util.*,java.sql.*&quot; 
+%&gt;
+&lt;%
+    List&lt;String&gt; list=new ArrayList&lt;String&gt;();
+    //演示request对象的功能: 读取请求中的数据
+    String ua = request.getHeader(&quot;User-Agent&quot;);
+    //演示response对象功能: 处理响应信息
+    response.setHeader(&quot;message&quot;, &quot;Hello World!&quot;); 
+%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;内置对象功能演示&lt;/h1&gt;
+    &lt;p&gt;User-Agent:
+    &lt;%
+        //在p标签里面显示ua信息
+        out.println(ua); 
+    %&gt;
+    &lt;/p&gt;
+    &lt;%
+        //pageContext 页面上下文, 包含当前页面全部相关信息
+        // pageContext.getOut() 返回对象就是 out 对象
+        // 其功能与out对象相同
+        JspWriter o = pageContext.getOut();
+    %&gt;
+    &lt;p&gt;User-Agent: &lt;% o.println(ua); %&gt; &lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h2>利用request对象共享数据</h2>
+<p>request内部封装了一个集合, 用于在一个请求期间共享数据.</p>
+<p>主要用于在Servlet与JSP之间共享数据.</p>
+<p>其主要API方法:</p>
+<pre><code>request.setAttribute(key, value);
+Object value = request.getAttribute(key);
+request.removeAttribute(key);
+</code></pre>
+
+<p>原理</p>
+<p>案例:</p>
+<pre><code>&lt;%@ page 
+    language=&quot;java&quot; 
+    contentType=&quot;text/html; charset=UTF-8&quot;
+    pageEncoding=&quot;UTF-8&quot;
+    import=&quot;java.util.*,java.sql.*&quot; 
+%&gt;
+&lt;%
+    //将数据存储到 request中
+    request.setAttribute(&quot;msg&quot;, &quot;Hello World!&quot;);
+    request.setAttribute(&quot;price&quot;, 1234.0);
+%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;利用request共享/传送数据&lt;/h1&gt;
+    &lt;%
+        //接收request传递/共享的数据
+        String s = (String)request.getAttribute(&quot;msg&quot;);
+        Double d = (Double)request.getAttribute(&quot;price&quot;);
+        //删除request中共享的数据
+        request.removeAttribute(&quot;msg&quot;);
+        request.removeAttribute(&quot;price&quot;);
+    %&gt;
+    &lt;p&gt;msg:&lt;%=s%&gt; price:&lt;%=d%&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h2>转发</h2>
+<p>利用请求协作对象, 从Servlet转发到JSP</p>
+<p>SUN为了能够实现Servlet处理业务功能, 由JSP显示业务处理结果, 而设计了Servlet到JSP的转发功能. </p>
+<p>原理:</p>
+<p>案例:</p>
+<pre><code>public class DemoServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(
+        HttpServletRequest request, 
+        HttpServletResponse response) 
+            throws ServletException, IOException {
+        //测试 从Servlet转发到JSP
+
+        //1. 保存数据到 request 对象
+        request.setAttribute(&quot;msg&quot;, &quot;Hello World!&quot;);
+        //2. 利用请求协作对象转发到一个JSP页面
+        RequestDispatcher rd=request
+                .getRequestDispatcher(&quot;demo03.jsp&quot;);
+        rd.forward(request, response);
+        //注意!! 转发以后不能再处理网页内容, 
+        //包括向response输出信息, 或者再次转发!!
+    }
+
+}
+
+  &lt;servlet&gt;
+    &lt;description&gt;&lt;/description&gt;
+    &lt;display-name&gt;DemoServlet&lt;/display-name&gt;
+    &lt;servlet-name&gt;DemoServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;day05.DemoServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;DemoServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/demo&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+
+
+&lt;%@ page 
+    language=&quot;java&quot; 
+    contentType=&quot;text/html; charset=UTF-8&quot;
+    pageEncoding=&quot;UTF-8&quot;
+    import=&quot;java.util.*,java.sql.*&quot; 
+%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;从Servlet转发到JSP&lt;/h1&gt;
+    &lt;p&gt;&lt;%=request.getAttribute(&quot;msg&quot;)%&gt;&lt;/p&gt; 
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h2>实现MVC版本的员工列表:</h2>
+<ol>
+<li>DBUtil, Emp 等略</li>
+<li>
+<p>编写Servlet</p>
+<pre><code>public class ListEmpServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(
+            HttpServletRequest request, 
+            HttpServletResponse response) 
+        throws ServletException, IOException {
+        //利用Dao获取数据
+        EmpDao dao = new EmpDao();
+        List&lt;Emp&gt; list = dao.findAll();
+        //利用request共享数据
+        request.setAttribute(&quot;list&quot;, list); 
+        //转发到 list-emp.jsp, 显示员工列表
+        RequestDispatcher rd=request
+                .getRequestDispatcher(&quot;list-emp.jsp&quot;);
+        rd.forward(request, response); 
+    }
+}
+</code></pre>
+
+</li>
+<li>
+<p>配置</p>
+<pre><code>  &lt;servlet&gt;
+    &lt;description&gt;&lt;/description&gt;
+    &lt;display-name&gt;ListEmpServlet&lt;/display-name&gt;
+    &lt;servlet-name&gt;ListEmpServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;day05.ListEmpServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;ListEmpServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/list-emp&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+</code></pre>
+
+</li>
+<li>
+<p>编写JSP</p>
+<pre><code>&lt;%@ page 
+    language=&quot;java&quot; 
+    contentType=&quot;text/html; charset=UTF-8&quot;
+    pageEncoding=&quot;UTF-8&quot;
+    import=&quot;java.util.*,entity.*&quot;
+%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;title&gt;员工列表&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;员工列表&lt;/h1&gt;
+    &lt;table border=&quot;1&quot;&gt;
+        &lt;tr&gt;
+            &lt;td&gt;编号&lt;/td&gt;
+            &lt;td&gt;姓名&lt;/td&gt;
+            &lt;td&gt;领导&lt;/td&gt;
+            &lt;td&gt;入职日期&lt;/td&gt;
+            &lt;td&gt;部门号&lt;/td&gt;
+            &lt;td&gt;薪资&lt;/td&gt;
+            &lt;td&gt;提成&lt;/td&gt;
+        &lt;/tr&gt;
+&lt;% 
+    List&lt;Emp&gt; list = 
+        (List&lt;Emp&gt;)request.getAttribute(&quot;list&quot;);
+%&gt;
+        &lt;%for(Emp emp:list){ %&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;%=emp.getEmpno()%&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;%=emp.getEname()%&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;%=emp.getMgr()%&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;%=emp.getHiredate()%&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;%=emp.getDeptno()%&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;%=emp.getSalary()%&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;%=emp.getComm()%&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;%}%&gt;
+    &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+</li>
+</ol>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

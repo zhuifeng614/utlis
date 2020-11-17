@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>day04</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>1.二叉树的遍历</h1>
+<pre><code>前序遍历:
+        先访问根节点，然后访问左子树，最后
+    访问右子树。
+        对于左子树和右子树，也采用前序遍历。
+中序遍历（重点）:
+        先访问左子树，再访问根节点，最后访问
+    右子树。
+        对于左子树和右子树，也采用中序遍历。
+后序遍历:
+        先访问左子树，再访问右子树，最后访问
+    根节点。
+        对于左子树和右子树，也采用后序遍历。
+</code></pre>
+
+<h1>2.二叉树的失衡(不平衡二叉树)</h1>
+<pre><code>对于某个节点，其左子树与右子树的高度差大于１.
+如果一树二叉树发生了失衡现象，会影响查找的效率
+（二叉树会退化成一个链表）。
+要将二叉树重新变成一个平衡的二叉树，需要对二
+叉树进行旋转，重新调整节点的位置。
+</code></pre>
+
+<h1>3.红黑树</h1>
+<pre><code>红黑树就是一种将不平衡的二叉树转换成弱平衡的二叉
+树的一种算法。
+
+红黑树的规则:
+    a.节点可以是红色的或者是黑色的。
+    b.根节点必须是黑色的。
+    c.叶子节点必须是黑色的。
+    d.红色节点的子节点必须是黑色的。
+    e.从根节点到任何叶子节点的路径上，
+    包含的黑色节点的个数是一样的。
+</code></pre>
+
+<p><img src="redTree.png" /></p>
+<h1>　4.散列表（Ｍap）</h1>
+<h2>(1)什么是散列表?</h2>
+<pre><code>是一种可以依据关键码值(key)进行计算，直接找到
+记录的存放位置的一种数据结构。
+</code></pre>
+
+<h2>(2)工作原理</h2>
+<pre><code>向散列表添加元素:
+    step1.先得到关键码值的hashCode。
+    step2.使用hashCode作为参数，调用散列函数
+    进行计算，得到一个位置(在散列表中的位置，
+    散列表是一个数组)。
+    step3.利用这个位置(下标)查找散列表，看该
+    位置有没有任何元素,如果没有，则将该元素添加
+    到该位置，如果有，则调用equals方法进行比较，如果相等，则替换该位置的元素，否则以链表的形式进行添加。
+注：  
+    在添加元素的时候，如果元素的个数超过了临界值(临界值等于loadFactor *　容量),则散列表会扩容。
+    比如，当前散列表的长度(容量)是16,负载因子是0.75,则元素超过12个，散列表就会扩容。
+    扩容的目的是为了减少地址冲突。
+    注意频繁的扩容会影响性能，在实际使用时，可以
+    事先指定好实际需要的容量。
+
+利用散列表找到元素:
+    step1.先得到关键码值的hashCode。
+    step2.利用散列函数计算(需要利用hashCode
+    来进行计算)得到下标。
+    step3.利用该下标找到散列表中的散列桶，然后
+    调用equals方法进行比较，找到对应的元素。
+
+hashCode尽量使用具有唯一性特点的属性来生成。
+这样，可以减少地址冲突。
+</code></pre>
+
+<h2>(3)以下三个类的区别</h2>
+<pre><code>Hashtable:线程安全，但是性能不好，淘汰
+HashMap:线程不安全，性能好。单线程环境下使用。
+ConcurrentMap:线程安全，性能好。多线程环境下使用。
+</code></pre>
+
+<h1>5.几个算法相关的面试题</h1>
+<h2>　(1)统计一个字符串中大写字母各自出现的次数?</h2>
+<pre><code>要点:
+    字符是一个数字，值是unicode编码。
+    比如 'A'　值是65。
+
+
+统计一个字符串当中各个数字出现的次数
+&quot;1232asdf22esdf&quot;
+</code></pre>
+
+<h2>(2)将非常大量的一组数据中前100名找到。</h2>
+<pre><code>要点：
+    不能够将这些数据全部放到内存当中进行比较，
+因为内存不够。可以先取出一部分数字，然后将这部
+分数字进行排序。然后再取出一部分数字，跟已经
+排序的数字进行比较。
+</code></pre>
+
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

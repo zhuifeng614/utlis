@@ -1,0 +1,345 @@
+Shoot射击游戏第一天:
+1.设计了6个对象类，创建World类并测试
+
+Shoot射击游戏第二天:
+1.给6个对象类添加构造方法，并测试
+
+Shoot射击游戏第三天:
+1.设计小敌机数组、大敌机数组、小蜜蜂数组、子弹数组，并测试
+2.设计FlyingObject超类，6个对象类继承超类
+3.给超类FlyingObject设计两个构造方法，6个派生类分别调用
+
+Shoot射击游戏第四天:
+1.将小敌机、大敌机、小蜜蜂数组合为FlyingObject数组，并测试
+2.在派生类中重写FlyingObject的step()方法
+3.画窗口
+
+
+回顾:
+1.引用类型数组:
+    Student[] stus = new Student[3];
+    stus[0] = new Student();
+2.继承:
+    代码复用，extends
+    超类:共有的  派生类:特有的
+    派生类具有:超类的+派生类的
+    单一继承、传递性
+    构造派生类之前必须先构造超类
+      派生类构造方法中若不调用超类构造，则默认super()
+      派生类构造方法中若调用了超类构造，则不再默认提供
+3.super:指代当前对象的超类对象
+   super.成员变量名-------------访问超类的成员变量
+   super.方法名()---------------调用超类的方法
+   super()----------------------调用超类的构造方法
+
+
+
+
+笔记:
+1.向上造型:
+  1)超类型的引用指向派生类的对象
+  2)能点出来什么，看引用的类型
+2.方法的重写(Override):重新写、覆盖
+  1)发生在父子类中，方法名称相同，参数列表相同，方法体不同
+  2)重写方法被调用时，看对象的类型
+  3)遵循"两同两小一大"原则:------------了解
+    3.1)两同:
+        3.1.1)方法名称相同
+	3.1.2)参数列表相同
+    3.2)两小:
+        3.2.1)派生类方法的返回值类型小于或等于超类方法的
+	      1)void时，必须相同
+	      2)基本数据类型时，必须相同
+	      3)引用数据类型时，小于或等于
+	3.2.2)派生类方法抛出的异常小于或等于超类方法的----------异常之后讲
+    3.3)一大:
+        3.3.1)派生类方法的访问权限大于或等于超类方法的----------明天讲
+3.重写与重载的区别:--------面试题
+  1)重写(Override):
+    1.1)发生在父子类中，方法名相同，参数列表相同，方法体不同
+    1.2)"运行期绑定"，看对象的类型绑定方法
+  2)重载(Overload):
+    2.1)发生在一个类中，方法名相同，参数列表不同，方法体不同
+    2.2)"编译期绑定"，看参数/引用的类型绑定方法
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Aoo{
+  void show(){}
+}
+class Boo extends Aoo{
+  void show(int num){}
+}
+
+
+
+
+
+Boo o = new Boo();
+o.show();
+o.show(4);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+swing相关:----------做窗口
+1)JFrame:窗口(相框)
+2)JPanel:面板(相板)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+java、.net
+
+
+
+互联网----------Internet
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+小敌机的y坐标向下移动了:speed
+大敌机的y坐标向下移动了:speed
+小蜜蜂的x坐标移动了:xSpeed，y坐标移动了:ySpeed
+英雄机切换图片啦!
+天空的y坐标和y1坐标向下移动了:speed
+子弹的y坐标向上移动了:speed
+
+
+
+
+
+
+
+
+
+
+
+
+
+编译期:.java源文件，经过编译，生成.class字节码文件
+运行期:JVM加载.class并运行.class
+
+
+
+编译错误:只是检查语法
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+我继承了一个中餐馆:
+A:我还是想中餐--------------不用重写
+B:我想改为西餐--------------需要重写
+C:我想在中餐之上加入西餐----需要重写(先super中餐再加西餐)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+FlyingObject[] enemies;
+FlyingObject[] enemies = null;
+
+FlyingObject[] enemies = {};
+FlyingObject[] enemies = new FlyingObject[0];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Person o1 = new Student();
+Person o2 = new Teacher();
+Person o3 = new Doctor();
+o1/o3/o3.只能访问Person类的
+
+
+FlyingObject o4 = new Airplane();
+FlyingObject o5 = new BigAirplane();
+FlyingObject o6 = new Bee();
+FlyingObject o7 = new Hero();
+FlyingObject o8 = new Sky();
+FlyingObject o9 = new Bullet(100,200);
+
+o4到o9.只能点出FlyingObject中的
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Animal o3 = new Tiger();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//动物是动物
+Animal o1 = new Animal();
+//老虎是老虎
+Tiger o2 = new Tiger();
+//老虎是动物
+Animal o3 = new Tiger();
+
+//动物是老虎----语义不通
+Tiger o4 = new Animal(); //编译错误
+
+class Animal{ //动物
+}
+class Tiger extends Animal{ //老虎
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+继承要符合is a(是一个)的关系
+
+
+
+
+
+
+
+
+
+
+
+
+

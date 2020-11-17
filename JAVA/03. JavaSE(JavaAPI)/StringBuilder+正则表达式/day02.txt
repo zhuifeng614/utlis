@@ -1,0 +1,240 @@
+#内容回顾
+
+1. api文档 -- 会使用
+2. 文档注释：
+	1. /**   */
+	2. 位置
+
+3. String
+	1. String是不可变对象
+	2. String本质是底层封装了字符数组
+	3. String创建的2种方式
+		1. new String(String)
+			 new String(char[])
+		2. 字符串字面量
+			1. String str="" ;
+			2. 字面量是被复用的
+
+				String引用之间的==比较
+				
+				注意点：字面量之间的拼接，编译器会进行优化 --考点
+					String str = "ab";
+					String str1 = "a"+"b";
+
+	4. 常用方法：
+		1. length
+		2. indexOf
+		3. substring
+		4. trim
+		5. charAt
+
+##内容
+
+###String
+
+####方法：
+	
+- startsWith(String str):boolean
+	- 判断字符串是否以给定的前缀开头
+- endsWith(String str):boolean
+	- 判断字符串是否以给定的后缀结尾
+
+- toUpperCase():将字符串中所有的英文转换为大写
+- toLowerCase()：将字符串中所有的英文转换为小写
+
+- valueOf(otherType):String
+	- 将其他类型的数据转换为String类型
+
+
+##问题：
+
+	public static void main(String[] args) {
+		String str = "a";
+		for(int i=0;i<10000000;i++) {
+			str += "a";
+		}
+		System.out.println("执行结束");
+	}
+
+	以上程序存在的问题：
+		会创建大量的对象，严重降低内存的性能
+
+	针对于大量的字符串拼接，java中提供了StringBuilder类来完成字符串的修改操作
+
+##StringBuilder
+
+- StringBuilder是专门设计用于做字符串修改操作的，提供了编辑字符串对应的增，删，改，插操作
+
+- 构造方法
+	- StringBuilder()
+	- StringBuilder(String str)
+
+- 方法
+	- append（String）
+		- 拼接字符串
+	- delete(int start,int end)
+		- 删除从start开始到end结束的字符串
+	- insert(int index,String str)
+		- 将给定的字符串插入到index位置
+	- replace(int start,int end,String str)
+		- 使用给定的字符串替换start-end之间的字符串
+	- reverse()
+		- 判断回文
+
+	如果只有两个String进行拼接，+可以
+	但是如果是大量的字符串进行拼接，就应该使用StringBuilder对象
+
+- StringBuffer和StringBuilder功能相同，api的使用也是相同的，区别在于StringBuilder是非线程安全的，StringBuffer是线程安全的
+
+
+###正则表达式
+
+什么是正则：
+
+- 正则其实是一个字符串，是用于规定字符出现次序的规则，正则是独立的一套体系，很多语言都提供了对其的支持。
+
+
+	java提供了一个简单的方式用于验证用户的输入内容：通过正则表达式验证、
+
+- 语法：
+	- 字符集
+
+	1. [] :匹配一位字符
+
+			[xym]
+
+	2. 预定义字符集
+
+			. 任意字符
+			\d 任意数字
+			\w 单词字符
+			\s 空白字符
+	3. 数量词：
+		
+			X？ 0次或1次
+			X+  出现1次以上
+			X*  出现任意次
+			X{n} 出现n次
+			X{n,} 出现至少n次
+			X{n,m} 至少出现n次，最多m次  
+
+- 分组():经常和|配合使用
+	- 将（）内的内容看成一个整体
+
+	
+
+	- 案例：校验用户输入的邮箱是否正确
+		
+			huaqian@tedu.cn
+			
+			123344@qq.com
+			xxxx@xx.com.cn
+			xxx@xx.gov.com.cn
+	
+			"\w+@\w+(\.\w+)+"
+		
+			注意点：
+	
+			1. java中的\和正则中的\都是转义字符，冲突，应使用\\
+			2. 若要使用正则中的一些特殊字符的本意，需要进行转义
+			3. 通过String中的matches(regex)对字符串进行正则校验
+
+- String提供了对正则的支持
+	- matches(String regex):boolean
+		- input.matches(regex)
+
+- 正则表达式中若想使用一些特殊字符的本意，需要转义  \\
+	- 特殊字符：
+		- .
+		- +
+		- ?
+		- *
+		- (
+		- [
+		- {
+
+
+
+- 练习：
+	- 校验用户输入的手机号码是否正确
+	- 简单版
+		- 11位数字
+		- 1 3/5/7/8 任意数字
+	- 升级版
+		- 0086/+86 手机号
+
+		- 若输入的一行数据中有空格，想全部接收，使用nextLine()接收数据
+		- nextLine()不要和其他next方法混合使用
+
+- 边界匹配符  ^  $
+	- ^匹配开头
+	- $匹配结尾
+
+		若没有边界匹配符，进行的部分匹配
+		
+		若添加上边界匹配符，进行的完全匹配
+	
+			//String regex1 = "\\w{8,10}";
+			String regex2 = "^\\w{8,10}$"
+			String input1 = "helloworld";- 都匹配的
+			String input2 = "hello_world"; 
+
+			注意：java中进行匹配时用matches(regex)
+			matches(regex)此方法自带边界匹配功能
+		
+				input2.matches(regex1) //false
+
+- String类中的正则api
+	- matches(String regex)
+	- split(String regex)
+	- replaceAll(String regex,String replacement):
+		- 实际工作中，常用于做过滤敏感字符
+		- 题目：
+			- 对以下内容进行过滤
+				- nnd|我去
+				- String str = ""
+
+##总结：
+
+####String中的方法
+
+####StringBuilder
+
+- 用于实现对字符串的修改操作的类
+- 提供了对应的增，删，改，插操作
+	- 方法：
+		- toString()
+		- reverse()
+
+- StringBuffer和StringBuilder的区别
+
+
+####正则表达式
+
+1. 字符集
+	1. 如何表示一位上的字符[]
+	2. 预定义字符集
+		1. .
+	3. 数量词
+		1. ? + * {n}  {n,}  {n,m}
+
+2. 分组：() 看成一个整体
+	1. 通常和|一起使用
+
+3. 边界匹配符：
+	1. ^开头  $结尾
+	2. java中的matches(regex)自带边界匹配功能，进行的完全匹配
+
+4. String类中对正则的支持：
+	1. matches(regex)
+	2. split(regex):String[]
+	3. replaceAll(regex,String replacement):String
+ 
+
+		
+
+		
+		
+		
+			
+	

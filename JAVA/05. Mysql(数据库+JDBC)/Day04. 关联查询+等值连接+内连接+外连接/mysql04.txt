@@ -1,0 +1,473 @@
+###课程回顾
+####day01
+1. 数据库相关SQL
+- 查询所有 show databases;
+- 创建  create database db1 character set utf8/gbk;
+- 查询详情 show create database db1;
+- 删除   drop database db1;
+- 使用  use db1;
+2. 表相关SQL
+- 创建   create table t1(name varchar(10),age int) engine=myisam/innodb charset=utf8/gbk;
+- 查询所有  show tables;
+- 查询详情 show create table t1;
+- 查看表字段  desc t1;
+- 删除  drop table t1;
+- 修改表名  rename table t1 to t2;
+- 修改引擎字符集   alter table t1 engine=myisam/innodb charset=utf8/gbk;
+- 添加表字段  alter table t1 add 字段名 类型 first/after xxx;
+- 删除表字段  alter table t1 drop 字段名;
+- 修改字段名和类型 alter table t1 change 原名 新名 新类型
+- 修改类型和位置  alter table t1 modify 字段名 新类型 first/after xxx;
+3. 数据相关
+- 插入数据 insert into t1 (字段名1,字段名2,字段名3) values(值1,值2,值3),(值1,值2,值3),(值1,值2,值3);
+- 查询数据 select * from t1 where 条件;
+- 修改数据 update t1 set xxx=xxxx where 条件;
+- 删除数据 delete from t1 where 条件;
+####day02
+1. 主键约束: 唯一且非空    primary key 
+2. 自增: auto_increment   ,只增不减 从历史最大值+1 
+3. 注释  comment
+4. `用于修饰表名和字段名
+5. 冗余: 由于表设计不够合理导致的大量重复数据,通过合理拆分表解决
+6. 事务: 数据库中执行同一业务多条SQL语句的工作单元,可以保证全部执行成功或全部执行失败 
+- 相关SQL:  开启事务begin   提交事务commit  回滚事务 rollback  保存回滚点 savepoint xxx;   回滚到回滚点 rollback to xxx;
+- 四大特性
+	1. 原子性: 最小不可拆分 保证全部成功或全部失败
+	2. 一致性: 从一个一致状态到另一个一致状态
+	3. 隔离性: 多个事务互相隔离 互不影响
+	4. 持久性: 事务提交后数据保存到磁盘中持久生效
+7. SQL分类
+- DDL:数据定义语言 包括:create drop alter truncate  不支持事务
+- DML: 数据操作语言 包括:insert update delete select(DQL) 支持事务
+- DQL:数据查询语言 包括:select
+- TCL:事务控制语言 包括:开启事务begin   提交事务commit  回滚事务 rollback  保存回滚点 savepoint xxx;   回滚到回滚点 rollback to xxx;
+- DCL:数据控制语言  分配用户权限相关SQL
+8. 数据类型
+- 整数: int(m)和bigint(m) m代表显示长度  结合zerofill使用
+- 浮点数:double(m,d) m代表总长度 d代表小数长度   超高精度浮点数decimal(m,d)
+- 字符串: char固定长度 最大长度255 执行效率略高,varchar 可变长度最大65535超过255建议使用text 节省空间  ,text 可变长度 最大65535
+- 日期: date 年月日, time 时分秒,datetime 默认值null 最大9999-12-31,timestamp 默认值当前系统时间 最大2038-1-19
+9. 导入sql文件  source 路径;
+####day03
+1. is null 和 is not null
+2. 别名   
+3. 比较运算符  >  <  >=  <=  =  !=和<>
+4. and 和 or
+5.  not between x and y 
+6. not in(2,3,4)
+7. like     _单个未知   % 0或多个未知 
+8. 排序 order by 字段名 asc(默认)/desc,字段名
+9. 分页查询   limit 跳过的条数,请求条数
+10. 去重  distinct   
+11. 数值计算  + - * / % 
+12. 日期相关: 
+- now() 当前系统时间
+- curdate() 当前年月日
+- curtime() 当前时分秒
+- 提取年月日  date(now())
+- 提取时分秒  time(now())
+- 提取时间分量  extract(year/month/day/hour/minute/second from now());
+- 日期格式化   date_format(时间,格式)  %YymcdHhis  
+- 反向格式化   str_to_date(时间,格式)
+13. 聚合函数   平均值avg()  最大值max() 最小值min() 求和sum() 统计数量count()
+14. ifull(x,y) 如果x值为null 则取y  如果不为null则取x
+15. 字符串相关:
+- 拼接  concat()
+- 获取字符长度 char_length()
+- 获取字符串出现位置 instr()
+- 转大小写   upper()  lower()
+- 截取字符串   left() right()  substring()
+- 去空白  trim()
+- 重复  repeat()
+- 替换 replace()
+- 反转  reverse()
+###练习题
+1 案例：查询没有上级领导的员工的编号，姓名，工资
+	select empno,ename,sal from emp where mgr is null;
+2 案例：查询emp表中没有奖金的员工的姓名，职位，工资，以及奖金
+	select ename,job,sal,comm from emp where comm=0 or comm is null;
+3 案例：查询emp表中含有奖金的员工的编号，姓名，职位，以及奖金
+	select empno,ename,job,comm from emp where comm>0;
+4 案例：查询含有上级领导的员工的姓名，工资以及上级领导的编号
+	select ename,sal,mgr from emp where mgr is not null;
+5 案例：查询emp表中名字以‘S’开头的所有员工的姓名
+	select ename from emp where ename like 's%';
+6 案例：查询emp表中名字的最后一个字符是'S'的员工的姓名
+	select ename from emp where ename like '%s';
+7 案例：查询倒数的第2个字符是‘E’的员工的姓名
+	select ename from emp where ename like '%e_';
+8 案例：查询emp表中员工的倒数第3个字符是‘N’的员工姓名
+	select ename from emp where ename like '%n__';
+9 案例：查询emp表中员工的名字中包含‘A’的员工的姓名
+	select ename from emp where ename like '%a%';
+10 案例：查询emp表中名字不是以'K'开头的员工的所有信息
+	select * from emp where ename not like 'k%';
+11 案例：查询emp表中名字中不包含‘A’的所有员工的信息
+	select * from emp where ename not like '%a%';
+12 案例：做文员的员工人数（job 中 含有 CLERK 的）
+	select count(*) from emp where job='clerk';
+13 案例：销售人员 job: SALESMAN 的最高薪水
+	select max(sal) from emp where job='SALESMAN';
+14 案例：最早和最晚入职时间
+	select min(hiredate),max(hiredate) from emp;
+15 案例：查询类别 163的商品总库存量
+	select sum(num) from t_item where category_id=163;
+16 案例：查询 类别 163 的商品
+	select * from t_item where category_id=163;
+17 案例：查询商品价格不大于100的商品名称列表
+	select title from t_item where price<=100;
+18 案例：查询品牌是联想,且价格在40000以上的商品名称和价格
+	select title,price from t_item where title like '%联想%' and price>40000;
+19 案例：查询品牌是三木,或价格在50以下的商品名称和价格
+	select title,price from t_item where title like '%三木%' or price<50;
+20 案例：查询品牌是三木、广博、齐心的商品名称和价格
+	select title,price from t_item where title like '%三木%' or title like '%广博%' or title like '%齐心%';
+21 案例：查询品牌不是联想、戴尔的商品名称和价格
+	select title,price from t_item where title not like '%联想%' and title not like '%戴尔%';
+22 案例：查找品牌是联想且价格大于10000的名称
+	select title from t_item where title like '%联想%' and price>10000;
+23 案例：查询联想或戴尔的电脑名称列表
+	select title from t_item where title like '%联想%' or title like '%戴尔%';
+24 案例：查询emp表中员工的编号，姓名，职位，工资，并且工资在1000~2000之间。
+	select empno,ename,job,sal from emp where sal between 1000 and 2000;
+25 案例：查询emp表中员工在10号部门，并且含有上级领导的员工的姓名，职位，上级领导编号以及所属部门的编号
+	select ename,job,mgr,deptno from emp where deptno=10 and mgr is not null;
+26 案例：查询emp表中名字中包含'E'，并且职位不是MANAGER的员工的编号，姓名，职位，以及工资。
+	select empno,ename,job,sal from emp where ename like '%e%' and job!='manager';
+27 案例：查询emp表中10号部门或者20号部门中员工的编号，姓名，所属部门的编号
+	select empno,ename,deptno from emp where deptno in(10,20);
+28 案例：查询emp表中没有奖金或者名字的倒数第2个字母不是T的员工的编号，姓名，职位以及奖金
+	select empno,ename,job,comm from emp where comm=0 or ename not like '%t_';
+29 案例：查询工资高于3000或者部门编号是30的员工的姓名，职位，工资，入职时间以及所属部门的编号
+	select ename,job,sal,hiredate,deptno from emp where sal>3000 or deptno=30;
+30 案例：查询不是30号部门的员工的所有信息
+	select * from emp where deptno!=30;
+31 案例：查询奖金不为空的员工的所有信息
+	select * from emp where comm is not null;
+32 案例：查询emp表中所有员工的编号，姓名，职位，根据员工的编号进行降序排列
+	select empno,ename,job from emp order by empno desc;
+33 案例：查询emp表中部门编号是10号或者30号中，所有员工姓名，职务，工资，根据工资进行升序排列
+	select ename,job,sal from emp where deptno in(10,30) order by sal;
+34 案例：查询emp表中所有的数据，然后根据部门的编号进行升序排列，如果部门编号一致，根据员工的编号进行降序排列
+	select * from emp order by deptno,empno desc;
+35 案例：查询emp表中工资高于1000或者没有上级领导的员工的编号，姓名，工资，所属部门的编号，以及上级领导的编号，根据部门编号进行降序排列，如果部门编号一致根据工资进行升序排列。
+	select empno,ename,sal,deptno,mgr from emp where sal>1000 or mgr is null order by deptno desc,sal;
+36 案例：查询emp表中名字中不包含S的员工的编号，姓名，工资，奖金，根据工资进行升序排列，如果工资一致，根据编号进行降序排列
+	select empno,ename,sal,comm from emp where ename not like '%s%' order by sal,empno desc;
+37 案例：统计emp表中员工的总数量
+	select count(*) from emp;
+38 案例：统计emp表中获得奖金的员工的数量
+	select count(*) from emp where comm>0;
+39 案例：求出emp表中所有的工资累加之和
+	select sum(sal) from emp;
+40 案例：求出emp表中所有的奖金累加之和
+	select sum(comm) from emp;
+41 案例：求出emp表中员工的平均工资
+	select avg(sal) from emp;
+42 案例：求出emp表中员工的平均奖金
+	select avg(comm) from emp;
+43 案例：求出emp表中员工的最高工资
+	select max(sal) from emp;
+44 案例：求出emp表中员工编号的最大值
+	select max(empno) from emp;
+45 案例：查询emp表中员工的最低工资。
+	select min(sal) from emp;
+46 案例：查询emp表中员工的人数，工资的总和，平均工资，奖金的最大值，奖金的最小值,并且对返回的列起别名。
+	select count(*) 人数,sum(sal) 工资总和,avg(sal) 平均工资, max(comm) 奖金最大, min(comm) 奖金最小 from emp;
+####数学相关
+- 向下取整 floor(num) 
+	select floor(3.93); 
+- 四舍五入 round(num)
+	select round(3.93);
+- 四舍五入 round(num,m) m代表小数位数
+	select round(23.879,2);
+- 非四舍五入 truncate(num,m) m代表小数位数
+	select truncate(23.879,2);
+- 随机数 rand()  获得0-1的随机数
+	select rand();
+###分组查询 
+1. 查询每个部门的平均工资
+	select deptno,avg(sal) from emp group by deptno;
+2. 查询每种工作的最高工资
+	select job,max(sal) from emp group by job;
+3. 查询每个部门的人数
+	select deptno,count(*) from emp group by deptno;
+4. 查询每个部门工资高于1500的人数
+	select deptno,count(*) from emp where sal>1500 group by deptno;
+5. 查询每个主管mgr的手下人数
+	select mgr,count(*) from emp where mgr is not null group by mgr;
+- 多字段分组:
+	group by 字段1名,字段2名
+1. 查询每个部门下每种职业的平均工资
+	select deptno,job,avg(sal) from emp group by deptno,job;
+- 练习:
+- 格式:   select ...... from 表名 where .... group by ..... order by ....  limit ......;
+
+1.  查询emp表中每个部门的编号、人数、工资总和,根据人数进行升序排序，如果人数一致根据工资总和降序排序。
+	select deptno,count(*) c,sum(sal) s from emp group by deptno order by c,s desc;
+2. 查询工资在1000~3000之间的员工信息，每个部门的编号，平均工资，最低工资，最高工资，根据平均工资进行升序排序
+	select deptno,avg(sal) a,min(sal),max(sal) from emp where sal between 1000 and 3000 group by deptno order by a;
+3. 查询有上级领导的员工，每个职业的人数，工资总和，平均工资，根据人数进行降序排序，如果人数一致则根据平均工资进行升序排序
+	select job,count(*) c,sum(sal),avg(sal) a from emp where mgr is not null group by job order by c desc,a;
+####having
+- where 后面只能写普通字段的条件 
+- having 后面写聚合函数的条件 ,having和分组查询结合使用 
+- 各个关键字的顺序:
+	select .....from 表名 where ......group by .... having ....
+	order by ....  limit .....;
+1. 查询每个部门的平均工资要求平均工资大于2000
+	select deptno,avg(sal) a from emp group by deptno having a>2000;
+2. 查询商品表中每个分类的平均单价，要求平均单价低于100
+	select category_id,avg(price) a from t_item group by category_id having a<100;
+3. 查询emp表中每个部门的平均工资高于2000的部门编号，部门人数，平均工资，最后根据平均工资降序排序
+	select deptno,count(*),avg(sal) a from emp group by deptno having a>2000 order by a desc;
+4. 查询238，917这两个分类下的商品的平均单价
+	select category_id,avg(price) from t_item where category_id in(238,917) group by category_id;
+5. 查询emp表中工资在1000-3000之间的员工，每个部门的编号，工资总和，平均工资，过滤掉平均工资低于2000的部门，最后按照平均工资进行升序排序
+	select deptno,sum(sal),avg(sal) a from emp where sal between 1000 and 3000 group by deptno having a>=2000 order by a;
+6. 查询每年入职的人数
+	select extract(year from hiredate) y,count(*) from emp group by y;
+7. 查询平均工资最高的部门编号和平均工资
+	select deptno,avg(sal) a from emp group by deptno order by a desc limit 0,1;
+###子查询(嵌套查询)
+1. 查询工资高于平均工资的员工信息
+	select avg(sal) from emp;
+	select * from emp where sal>(select avg(sal) from emp);
+2. 查询员工表中工资最高的员工信息
+	select max(sal) from emp;
+	select * from emp where sal=(select max(sal) from emp);
+3. 查询工资高于20号部门最高工资的员工信息
+	select max(sal) from emp where deptno=20;
+	select * from emp where sal>(select max(sal) from emp where deptno=20);
+4. 查询和jones相同工作的其它员工信息
+	select job from emp where ename='jones';
+	select * from emp where job=(select job from emp where ename='jones') and ename!='jones';
+5. 查询工资最低员工的同事们的信息（同事指同一部门）
+	select min(sal) from emp;
+	
+	select deptno from emp where sal=(select min(sal) from emp);
+	
+	select * from emp where deptno=(第二坨) and sal != (第一坨);
+6. 查询最后入职的员工信息
+	select max(hiredate) from emp;
+	select * from emp where hiredate=(select max(hiredate) from emp);
+7. 查询king的部门信息(需要用到dept表)
+	select deptno from emp where ename='king';
+	select * from dept where deptno=(select deptno from emp where ename='king');
+8. 查询员工表中出现过的部门的信息(部门表里面有个40号部门,需要过滤掉它)
+	- 先查询员工表中出现的部门编号
+	select distinct deptno from emp;
+	- 去部门表中查询详情
+	select * from dept where deptno in(select distinct deptno from emp);
+9. 查询平均工资最高的部门信息(难度最高,需要考虑并列第一的问题)
+	- 先查询平均工资最高的值 
+		select avg(sal) a from emp group by deptno order by a desc limit 0,1;
+	- 通过最高的平均工资 查询 部门编号
+		select deptno from emp group by deptno having avg(sal)=(select avg(sal) a from emp group by deptno order by a desc limit 0,1);
+	- 通过部门编号 查询部门信息
+		select * from dept where deptno in(上面一坨);
+- 子查询可以写的位置
+	1. 写在where和having后面,当做查询条件的值
+	2. 写在创建表的时候,把查询结果保存到新的表中
+		create table emp_10 as (select * from emp where deptno=10);
+	3. 写在from后面   **一定要有别名**
+		select * from emp where deptno=10;
+		select ename from (select * from emp where deptno=10) t;
+###关联查询
+- 同时查询多张表的查询方式称为关联查询
+- 关联查询必须写关联关系,如果不写则会得到两张表的乘积,这个乘积称为笛卡尔积, 这是一个错误的查询结果,切记工作中不要出现.
+
+1. 查询每一个员工的姓名和对应的部门名
+	select e.ename,d.dname
+	from emp e,dept d
+	where e.deptno=d.deptno; 
+####关联查询的查询方式之 等值连接和内连接
+1. 等值连接:
+	select * from A,B where A.x=B.x and A.y>2000;
+2. 内连接:
+	select * from A [?inner] join B on A.x=B.x where A.y>2000;
+	-查询每一个员工的姓名和对应的部门名
+	select e.ename,d.dname
+	from emp e join dept d
+	on e.deptno=d.deptno;
+	-查询工资高于2000的每个员工的姓名 工资和对应的部门地点
+	select e.ename,e.sal,d.loc
+	from emp e join dept d
+	on e.deptno=d.deptno
+	where e.sal>2000;
+	- 查询在new york工作的员工姓名和工资
+	select e.ename,e.sal
+	from emp e join dept d
+	on e.deptno=d.deptno
+	where d.loc='new york';
+	- 查询james的部门名称和地点
+	select d.dname,d.loc
+	from emp e join dept d
+	on e.deptno=d.deptno
+	where e.ename='james';
+###关联查询的查询方式之 外连接
+- 等值连接和内连接查询的是两张表的交集数据
+- 外连接查询的是一张表的全部数据和另外一张表的交集数据
+- 格式:
+	select * from A left/right join B on A.x=B.x where A.y<2000;
+	- 查询所有的部门名和对应的员工姓名
+		select d.dname,e.ename
+		from emp e right join dept d
+		on e.deptno=d.deptno;
+
+- 总结: 如果查询的数据是两张表的交集数据使用等值连接或内连接(推荐),如果查询的是一张表的全部数据和另外一张表的交集数据则使用外连接
+
+###练习题
+1. 每个部门的人数，根据人数降序排序
+	select deptno,count(*) c from emp group by deptno order by c desc;
+2. 每个部门中，每个主管的手下人数
+	select deptno,mgr,count(*) from emp where mgr is not null group by deptno,mgr;
+3. 每种工作的平均工资
+	select job,avg(sal) from emp group by job;
+4. 每年的入职人数
+	select extract(year from hiredate) y,count(*) from emp group by y;
+5. 拿最低工资的员工信息
+	select * from emp where sal=(select min(sal) from emp);
+6. 少于等于3个人的部门信息
+	- 不考虑40号部门	
+	select deptno from emp group by deptno having count(*)<=3;
+
+	select * from dept where deptno in(上面一坨);
+	- 考虑40号部门
+	select d.*
+	from emp e right join dept d
+	on e.deptno=d.deptno
+	group by d.deptno
+	having count(e.ename)<=3;  
+
+7. 只有一个下属的主管信息
+8. 每月发工资最多的部门信息
+9. 下属最多的人，查询其个人信息
+10. 拿最高工资员工的同事信息
+11. 和最后入职的员工在同一部门的员工信息 实现流程和第十题一样
+12. 查询平均工资高于20号平均工资的部门信息
+13. 查询员工信息和员工对应的部门名称
+14. 查询员工信息，部门名称，所在城市
+15. 查询Dallas市所有的员工信息
+16. 计算每个城市的员工数量
+17. 查询员工信息和他的主管姓名
+18. 员工信息，员工主管名字，部门名
+19. 员工名和他所在部门名
+20. 案例：查询emp表中所有员工的姓名以及该员工上级领导的编号，姓名，职位，工资
+21. 案例：查询emp表中名字中没有字母'K'的所有员工的编号，姓名，职位以及所在部门的编号，名称，地址
+22. 案例：查询dept表中所有的部门的所有的信息，以及与之关联的emp表中员工的编号，姓名，职位，工资
+
+
+
+
+7. 只有一个下属的主管信息
+	- 查询只有一个下属的主管编号
+	select mgr from emp where mgr is not null group by mgr having count(*)=1;
+	- 通过主管编号查询主管信息
+	select * from emp where empno in(select mgr from emp where mgr is not null group by mgr having count(*)=1);
+8. 每月发工资最多的部门信息
+	- 得到最高的工资数
+		select sum(sal) s from emp group by deptno order by s desc limit 0,1;
+	- 通过最高工资获取部门编号
+		select deptno from emp group by deptno having sum(sal)=(select sum(sal) s from emp group by deptno order by s desc limit 0,1);
+	- 通过部门编号得到部门信息
+		select * from dept where deptno in(上面一坨);
+
+9. 下属最多的人，查询其个人信息
+	- 得到最多的人数
+		select count(*) from emp group by mgr order by count(*) desc limit 0,1;
+	- 通过人数获取主管编号
+		select mgr from emp group by mgr having count(*)=(select count(*) from emp group by mgr order by count(*) desc limit 0,1);
+	- 通过主管编号得到员工信息
+		select * from emp where empno in(上面一坨);
+10. 拿最高工资员工的同事信息
+	- 查询最高工资
+		select max(sal) from emp;
+	- 查询最高工资员工的部门编号
+		select deptno from emp where sal=(select max(sal) from emp);
+	- 通过部门编号查询员工信息
+		select * from emp where deptno=(select deptno from emp where sal=(select max(sal) from emp)) and sal!=(select max(sal) from emp);
+11. 和最后入职的员工在同一部门的员工信息 实现流程和第十题一样
+	-得到时间最大值
+	select max(hiredate) from emp;
+	- 获取最后入职员工的部门编号
+	select deptno from emp where hiredate=(select max(hiredate) from emp);
+	- 通过部门编号获取员工信息
+	select * from emp where deptno=(select deptno from emp where hiredate=(select max(hiredate) from emp)) and hiredate!=(select max(hiredate) from emp);
+12. 查询平均工资高于20号平均工资的部门信息
+	-20号部门的平均工资
+	select avg(sal) from emp where deptno=20;
+	- 查询高于20号部门平均工资的部门编号
+	select deptno from emp group by deptno having avg(sal)>(select avg(sal) from emp where deptno=20);
+	- 通过部门编号查询部门信息
+	select * from dept where deptno in(select deptno from emp group by deptno having avg(sal)>(select avg(sal) from emp where deptno=20));
+13. 查询员工信息和员工对应的部门名称
+	select e.*,d.dname
+	from emp e join dept d
+	on e.deptno=d.deptno;
+14. 查询员工信息，部门名称，所在城市
+	select e.*,d.dname,d.loc
+	from emp e join dept d
+	on e.deptno=d.deptno;
+15. 查询Dallas市所有的员工信息
+	select e.*
+	from emp e join dept d
+	on e.deptno=d.deptno
+	where d.loc='dallas';
+16. 计算每个城市的员工数量
+	select d.loc,count(e.ename)
+	from emp e right join dept d
+	on e.deptno=d.deptno group by d.loc;
+17. 查询员工信息和他的主管姓名
+- 自关联查询时把一张表当成两张表 
+	select e.ename,m.ename
+	from emp e join emp m
+	on e.mgr=m.empno;
+18. 员工信息，员工主管名字，部门名
+	select e.*,m.ename,d.dname
+	from emp e join emp m
+	on e.mgr=m.empno
+	join dept d
+	on e.deptno=d.deptno;	
+19. 员工名和他所在部门名
+	select e.ename,d.dname
+	from emp e join dept d
+	on e.deptno=d.deptno;
+20. 案例：查询emp表中所有员工的姓名以及该员工上级领导的编号，姓名，职位，工资
+	select e.ename,m.empno,m.ename,m.job,m.sal
+	from emp e left join emp m
+	on e.mgr=m.empno;
+21. 案例：查询emp表中名字中没有字母'K'的所有员工的编号，姓名，职位以及所在部门的编号，名称，地址
+	select e.empno,e.ename,e.job,d.*
+	from emp e join dept d
+	on e.deptno=d.deptno
+	where e.ename not like '%k%';
+22. 案例：查询dept表中所有的部门的所有的信息，以及与之关联的emp表中员工的编号，姓名，职位，工资
+	select d.*,e.empno,e.ename,e.job,e.sal
+	from emp e right join dept d
+	on e.deptno=d.deptno;
+
+
+
+
+###课程回顾
+1. 数学相关函数
+- 向下取整 floor()
+- 四舍五入 round(num,m) m代表小数位数
+- 非四舍五入 truncate(num,m)
+- 随机数  rand() 0-1
+2. 分组查询 group by 字段名,字段名     having 聚合函数的条件
+3. 子查询(嵌套查询) 
+- 可写的位置:
+	1. 写在where和having后面 当做查询条件的值
+	2. 写在创建表的时候  把查询的数据保存到新的表中
+	3. 写在from后面 当成一张虚拟的表  必须要有别名
+4. 关联查询
+- 查询方式有:
+	1. 等值连接  查询两张表的交集数据
+		select * from A,B where A.x=B.x and A.y>2000;
+	2. 内连接   查询两张表的交集数据
+		select * from A join B on A.x=B.x where A.y>2000;
+	3. 外连接  查询一张表的全部数据和另外一张表的交集数据
+		select * from A left/right join B on A.x=B.x where A.y>2000;
+- 关联查询必须接关联关系,如果不写会得到两张表数据的乘积 称为笛卡尔积

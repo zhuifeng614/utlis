@@ -1,0 +1,292 @@
+###课程回顾
+1. 主键约束 primary key	
+	唯一且非空
+2. 主键约束+自增  primary key auto_increment
+	历史最大值+1  只增不减
+3. 注释 comment
+4. `用于修饰表名和字段名 可以省略
+5. 冗余: 由于表设计不够合理导致的大量重复数据,通过合理拆分表解决
+6. 事务:数据库中执行同一业务多条SQL语句的工作单元,可以保证多条SQL全部成功或全部失败
+- 相关SQL:
+	开启事务begin;
+	提交事务commit;
+	回滚事务rollback;
+	保存回滚点 savepoint xxx;
+	回滚到某个点  rollback to xxx;
+- 事务的四大特性ACID
+	1. 原子性:最小不可拆分 保证全部成功或全部失败
+	2. 一致性:从一个一致状态 到另一个一致状态
+	3. 隔离性:多个事务互相隔离 互不影响
+	4. 持久性:事务提交后 数据保存到磁盘中持久生效
+7. SQL分类
+- DDL:数据定义语言,包括:create drop alter truncate  不支持事务
+- DML:数据操作语言,包括:insert update delete select(DQL) 支持事务
+- DQL:数据查询语言,只包括select
+- TCL:事务控制语言,包括:开启事务begin;
+	提交事务commit;
+	回滚事务rollback;
+	保存回滚点 savepoint xxx;
+	回滚到某个点  rollback to xxx;
+- DCL:数据控制语言, 用于分配用户权限相关SQL
+8. 数据类型
+- 整数: int(m)和bigint(m) m代表显示长度 结合zerofill使用
+- 浮点数: double(m,d) m代表总长度  d代表小数长度   超高精度浮点数 decimal(m,d)
+- 字符串: char 固定长度 最大255 执行效率略高 ,varchar 可变长度 最大65535 超过255建议使用text   ,text 可变长度 最大65535
+- 日期: date年月日,time时分秒,datetime 默认值null 最大9999-12-31,timestamp 默认值当前系统时间 最大值2038-1-19
+9. 导入*.sql文件 
+	source 路径;
+
+###is null 和 is not null
+1. 从员工表中查询 没有上级领导的员工姓名,工资
+	select ename,sal from emp where mgr is null;
+2. 查询有领导的员工姓名和上级领导的编号
+	select ename,mgr from emp where mgr is not null;
+###别名 
+select ename as '姓名' from emp;
+select ename '姓名' from emp;
+select ename 姓名 from emp;
+###比较运算符 > < >= <= = !=和<>
+1. 查询工资在2000以下的员工姓名和工资
+	select ename,sal from emp where sal<2000;
+2. 查询职位(job)是manager的员工姓名、工资、职位
+	select ename,sal,job from emp where job='manager';
+3. 查询工资小于等于1600的员工姓名、职位、工资
+	select ename,job,sal from emp wehere sal<=1600;
+4. 查询不是10号部门的员工姓名和部门编号（两种写法）
+	select ename,deptno from emp where deptno!=10;
+	select ename,deptno from emp where deptno<>10;
+5. 查询商品表（t_item）中单价为23的商品信息
+	select * from t_item where price=23 \G;
+6. 查询单价不是8443的商品标题(title)
+	select title from t_item where price!=8443;
+###去重 distinct
+1. 查询员工表中有哪些职位
+	select distinct job from emp;
+2. 查询员工表中出现了那几个部门编号
+	select distinct deptno from emp;
+###and 和 or 
+- 如果查询数据时需要同时满足多个条件则使用and   &&
+- 如果查询数据时只需要满足条件中的某一个则使用or ||
+1. 查询10号部门中工资低于2000的员工信息
+	select * from emp where deptno=10 and sal<2000;
+2. 查询部门是30号或者工资高于3000的员工信息
+	select * from emp where deptno=30 or sal>3000;
+###模糊查询 like
+- % 代表0或多个未知字符
+- _ 代表单个未知字符
+	举例:   第一个字符是x       x%
+			最后一个字符是y     %y
+			包含               %x%
+			倒数第二个字符是x	   %x_
+			x开头y结尾         x%y
+			第二个字符是x 倒数第三个字符是y     _x%y__
+1. 查询名字以j开头的所有员工姓名
+	select ename from emp where ename like 'j%';
+2. 查询名字第二个字符是l的员工姓名和工资
+	select ename,sal from emp where ename like '_l%';
+3. 查询t_item表中 标题中包含记事本的商品标题
+	select title from t_item where title like '%记事本%';
+4. 查询职位中包含an并且工资高于1500的员工姓名、工资、职位
+	select ename,sal,job from emp where job like '%an%' and sal>1500;
+5. 查询有赠品的dell商品详情(卖点sell_point中包含“赠”，并且title包含dell)
+	select * from t_item where sell_point like '%赠%' and title like '%dell%';
+6. 查询单价低于100块钱的笔记本标题和价格(提示:title包含笔记本)
+	select title,price from t_item where price<100 and title like '%笔记本%';
+7. 查询有图片的得力商品信息（image字段不为null,title包含得力）
+	select * from t_item where image is not null and title like '%得力%';
+8. 查询不包含a的员工姓名
+	select ename from emp where ename not like '%a%';
+###between x and y
+1. 查询工资在2000到3000之间的员工姓名和工资(要求包含2000和3000)
+	select ename,sal from emp where sal>=2000 and sal<=3000;
+	select ename,sal from emp where sal between 2000 and 3000;
+2. 查询单价在50到100之间的商品标题和单价
+	select title,price from t_item where price between 50 and 100;
+3. 查询工资在1000到2000之外的员工姓名和工资
+	select ename,sal from emp where sal not between 1000 and 2000;
+###in
+- 当查询字段值为多个值的时候使用
+1. 查询员工工资为800,1300,1500的员工信息
+	select * from emp where sal=800 or sal=1300 or sal=1500;
+	select * from emp where sal in(800,1300,1500);
+2. 查询商品价格为56,58,89的商品标题和单价
+	select title,price from t_item where price in(56,58,89);
+3. 查询工资不等于3000,5000,1500的员工姓名和工资
+	select ename,sal from emp where sal not in(3000,5000,1500);
+####综合练习题
+1. 查询分类id为238,917的商品信息 (涉及字段自己查)
+	select * from t_item where category_id in(238,917);
+2. 查询价格在50-200之间的得力商品标题和价格
+	select title,price from t_item where price between 50 and 200 and title like '%得力%';
+3. 查询有上级领导并且工资小于2000的员工姓名、工资和领导编号
+	select ename,sal,mgr from emp where mgr is not null and sal<2000;
+4. 查询有奖金并且有上级领导的员工姓名、奖金、领导编号
+	select ename,comm,mgr from emp where comm>0 and mgr is not null;
+5. 查询名字中包含a,并且工资在3000以内的员工从事的职业有哪几种
+	select distinct job from emp where ename like '%a%' and sal<3000;
+###排序 order by 
+- 格式: order by 字段名 asc/desc       asc:升序(默认)   desc:降序
+- order by 写在条件的后面
+1. 查询工资小于3000的员工姓名和工资 要求按照工资降序排序	
+	select ename,sal from emp where sal<3000 order by sal desc;
+2. 查询10号部门每个员工的姓名和工资 按照工资升序排序
+	select ename,sal from emp where deptno=10 order by sal;
+3. 查询有奖金的员工姓名、工资、奖金  按照奖金降序排序
+	select ename,sal,comm from emp where comm>0 order by comm desc; 
+4. 查询单价低于100的商品标题和单价并按照单价升序排序
+	select title,price from t_item where price<100 order by price;
+- 多字段排序: order by 字段1 asc/desc,字段2 asc/desc
+5. 查询每个员工的姓名、工资和部门编号 按照部门编号降序排序,如果部门一致则按照工资升序排序
+	select ename,sal,deptno from emp order by deptno desc,sal;
+####分页查询 limit 跳过的条数,请求的条数
+- 请求第一页的10条数据  limit 0,10
+- 请求第三页的10条数据  limit 20,10
+- 请求第八页的5条数据   limit  35,5  
+- 公式   limit (页数-1)*数量,数量
+- 请求第四页的7条数据  limit 21,7
+1. 查询每个员工的姓名和工资,按照工资降序排序 请求第三页的3条数据
+	select ename,sal from emp order by sal desc limit 6,3;
+2. 请求员工表中工资最高的前三名员工的信息
+	select * from emp order by sal desc limit 0,3;
+3. 查询商品标题和单价 按照单价升序排序 第三页的5条数据
+	select title,price from t_item order by price limit 10,5;
+4. 查询30号部门中工资最高的员工信息
+	select * from emp where deptno=30 order by sal desc limit 0,1;
+###数值计算 + - * / %
+1. 查询员工姓名,工资和年终奖(年终奖=工资*5)
+	select ename,sal,sal*5 年终奖 from emp;
+2. 查询商品标题，商品单价，库存和总价值（单价*库存）
+	select title,price,num,price*num 总价值 from t_item;
+3. 查询每个员工的姓名和 加薪5块钱之后的工资
+	select ename,sal+5 from emp;
+###日期相关SQL
+1. 获取系统时间 now()
+	create table t_date(name varchar(10),birthday datetime);
+	insert into t_date values('刘德华',now());
+2. 获取当前的年月日 和当前的时分秒  cur=current 当前
+	select "hellworld";
+	select curdate(),curtime();
+3. 从年月日时分秒中 提取年月日 和 提取时分秒
+	select date(now());
+	select time(now());
+	查询商品的上传日期 只查询年月日
+	select created_time from t_item; //商品上传年月日时分秒
+	select date(created_time) from t_item;//商品上传年月日
+4. 从年月日时分秒中提取时间分量
+	select extract(year from now());
+	select extract(month from now());
+	select extract(day from now());
+	select extract(hour from now());
+	select extract(minute from now());
+	select extract(second from now());
+	查询员工入职的年份
+	select extract(year from hiredate) from emp;
+5. 日期格式化 date_format(时间,格式);
+- 格式规则:
+	%Y 四位年 2019  %y 两位年 19
+	%m 2位月  06   %c 1位月  6
+	%d  日
+	%H 24小时   %h  12小时
+	%i 分钟
+	%s 秒
+- 测试: 把now()  2019-06-21 15:29:30  转成 2019年06月21号 15点29分30秒	
+	select date_format(now(),'%Y年%m月%d号 %H点%i分%s秒');
+6. 反向格式化 str_to_date(时间,格式)
+	21.06.2019 15点36分20秒 转回  2019-06-21 15:36:20
+	select str_to_date('21.06.2019 15点36分20秒','%d.%m.%Y %H点%i分%s秒');
+###ifnull(x,y)
+- age=ifnull(x,y)   如果x值为null则age=y 否则age=x
+- 练习:修改奖金为null的值为0 不为null则不变
+	update emp set comm=ifnull(comm,0);
+###聚合函数
+- 对查询的多条数据进行统计查询: 平均值,最大值,最小值,求和,计数
+1. 平均值 avg(字段名)
+	-查询员工的平均工资
+	select avg(sal) from emp;
+2. 最大值 max(字段名)
+	-查询20号部门的最高工资	
+	select max(sal) from emp where deptno=20;
+3. 最小值 min(字段名)
+	-查询名字里面包含a的员工的最低工资
+	select min(sal) from emp where ename like '%a%';
+4. 求和 sum(字段名)
+	-查询10号部门工资总和
+	select sum(sal) from emp where deptno=10;
+5. 计数 count(字段名)
+	-查询工资高于2000的员工数量
+	select count(*) from emp where sal>2000;
+- 查询20号部门的平均工资,最高工资,最低工资,工资总和,员工数量
+	select avg(sal),max(sal),min(sal),sum(sal),count(*) from emp where deptno=20;
+###字符串相关
+1. 字符串拼接concat(s1,s2);   s1s2
+	select concat('aa','bb');
+	- 查询每个员工的姓名和工资 要求工资以元为单位
+	select ename,concat(sal,'元') from emp;
+2. 获取字符串的长度 char_length(str);
+	select char_length('abc');
+	- 查询每个员工的姓名和名字长度
+	select ename,char_length(ename) from emp;
+3. 获取字符串出现的位置 instr(str,substr);
+	select instr('abcdefg','d');
+4. 转大写和转小写
+	select upper('abc'),lower('NBA');
+5. 截取字符串
+	- 左边截取   select left('abcdefg',2);
+	- 右边截取   select right('abcdefg',2);
+	- 自由截取	select substring('abcdefg',2,3); 3代表长度
+6. 去两端空白 trim()
+	select trim('   a b   ');  
+7. 重复repeat()
+	select repeat('ab',2);
+8. 替换replace()
+	select replace('abcde abc','b','m');
+9. 反转reverse()
+	select reverse('abc');
+
+### 
+1 案例：查询没有上级领导的员工的编号，姓名，工资
+2 案例：查询emp表中没有奖金的员工的姓名，职位，工资，以及奖金
+3 案例：查询emp表中含有奖金的员工的编号，姓名，职位，以及奖金
+4 案例：查询含有上级领导的员工的姓名，工资以及上级领导的编号
+5 案例：查询emp表中名字以‘S’开头的所有员工的姓名
+6 案例：查询emp表中名字的最后一个字符是'S'的员工的姓名
+7 案例：查询倒数的第2个字符是‘E’的员工的姓名
+8 案例：查询emp表中员工的倒数第3个字符是‘N’的员工姓名
+9 案例：查询emp表中员工的名字中包含‘A’的员工的姓名
+10 案例：查询emp表中名字不是以'K'开头的员工的所有信息
+11 案例：查询emp表中名字中不包含‘A’的所有员工的信息
+12 案例：做文员的员工人数（job 中 含有 CLERK 的）
+13 案例：销售人员 job: SALESMAN 的最高薪水
+14 案例：最早和最晚入职时间
+15 案例：查询类别 163的商品总库存量
+16 案例：查询 类别 163 的商品
+17 案例：查询商品价格不大于100的商品名称列表
+18 案例：查询品牌是联想,且价格在40000以上的商品名称和价格
+19 案例：查询品牌是三木,或价格在50以下的商品名称和价格
+20 案例：查询品牌是三木、广博、齐心的商品名称和价格
+21 案例：查询品牌不是联想、戴尔的商品名称和价格
+22 案例：查找品牌是联想且价格大于10000的名称
+23 案例：查询联想或戴尔的电脑名称列表
+24 案例：查询emp表中员工的编号，姓名，职位，工资，并且工资在1000~2000之间。
+25 案例：查询emp表中员工在10号部门，并且含有上级领导的员工的姓名，职位，上级领导编号以及所属部门的编号
+26 案例：查询emp表中名字中包含'E'，并且职位不是MANAGER的员工的编号，姓名，职位，以及工资。
+27 案例：查询emp表中10号部门或者20号部门中员工的编号，姓名，所属部门的编号
+28 案例：查询emp表中没有奖金或者名字的倒数第2个字母不是T的员工的编号，姓名，职位以及奖金
+29 案例：查询工资高于3000或者部门编号是30的员工的姓名，职位，工资，入职时间以及所属部门的编号
+30 案例：查询不是30号部门的员工的所有信息
+31 案例：查询奖金不为空的员工的所有信息
+32 案例：查询emp表中所有员工的编号，姓名，职位，根据员工的编号进行降序排列
+33 案例：查询emp表中部门编号是10号或者30号中，所有员工姓名，职务，工资，根据工资进行升序排列
+34 案例：查询emp表中所有的数据，然后根据部门的编号进行升序排列，如果部门编号一致，根据员工的编号进行降序排列
+35 案例：查询emp表中工资高于1000或者没有上级领导的员工的编号，姓名，工资，所属部门的编号，以及上级领导的编号，根据部门编号进行降序排列，如果部门编号一致根据工资进行升序排列。
+36 案例：查询emp表中名字中不包含S的员工的编号，姓名，工资，奖金，根据工资进行升序排列，如果工资一致，根据编号进行降序排列
+37 案例：统计emp表中员工的总数量
+38 案例：统计emp表中获得奖金的员工的数量
+39 案例：求出emp表中所有的工资累加之和
+40 案例：求出emp表中所有的奖金累加之和
+41 案例：求出emp表中员工的平均工资
+42 案例：求出emp表中员工的平均奖金
+43 案例：求出emp表中员工的最高工资
+44 案例：求出emp表中员工编号的最大值
+45 案例：查询emp表中员工的最低工资。
+46 案例：查询emp表中员工的人数，工资的总和，平均工资，奖金的最大值，奖金的最小值,并且对返回的列起别名。

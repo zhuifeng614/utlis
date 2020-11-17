@@ -1,0 +1,489 @@
+Shoot射击游戏第一天:
+1.设计了6个对象类，创建World类并测试
+
+Shoot射击游戏第二天:
+1.给6个对象类添加构造方法，并测试
+
+Shoot射击游戏第三天:
+1.设计小敌机数组、大敌机数组、小蜜蜂数组、子弹数组，并测试
+2.设计FlyingObject超类，6个对象类继承超类
+3.给超类FlyingObject设计两个构造方法，6个派生类分别调用
+
+Shoot射击游戏第四天:
+1.将小敌机、大敌机、小蜜蜂数组合为FlyingObject数组，并测试
+2.在派生类中重写FlyingObject的step()方法
+3.画窗口
+
+Shoot射击游戏第五天:
+1.给类中成员添加访问控制修饰符
+2.给对象添加图片属性----Images图片工具类
+
+Shoot射击游戏第六天:
+1.设计窗口的宽和高为常量，适当地方做修改
+2.画对象:
+  1)想画对象需要先获取对象的图片，每个对象都能获取图片，
+    意味着获取图片行为为共有的行为，设计FlyingObject超类中，
+    每个对象获取图片的行为都是不一样的，所以设计为抽象方法
+    ----在FlyingObject中设计抽象方法getImage()来获取对象的图片
+  2)获取图片时需要考虑对象的状态，因为不同状态下获取的图片是不同的，
+    每个对象都有状态，所以将状态设计在FlyingObject超类中，
+    状态一般都设计为常量，分三个状态:LIFE、DEAD、REMOVE
+    设计state变量表示当前状态(默认LIFE活着的)
+    ----在FlyingObject中设计三个常量，一个变量state表示当前状态
+    在获取图片时需要判断对象的状态，每个对象都需要判断，
+    所以将判断状态行为设计在FlyingObject中，
+    每个对象判断状态的行为都是一样的，所以设计为普通方法
+    ----在FlyingObject中设计isLife()、isDead()、isRemove()
+  3)----重写getImage()获取对象图片
+    3.1)天空Sky，直接返回sky即可
+    3.2)子弹Bullet:
+        3.2.1)若活着呢，直接返回bullet即可
+        3.2.2)若死了呢，直接删除
+    3.3)英雄机Hero:
+        3.3.1)若活着呢，返回heros[0]和heros[1]来回切换
+    3.4)小敌机Airplane:
+        3.4.1)若活着呢，返回airplanes[0]即可
+        3.4.2)若死了呢，依次返回第2张到第5张的图，5后删除
+    3.5)大敌机BigAirplane:
+        3.5.1)若活着呢，返回bigairplanes[0]即可
+        3.5.2)若死了呢，依次返回第2张到第5张的图，5后删除
+    3.6)小蜜蜂Bee:
+        3.6.1)若活着呢，返回bees[0]即可
+        3.7.2)若死了呢，依次返回第2张到第5张的图，5后删除
+  4)图片有了则可以开画了，每个对象都能画，
+    意味着画对象为共有行为，所以设计在FlyingObject超类中，
+    每个对象画的方式都是一样的，所以设计为普通方法
+    ----在FlyingObject中设计paintObject()画对象
+  5)天空Sky需要画两张图，所以需重写超类的paintObject()
+    ----在Sky中重写paintObject()画对象
+  6)----在World中重写paint()，调用paintObject()画对象
+
+Shoot射击游戏第七天:
+1.敌人入场:
+  1)敌人是由窗口产生的，所以在World中设计nextOne()生成敌人对象
+  2)敌人入场为定时发生的，所以在run()中调用enterAction()实现敌人入场
+    在enterAction()中:
+      每400毫秒，获取敌人，enemies扩容，将装在最后一个位置上
+2.子弹入场:
+  1)子弹是由英雄机发射出来的，所以在Hero中设计shoot()生成子弹对象
+  2)子弹入场为定时发生的，所以在run()中调用shootAction()实现子弹入场
+    在shootAction()中:
+      每300毫秒，获取子弹，bullets扩容，数组的追加
+3.飞行物移动:
+  1)飞行物移动为共有行为，所以在FlyingObject中设计step()实现飞行物移动
+  2)飞行物移动为定时发生的，所以在run()中调用stepAction()实现飞行物移动
+    在stepAction()中:
+      天空动，遍历敌人敌人动，遍历子弹子弹动
+
+
+
+
+回顾:
+1.static final常量:
+    必须声明同时初始化、类名点来访问、不能改变、大写
+    编译器在编译时将常量直接替换为具体的值，效率高
+    何时用:数据永远不变、并且经常使用
+2.抽象方法:
+    abstract，只有方法的定义，没有具体的实现
+3.抽象类:
+    abstract，包含抽象方法的类必须是抽象类，
+    不能被实例化，是需要被继承的，派生类:
+      1)重写抽象方法----变不完整为完整
+      2)也声明为抽象类----不常用
+    意义:
+      1)代码复用
+      2)向上造型
+      3)可以包含抽象方法，为所有派生类提供统一的入口
+        派生类的实现不同，但入口是一致的
+
+
+
+
+
+
+笔记:
+1.成员内部类:应用率低
+  1)类中套类，外面的称为Outer外部类，里面的称为Inner内部类
+  2)内部类通常只服务于外部类，对外不具备可见性
+  3)内部类对象通常是在外部类中创建的
+  4)内部类中可以直接访问外部类的成员(包括私有的)
+    内部类中有个隐式的引用指向了创建它的外部类对象
+      eg: 外部类名.this
+2.匿名内部类:应用率高
+  1)若想创建了一个类(派生类)的对象，并且对象只被创建一次，
+    此时该类不必命名，称为匿名内部类
+  2)匿名内部类中若想访问外部的变量，该变量必须是的final的
+    -----在JDK1.8之前有这样的要求
+
+面试题:
+问:内部类有独立的.class吗?
+答:有
+
+
+
+做功能的步骤:
+1.先写行为:
+  1)若为某对象所特有的行为，则设计在对应的类中即可
+  2)若为所有对象所共有的行为，则设计在超类中即可
+2.窗口调用:
+  1)定时发生的，则在定时器中调用
+  2)事件触发的，则在侦听器中调用
+
+
+
+
+程序的运行结果与你所预期的结果不同:
+1)打桩: System.out.println(数据);
+2)Debug调试:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+编译错误
+异常
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5+1------------(加)
+5+(-1)---------(减)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bullet[] bs = hero.shoot();
+bullets = Arrays.copyOf(bullets,bullets.length+bs.length);
+System.arraycopy(bs,0,bullets,bullets.length-bs.length,bs.length); //数组的追加
+
+
+
+
+
+
+
+
+
+
+
+
+
+if(bs.length>2){ //三
+  bullets[bullets.length-1] = bs[0];
+  bullets[bullets.length-2] = bs[1];
+  bullets[bullets.length-3] = bs[2];
+}else if(bs.length>1){ //双
+  bullets[bullets.length-1] = bs[0];
+  bullets[bullets.length-2] = bs[1];
+}else{ //单
+  bullets[bullets.length-1] = bs[0];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+paint()调用方式有两种:
+1)frame.setVisible(true);
+2)repaint();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+假设有5个敌人----enemies的长度5
+再来一个敌人-----enemies扩容
+再来一个敌人-----enemies扩容
+
+
+
+
+
+
+
+//生成敌人(小敌机、大敌机、小蜜蜂)对象
+public FlyingObject nextOne(){
+  Random rand = new Random();
+  int type = rand.nextInt(20); //0到19
+  if(type<5){ //0到4
+    return new Bee();
+  }else if(type<16){ //5到15
+    return new Airplane();
+  }else{ //16到19
+    return new BigAirplane();
+  }
+}
+
+
+
+
+
+public FlyingObject nextOne(){
+  Random rand = new Random();
+  int type = rand.nextInt(3); //0到2
+  if(type==0){
+    return new Bee();
+  }else if(type==1){
+    return new Airplane();
+  }else{
+    return new BigAirplane();
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+敌人入场-----创建敌人
+  敌人是由窗口产生的---------所以创建敌人行为写在World中
+子弹入场-----创建子弹
+  子弹是由英雄机发射的-------所以创建子弹行为写在Hero中
+飞行物移动---飞行物移动
+  飞行物移动为共有行为-------所以飞行物移动写在FlyingObject中
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1.敌人入场:--------------定时发生的
+2.子弹入场:--------------定时发生的
+3.飞行物移动:------------定时发生的
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              TimerTask,        long,long
+timer.schedule(new TimerTask(){
+  public void run(){ //定时干的那个事
+    
+  }
+},  10,  10);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+第1个10:从程序启动到第一次触发的时间间隔
+第2个10:从第一次触发到第二次触发的时间间隔
+        从第二次触发到第三次触发的时间间隔
+	从第三次触发到第四次触发的时间间隔
+	...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+字母、
+
+数字、_和$
+
+
+NstInnerClassDemo$1.class
+NstInnerClassDemo$2.class
+NstInnerClassDemo$3.class
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mama.class
+Mama$Baby.class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Aoo o1 = new Aoo();
+Boo o2 = new Boo(); //编译错误
+
+
+class Aoo{
+  private int a;
+  void show(){
+    Boo o2 = new Boo(); //正确
+  }
+  class Boo{
+    void test(){
+      System.out.println(a);
+      System.out.println(Aoo.this.a);
+      System.out.println(this.a); //编译错误
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+项目功能:
+1)敌人入场:
+2)子弹入场:
+3)飞行物移动:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

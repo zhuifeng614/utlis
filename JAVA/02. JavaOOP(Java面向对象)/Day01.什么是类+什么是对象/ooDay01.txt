@@ -1,0 +1,547 @@
+Shoot射击游戏第一天:
+1.创建了6个对象类，创建World类并测试
+
+
+笔记:
+1.什么是类？什么是对象？
+  1)现实世界是由很多很多对象组成的
+    基于对象抽出了类
+  2)对象:真实存在的单个的个体
+    类:类型/类别，代表一类个体
+  3)类中可以包含:
+    3.1)所有对象所共有的属性/特征------------成员变量
+    3.2)所有对象所共有的行为-----------------方法
+  4)一个类可以创建多个对象
+    同一类型所创建的对象，结构相同，数据不同
+  5)类是对象的模板，对象是类的具体的实例
+
+2.如何创建类？如何创建对象？如何访问成员？
+
+
+射击游戏需求:
+1)所参与的角色:
+    英雄机、子弹、小敌机、大敌机、小蜜蜂、天空
+2)英雄机可以发射子弹(单倍火力(=0)、双倍火力(>0))
+  发射一次双倍火力，则火力值减2
+3)子弹可以射击敌人(小敌机、大敌机、小蜜蜂):
+  ---子弹打掉小敌机:同时消失、玩家得1分
+  ---子弹打掉大敌机:同时消失、玩家得3分
+  ---子弹打掉小蜜蜂:同时消失、英雄机得奖励(1条命、40火力值)
+3)敌人(小敌机、大敌机、小蜜蜂)撞英雄机:
+  ---撞上后:敌人消失、英雄机减命、英雄机清空火力值
+  当英雄机的命数为0时，则游戏结束
+4)英雄机、子弹、小敌机、大敌机、小蜜蜂都在天空上飞
+
+
+
+Hero:
+  width,height,x,y,life,doubleFire,moveTo(),step()
+Airplane:
+  width,height,x,y,speed,step()
+BigAirplane:
+  width,height,x,y,speed,step()
+Bee:
+  width,height,x,y,xSpeed,ySpeed,awardType,step()
+Bullet:
+  width,height,x,y,speed,step()
+Sky:
+  width,height,x,y,speed,y1,step()
+
+
+
+
+
+
+
+
+
+
+
+
+MyShoot
+cn.tedu.shoot
+
+
+
+
+
+
+
+
+
+设计对象类:
+1)找对象:英雄机、子弹、小敌机、大敌机、小蜜蜂、天空
+2)抽类:
+3)设计类中的成员变量和方法
+4)创建对象并测试
+
+
+
+class Hero{ //英雄机
+  life、doubleFire、width、height、x、y
+
+  //英雄机随着鼠标移动 x/y:鼠标的坐标
+  void moveTo(int x,int y){
+    
+  }
+
+  //英雄机移动
+  void step(){
+    两张图片在切换
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Bullet{ //子弹
+}
+
+class Airplane{ //小敌机
+  width,height,x,y,speed
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class BigAirplane{ //大敌机
+}
+class Bee{ //小蜜蜂
+}
+class Sky{ //天空
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              引用
+数据类型  引用类型变量  指向       对象
+Student       zs         =      new Student();
+
+
+
+Student zs = new Student();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      基本类型变量(变量)
+int     a;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+引用类型--------null
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+oo.day01
+Student
+StudentTest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   类           对象
+月饼模子        月饼
+
+
+
+
+
+
+
+
+
+
+Student zs = new Student();
+zs.name = "zhangsan";
+zs.age = 25;
+zs.address = "河北廊坊";
+zs.stuId = "001";
+zs.eat();
+zs.sleep();
+zs.study();
+zs.abc = 250; //编译错误
+
+Student ls = new Student();
+ls.name = "lisi";
+ls.age = 26;
+ls.address = "黑龙江佳木斯";
+ls.stuId = "002";
+ls.eat();
+ls.sleep();
+ls.study();
+
+class Student{
+  String name;
+  int age;
+  String address;
+  String stuId;
+  void eat(){}
+  void sleep(){}
+  void study(){}
+}
+
+
+
+
+
+
+
+Student zs = new Student();
+Student ls = new Student();
+Student ww = new Student();
+
+
+
+
+
+
+
+
+
+
+
+
+class Dog{
+  String type;
+  String color;
+  void saveDoor(){}
+}
+class Car{
+  String type;
+  String color;
+  double price;
+  void run(){}
+  void back(){}
+  void stop(){}
+}
+
+
+
+
+
+
+
+
+
+
+对象                 类
+
+张三                学生
+李四
+王五
+
+小花                 狗
+小黑
+小强
+
+马六                汽车
+奥迪
+奥拓
+
+
+
+
+
+
+
+
+
+
+
+
+class Emp{ //Emp就是自己造的一个数据类型
+  String name;
+  int age;
+  double salary;
+  void print(){
+    System.out.println("name="+name);
+    System.out.println("age="+age);
+    System.out.println("salary="+salary);
+  }
+}
+
+class Test{
+  public static void main(String[] args){
+    Emp e = new Emp(); //创建雇员对象
+    e.name = "zhangsan";
+    e.age = 25;
+    e.salary = 8000.0;
+    e.print();
+  }
+}
+
+
+
+面向过程的结构化设计弊端:
+1)缺乏对数据的封装
+2)数据与方法(操作数据)的分离
+
+
+
+
+
+基本数据类型-------------只能装一个数
+数组---------------------必须数据类型相同
+自己造个数据类型---------想装什么就装什么
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+高质量的代码:-----------以后的目标
+  复用性好、扩展性好、维护性好、
+  可移植性好、健壮性好、可读性好、效率好...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+清华思路------------环保、GIS
+技术牛人------------抽了4个人(花费2个月的时间做一套框架)
+
+
+
+福州夜间施工项目------做需求的增加(30万)
+
+我一个人，每天不到1个小时，5天时间-----共不到5小时
+
+
+
+
+
+
+
+
+
+
+某和-----------OA办公系统(.net)
+
+A公司:做一些修改
+B公司:做一些修改
+C公司:做一些修改
+
+
+改版成Java做的
+
+
+
+
+
+
+产品:可以适应很多公司的
+项目:只能适应一家公司的
+
+
+
+
+
+
+
+
+
+
+
+
+
+晕乎乎的过来的------------------正常的
+
+不晕:
+1)一点也不懂--------------------下个月见
+2)自以为不晕--------------------很不错很不错很不错的了
+
+
+
+
+
+
+
+
+
+
+
+
+
+语言基础:简单----固定
+1)画一个圆形
+2)猜字符小游戏
+
+面向对象:难------抽象
+1)画一个图形
+2)射击游戏
+
+
+
+
+
+
+
+
+
+
+
+
+OO:面向对象
+OOA:面向对象的分析
+OOD:面向对象的设计
+OOAD:面向对象的分析与设计
+OOP:面向对象的编程-------------你们所参与的
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+面向对象-----------讲10天(贯穿项目)
+1)讲语法
+2)讲项目
+
+
+射击游戏-----------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

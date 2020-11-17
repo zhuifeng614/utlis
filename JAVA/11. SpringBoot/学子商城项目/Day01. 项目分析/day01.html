@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>day01</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h3>1. 项目分析</h3>
+<p>首先，分析这个项目可能用到哪些种类的数据。本项目中：用户，商品，商品种类，收货地址，收藏，购物车，订单。</p>
+<pre><code>1. 企业中这个阶段必须分析的尽量详尽
+2. 学习阶段这个过程适可而止
+</code></pre>
+
+<p>然后，确定这些数据相关的功能的开发顺序，优先开发基础数据和简单数据相关的功能。</p>
+<pre><code>基础数据：和其他数据没有关联，是其他数据存在的基础
+简单数据：字段少，逻辑清晰，和其他表关联少
+</code></pre>
+
+<p>因此，上面数据的开发顺序：用户 &gt; 收货地址 &gt; 商品种类 &gt; 商品 &gt; 收藏 &gt;购物车 &gt; 订单 </p>
+<p>接下来，分析1个数据相关的功能：注册，登录，修改密码，修改个人资料，上传头像</p>
+<p>分析完成后，确定以上功能的开发顺序，一般按照“增 查 删 改”，因此“用户”相关的功能的开发顺序：注册 &gt; 登录 &gt; 修改密码 &gt; 修改个人资料 &gt; 上传头像</p>
+<p>针对一个功能，确定开发顺序：创建数据表 &gt; 创建实体类 &gt; 持久层 &gt; 业务层 &gt; 控制器层 &gt; 前端界面</p>
+<h3>2. 用户-创建数据库表</h3>
+<p>创建数据库</p>
+<pre><code>CREATE DATABASE tedu_store;
+</code></pre>
+
+<p>使用数据库</p>
+<pre><code>USE tedu_store;
+</code></pre>
+
+<p>创建“用户”表</p>
+<pre><code>CREATE TABLE t_user(
+    uid INT AUTO_INCREMENT COMMENT '用户id',
+    username VARCHAR(50) UNIQUE NOT NULL COMMENT '用户名',
+    password CHAR(32) NOT NULL COMMENT '密码',
+    salt CHAR(36) COMMENT '盐值',
+    is_delete INT COMMENT '是否删除，0代表未删除，1代表已删除',
+    phone VARCHAR(20) COMMENT '电话号码',
+    email VARCHAR(50) COMMENT '邮箱',
+    gender INT COMMENT '性别,0代表女，1代表男',
+    avatar VARCHAR(100) COMMENT '头像',
+    created_user VARCHAR(50) COMMENT '创建用户',
+    created_time DATETIME COMMENT '创建时间',
+    modified_user VARCHAR(50) COMMENT '最后修改用户',
+    modified_time DATETIME COMMENT '最后修改时间',
+    PRIMARY KEY (uid)
+)DEFAULT CHARSET=utf8;
+</code></pre>
+
+<h3>3. 用户-创建实体类</h3>
+<p>初始化springboot项目：</p>
+<ol>
+<li>
+在<code>https://start.sprint.io</code>网站上初始化一个sprintboot项目
+<ol>
+<li>war</li>
+<li>关联mysql驱动，mybatis框架</li>
+</ol>
+</li>
+<li>将下载好的压缩文件解压缩，将文件夹拷贝到工作空间下</li>
+<li>在Eclipse通过&quot;Import&quot;-》&quot;Existing Maven Projects&quot;导入该项目</li>
+<li>修改pom.xml，springboot版本修改为2.1.3</li>
+<li>使用“Maven”-&gt;&quot;Update Project...&quot;-&gt;勾选Fource up....</li>
+<li>如果直接使用<code>src/test/java</code>中的测试类测试，会抛出异常，需要引入数据库的配置</li>
+<li>将之前配置的数据库连接信息拷贝到新项目中，再次测试，测试通过</li>
+<li>
+<p>在默认测试类中开发一个测试方法<code>getConnection()</code>，获取一个数据库连接对象，测试数据库连接是否正常：</p>
+<p>@Autowired
+DataSource ds;</p>
+<p>@Test
+public void getConnection() throws SQLException {
+	Connection conn=ds.getConnection();
+	System.err.println(conn);
+}</p>
+</li>
+</ol>
+<p>首先，创建<code>cn.tedu.store.entity.BaseEntity</code>类，作为所有实体类的父类，封装所有实体类共同的属性，该类应该实现<code>Serializable</code>接口。</p>
+<pre><code>abstract class BaseEntity implements Serializable{
+    private String createdUser;
+    private Date createdTime;
+    private String modifiedUser;
+    private Date modifiedTime;
+
+}
+</code></pre>
+
+<p>创建<code>cn.tedu.store.entity.User</code>用户实体类，继承自<code>BaseEntity</code>，并提供必要的GET/SET方法，基于uid生成<code>hashCode()</code>和<code>equals()</code>方法。</p>
+<pre><code>public class User{
+
+    private Integer uid;
+    private String username;
+    private String password;
+    private String salt;
+    private Integer isDelete;
+    private String phone;
+    private String email;
+    private Integer gender;
+    private String avatar;
+
+    //GET/SET/基于uid生成hashCode和equals方法/toString()
+}
+</code></pre>
+
+<h3>4. 用户-注册-持久层</h3>
+<h3>5. 用户-注册-业务层</h3>
+<h3>6. 用户-注册-控制器层</h3>
+<h3>7. 用户-注册-前端界面</h3>
+<h3>8. 用户-登录-持久层</h3>
+<h3>9. 用户-登录-业务层</h3>
+<h3>10. 用户-登录-控制器层</h3>
+<h3>11. 用户-登录-前端界面</h3>
+<h3>12. 用户-修改密码-持久层</h3>
+<h3>13. 用户-修改密码-业务层</h3>
+<h3>14. 用户-修改密码-控制器层</h3>
+<h3>15. 用户-修改密码-前端界面</h3>
+<h3>课程介绍</h3>
+<ol>
+<li>
+<p>内容</p>
+<ol>
+<li>使用springboot完成一个商城类项目</li>
+<li>大概12-13天</li>
+</ol>
+</li>
+<li>
+<p>为什么学</p>
+<ol>
+<li>积累项目开发经验</li>
+<li>一些必须有业务场景的知识点，会在这里补充</li>
+<li>掌握项目开发的流程和思路</li>
+</ol>
+</li>
+<li>
+<p>怎么学</p>
+<ol>
+<li>尽量不要跟着敲代码，听思路，自己敲，对照</li>
+<li>每天的代码必须完成，即使复制粘贴，也要保证前一天的代码是完整</li>
+<li>
+有余力的同学，可以同时自己写1个项目
+<ol>
+<li>选题：百度“计算机专业毕业设计题目”</li>
+<li>时间：慢慢写，在面试阶段也可以每天写</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3>自我介绍</h3>
+<p>陈天竺</p>
+<p>chentianzhu@tedu.cn</p>
+<p>优先发微信公众号上面
+标注一下属于哪个班</p>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

@@ -1,0 +1,119 @@
+###课程回顾
+1. 内容标题 h1-h6   独占一行 有上下外边距 字体加粗   align=left、right/center  
+2. 段落标签  p   独占一行 有上下外边距   
+3. 水平分割线 hr
+4. 换行 br
+5. 列表标签
+- 无序列表 ul：type   li
+- 有序列表 ol:type/start/reversed    li
+- 定义列表 dl/dt/dd
+- 列表嵌套：有序和无序可以任意无限嵌套
+6. 分区标签
+- div：块级分区元素  独占一行  
+- span：行内分区元素 共占一行
+- h5新增   header  article   footer
+7. 元素分类
+- 块级元素：独占一行 div、h1-h6 p hr
+- 行内元素：共占一行 span strong和b em和i  del和s  u
+8. 实体引用
+- 空格   &nbsp;
+- 小于号 &lt;
+- 大于号 &gt;
+9. 图片标签img
+-  src:路径   相对 访问站内资源 a.同目录直接写文件名 b.上级 ../文件名 c. 下级 文件夹名/文件名   和绝对 访问站外资源 盗链，节省自己网站资源，有找不到图片的风险
+- alt： 图片不能正常显示时显示的文本
+- title： 鼠标悬停显示的文本
+- width/height:  1.像素 2.上级元素的百分比  只设置宽度 高度会按照原始宽高比缩放
+10. 图片地图map
+- 属性：name唯一标识
+- 子元素 area:
+		shape:rect/circle形状
+		coords：坐标（矩形两个对角线点的坐标、圆形是圆心坐标和半径）
+		href：资源路径 1.页面资源 2.文件资源(能浏览则浏览 不能浏览则下载)
+###超链接a
+- 如果a标签不写href属性则就是纯文本
+- target=_blank 开启新的窗口显示该页面，如果不写默认是从当前窗口跳转
+- 如果a标签包裹文本内容则是文本超链接，如果包裹的是图片则是图片超链接
+- 页面内部跳转
+	1. 设置锚点用于定位   <a id="top"></a>
+	2. 通过超链接跳转到锚的位置   <a href="#top">回到顶部</a>
+	如果跳转的目的地有标签则直接给标签添加id属性即可
+- 练习：创建demo03 在页面中添加四个超链接：
+		1号美女 2号美女 3号美女 4号帅哥
+###表格table
+- border边框的粗细
+- cellspacing：单元格间距和单元格距外边框的距离
+- cellpadding：单元格的内边距 
+- 跨行rowspan 跨列colspan
+- caption表格的标题
+- th table head 表头，加粗并居中
+- 分区标签：thead tbody tfoot  对多行进行统一管理（比如统一添加样式）分区标签自身没有显示效果
+###表单form
+- 作用：获取用户输入的各种数据把数据提交到服务器
+- 主要学习有哪些控件：文本输入框、密码框、提交按钮、单选、多选、下拉选、日期选择器、文件选择器等
+- 文本输入框 input type=text  name  value  placeholder占位文本 最大长度maxlength  只读readonly  
+- 密码框 input type=password  name 
+- 单选  input type=radio  name  value  默认选中checked    通过label标签扩充点击范围 
+- 多选 input type=checkbox name value  属性和单选一样
+- 日期 input type=date  name
+- 文件选择  input type=file  name 
+- 隐藏域 当需要给服务器提交数据但是此数据不需要给用户展示的时候使用 input type=hidden  name value
+- 下拉选  select:name    子标签 option:value selected默认选中
+- 文本域  textarea:name rows行  cols列 占位文本placeholder
+- 提交按钮 input type=submit   value修改文本内容
+- 重置按钮 input type=reset   value修改文本内容
+- 自定义按钮  input type=button  value修改文本内容
+
+
+
+###课程回顾
+1. 内容标题： h1-h6  独占一行 有上下外边距 字体加粗  align=left/right/center
+2. 段落标签 p   独占一行 有上下外边距
+3. 水平分割线 hr
+4. 换行 br
+5. 列表标签 
+- 无序列表  ul:type li
+- 有序列表  ol:type start reversed   li 
+- 定义列表  dl dt  dd
+- 列表嵌套  有序和无序可以任意无限嵌套
+6. 分区标签
+- div：独占一行
+- span：共占一行 
+- h5    header article   footer
+7. 分类
+- 块级元素：独占一行  包括 div、h1-h6、hr、p
+- 行内元素:共占一行  包括 span  strong和b  em和 i   del和s  u
+8. 实体引用
+- 空格  &nbsp;
+- 小于号 &lt;
+- 大于号 &gt;
+9. 图片标签img
+- src：路径  相对 访问站内资源 和 绝对 访问站外资源 
+- alt：图片不能显示时显示的文本
+- title：鼠标悬停显示的文本
+- width、height： 1.像素 2.上级元素的百分比  
+10. 图片地图map
+- name属性 唯一标识
+- 子标签 area：shape（circle，rect）coords（矩形4 圆形3） href：资源路径  页面资源和文件资源
+###day02
+1. 超链接a
+- 如果不写href属性则就是纯文本
+- 文本超链接和图片超链接
+- target="_blank"  从新的窗口显示页面 
+- 页面内部跳转   如果目的地有标签直接给标签添加id  如果没标签添加猫(空的a标签)  
+2. 表格table
+- 子标签：tr td th caption thead tbody tfoot
+- 属性： table:border  cellspacing  cellpadding   td:rowspan colspan
+3. 表单form
+- 文本框  type=text  name value  readonly placeholder maxlength 
+- 密码框 type=password name value  readonly placeholder maxlength 
+- 单选 type=radio  name value id checked     lable标签
+- 多选 type=checkbox name value id checked     lable标签
+- 日期 type=date  name 
+- 文件 type=file name 
+- 隐藏域 type=hidden  name value
+- 下拉选  select:name     子标签  option:value selected
+- 文本域  textarea:name rows  cols  placeholder
+- 提交按钮 type=submit  value
+- 重置按钮 type=reset   value
+- 自定义按钮  type=button value  

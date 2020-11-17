@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	img{
+		position: absolute;
+	}
+	body{
+		background-image:url("t.jpg");
+		background-color: black;
+		margin: 0;
+	}
+</style>
+<script src="jquery-1.4.2.js"></script>
+<script type="text/javascript">
+	setInterval(function(){
+		//创建雪花图片并添加到页面中
+		var img = $("<img src='snow.png'>");
+		$(document.body).append(img);
+		//图片尺寸20-40 0-20+20
+		var size = parseInt(Math.random()*20)+20;
+		//得到屏幕的宽度
+		var w = document.body.clientWidth;
+		//得到随机x轴坐标
+		var left = parseInt(Math.random()*(w-size));
+		
+		img.css({"width":size+"px","left":left+"px"});
+		//得到屏幕的高度
+		var h = document.body.parentElement.clientHeight;
+		img.animate({"top":h-size+"px"},size*100)
+			.fadeOut(2000,function(){
+				img.remove();
+			});
+	},10);
+</script>
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+
+
+

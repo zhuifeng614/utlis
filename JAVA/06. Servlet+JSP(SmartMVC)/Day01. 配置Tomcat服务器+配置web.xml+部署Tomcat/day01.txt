@@ -1,0 +1,72 @@
+﻿
+# Servlet 
+
+Servlet: 是指在在服务器上执行的程序片段. 
+
+1. Servlet是JavaEE规范的一部分
+2. 用来解决Web服务器端编程问题
+3. Servlet组件工作在Java Web服务器中
+
+
+## 安装配置Tomcat服务器
+
+1. 下载Tomcat  http://tomcat.apache.org
+2. 安装: 释放tomcat压缩包即可
+3. 在Eclipse中配置Tomcat
+
+参考:  http://doc.tedu.cn/tomcat/index.html
+
+## Servlet Hello World
+
+实现步骤
+
+1. 创建 Maven Web 项目
+	1. 创建maven war项目(Eclipse必须能够连接到Mavne仓库)
+	2. 在项目上 使用 右键创建 "部署描述文件 web.xml"
+2. 导入Tomcat 目标服务器运行环境
+	1. 就是导入 Servlet 接口
+3. 创建一个类 DemoServlet 
+	1. 向response发送 Hello World 
+
+			public class DemoServlet implements Servlet{
+			
+				public void destroy() {
+				}
+				public ServletConfig getServletConfig() {
+					return null;
+				}
+				public String getServletInfo() {
+					return null;
+				}
+				public void init(ServletConfig arg0) throws ServletException {
+				}
+			
+				public void service(ServletRequest request, 
+						ServletResponse response) 
+						throws ServletException, IOException {
+					response.setContentType("text/html"); 
+					//将 Hello World 写到response中
+					response.getWriter().print("Hello World!");
+				}
+				
+			}
+
+4. 配置web.xml 
+	1. 将请求路径 /hello 映射到 DemoServlet 上
+			
+			  <!-- 登记 Servlet -->
+			  <servlet>
+			  	<servlet-name>demo</servlet-name>
+			  	<servlet-class>day01.DemoServlet</servlet-class>
+			  </servlet>
+			  <!-- 将Servlet 映射到 URL 连接 -->
+			  <servlet-mapping>
+			  	<servlet-name>demo</servlet-name>
+			  	<url-pattern>/hello</url-pattern>
+			  </servlet-mapping>
+
+5. 将web程序部署到 Tomcat 中
+	1. 部署就是复制, 将web.xml DemoServlet 等复制到Tomcat服务器中.
+6. 使用浏览器请求 /hello, 在浏览器中看到 Hello World!
+
+		http://localhost:8080/Servlet01/hello

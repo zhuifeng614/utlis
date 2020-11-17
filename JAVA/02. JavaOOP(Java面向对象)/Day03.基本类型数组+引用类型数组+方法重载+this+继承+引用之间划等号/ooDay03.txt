@@ -1,0 +1,336 @@
+Shoot射击游戏第一天:
+1.设计了6个对象类，创建World类并测试
+
+Shoot射击游戏第二天:
+1.给6个对象类添加构造方法，并测试
+
+Shoot射击游戏第三天:
+1.设计小敌机数组、大敌机数组、小蜜蜂数组、子弹数组，并测试
+2.设计FlyingObject超类，6个对象类继承超类
+3.给超类FlyingObject设计两个构造方法，6个派生类分别调用
+
+
+
+回顾:
+1.方法的重载(Overload):
+  1)发生在一个类中，方法名相同，参数列表不同，方法体不同
+  2)编译器根据方法的签名自动绑定调用的方法
+2.构造方法:
+  1)给成员变量赋初值
+  2)与类同名、没有返回值类型
+  3)创建对象时被自动调用
+  4)若自己不写，则默认一个无参构造，若自己写了，则不再默认提供
+  5)可以重载
+3.this:指代当前对象，哪个对象调用方法指的就是哪个对象
+  this的用法:
+    this.成员变量名------------访问成员变量
+    this.方法名()--------------调用方法
+    this()---------------------调用构造方法
+4.null:空，没有指向任何对象
+       若引用的值为null，则该引用不能进行任何操作了，
+       若操作则发生NullPointerException空指针异常
+5.引用类型画等号:
+    指向同一个对象，影响
+  基本类型画等号:
+    赋值，不会影响
+
+
+
+
+
+笔记:
+1.引用类型数组:
+  1)Student[] stus = new Student[3]; //创建Student数组对象
+    stus[0] = new Student("zhangsan",25,"LF"); //创建Student对象
+    stus[1] = new Student("lisi",26,"JMS");
+    stus[2] = new Student("wangwu",27,"SD");
+    System.out.println(stus[0].name);
+    stus[1].age = 28;
+    stus[2].sayHi();
+  2)Student[] stus = new Student[]{
+      new Student("zhangsan",25,"LF"),
+      new Student("lisi",26,"JMS"),
+      new Student("wangwu",27,"SD")
+    };
+2.继承:
+  1)作用:代码复用
+  2)通过extends来实现继承
+  3)超类:派生类所共有的属性和行为
+    派生类:派生类所特有的属性和行为
+  4)派生类继承超类后，派生类具有: 派生类的+超类的
+  5)一个超类可以有多个派生类
+    一个派生类只能继承一个超类------单一继承
+  6)继承具有传递性
+  7)java规定:构造派生类之前必须先构造超类
+    在派生类的构造方法中若没有调用超类的构造方法
+    ---则默认super()调用超类的无参构造方法
+    在派生类的构造方法中若调用了超类的构造方法
+    ---则不再默认提供
+    super()调用超类构造方法必须位于派生类构造方法的第一行
+3.super:指代当前对象的超类对象
+  super的用法:
+   1)super.成员变量名-----------访问超类的成员变量
+   2)super.方法名()-------------调用超类的方法-------下次课讲
+   3)super()--------------------调用超类的构造方法
+
+
+
+
+练习:--------------------oo.day04包中
+1)创建类Person，包含:
+  1.1)成员变量:name,age,address
+  1.2)构造方法:Person(3个参数){}
+  1.3)方法:sayHi(){输出3个数据}
+2)创建类Student，继承Person，包含:
+  2.1)成员变量:stuId(学号)
+  2.2)构造方法:Student(4个参数){}
+3)创建类Teacher，继承Person，包含:
+  3.1)成员变量:salary(工资)
+  3.2)构造方法:Teacher(4个参数){}
+4)创建类Doctor，继承Person，包含:
+  4.1)成员变量:level(职称)
+  5.2)构造方法:Doctor(4个参数){}
+5)创建类Test，main中:
+  5.1)创建Student数组ss，包含3个元素，遍历和大家问好
+  5.2)创建Teacher数组ts，包含3个元素，遍历和大家问好
+  5.3)创建Doctor数组ds，包含2个元素，遍历和大家问好
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Aoo{----------------------a
+  int a;
+}
+class Boo extends Aoo{----------b+a
+  int b;
+}
+class Coo extends Boo{----------c+b+a
+  int c;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Person{-------------------------超类/父类
+  String name;
+  int age;
+  String address;
+  void eat(){}
+  void sleep(){}
+}
+class Student extends Person{ ---------派生类/子类
+  String stuId;
+  void study(){}
+}
+class Teacher extends Person{----------派生类/子类
+  double salary;
+  void teach(){}
+}
+class Doctor extends Person{-----------派生类/子类
+  String level;
+  void cut(){}
+}
+
+
+
+
+
+
+
+Student zs = new Student();
+zs.stuId/study();
+zs.name/age/address/eat()/sleep();
+
+
+Teacher ls = new Teacher();
+ls.salary/teach();
+ls.name/age/address/eat()/sleep();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+程序中的继承:
+    代码不用自己写，自己也能用
+
+生活中的继承:
+1)继承财产:
+    钱不用自己挣，自己也能花
+2)继承皇位:
+    江山不用自己打，自己也能坐
+3)继承工作:
+    工作不用自己找，自己也能干
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+数组的数组:----------二维数组
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int[] arr = new int[]{
+  1,
+  5,
+  8
+};
+Student[] stus = new Student[]{
+  new Student("zhangsan",25,"LF"),
+  new Student("lisi",26,"JMS"),
+  new Student("wangwu",27,"SD")
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int[] arr = new int[3];
+arr[0] = 100;
+
+Student[] stus = new Student[3];
+stus[0] = new Student("zhangsan",25,"LF");
+stus[1] = new Student("lisi",26,"JMS");
+stus[2] = new Student("wangwu",27,"SD");
+
+
+Airplane[] as = new Airplane[4]; //创建Airplane数组对象
+as[0] = new Airplane(); //创建Airplane对象
+as[1] = new Airplane();
+as[2] = new Airplane();
+as[3] = new Airplane();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//声明整型数组arr，包含3个元素
+//每个元素都是int型，默认值为0
+int[] arr  = new int[3];
+
+//声明Student型数组stus，包含3个元素
+//每个元素都是Student型，默认值为null
+Student[] stus = new Student[3];
+
+
+//声明Airplane数组as，包含10个元素
+//每个元素都是Airplane型，默认值为null
+Airplane[] as = new Airplane[10];
+
+
+
+//声明Bee型数组bs，包含20个元素
+//每个元素都是Bee型，默认值为null
+Bee[] bs = new Bee[20];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

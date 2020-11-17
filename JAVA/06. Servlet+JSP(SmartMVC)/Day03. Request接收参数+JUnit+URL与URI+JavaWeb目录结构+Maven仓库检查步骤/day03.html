@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>day03</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>Serlvet/JSP</h1>
+<h2>回顾</h2>
+<p>约定(规定)的意义</p>
+<ol>
+<li>什么是Servlet/什么是Servlet 容器 </li>
+<li>请求与响应</li>
+<li>处理请求参数</li>
+</ol>
+<h2>概念梳理</h2>
+<p>URL/URI: 语法规则一致:  </p>
+<pre><code>协议://服务器/路径/资源名
+</code></pre>
+
+<ol>
+<li>
+<p>URL 统一资源定位: 从你计算机开始能够唯一寻获的资源位置, 目标资源一定存在.</p>
+<p>http://cdn.tmooc.cn/bsfile//imgad///4E6DEFE23ED047B2B4AB7AD8B963E9B0.png</p>
+</li>
+<li>
+<p>URI 统一资源识别: 是一个名字, 其对应的位置未必有资源. 目标资源不一定存在, 只是用来作为唯一标识名!!</p>
+<p>请求行  GET /demo HTTP/1.1
+			URI </p>
+</li>
+</ol>
+<p>Java WEB 目录结构</p>
+<ol>
+<li>
+<p>Java EE 规定了web容器中的WEB应用目录结构</p>
+<pre><code>webapps    Tomcat WEB应用程序部署目录
+    |- examples     Webapp WEB应用
+    |   |- WEB-INF
+    |   |   |- lib
+    |   |   |   |- mysql-jdbc.jar  第三方的jar包
+    |   |   |- classes
+    |   |   |   |- xxx.class       编写的类文件
+    |   |   |- web.xml             部署描述文件
+    |   |- index.html
+wtpwebapps Eclipse创建了应用程序测试目录, 也是部署目录
+    |- Servlet02          Webapp WEB应用
+    |   |- WEB-INF
+    |   |   |- lib
+    |   |   |   |- mysql-jdbc.jar  第三方的jar包
+    |   |   |- classes
+    |   |   |   |- xxx.class       编写的类文件
+    |   |   |- web.xml             部署描述文件
+    |   |- index.html   
+</code></pre>
+
+<blockquote>
+<p>WEB-INF 文件夹是用户不能直接看到的文件夹.</p>
+</blockquote>
+</li>
+<li>
+<p>Eclipse 会自动在项目中创建目录结构, 在部署时候将目录结构复制到Tomcat中.</p>
+</li>
+</ol>
+<p>Maven 仓库检查步骤</p>
+<ol>
+<li>
+用浏览器检查是否能够看到仓库
+<ol>
+<li>检查 https://mirrors.huaweicloud.com/repository/maven/</li>
+<li>如果能够看到信息, 说明能够访问仓库, 相反说明网络故障.</li>
+</ol>
+</li>
+<li>
+<p>修改Eclipse中的Maven settings.xml 文件</p>
+<pre><code>&lt;mirror&gt;
+    &lt;id&gt;huaweicloud&lt;/id&gt;
+    &lt;mirrorOf&gt;*&lt;/mirrorOf&gt;
+    &lt;url&gt;https://mirrors.huaweicloud.com/repository/maven/&lt;/url&gt;
+&lt;/mirror&gt;
+</code></pre>
+
+</li>
+<li>
+<p>重启Eclipse 检查 Maven Repositories 是否连接到了Maven</p>
+</li>
+<li>
+在项目上执行 Maven -&gt; Update Project (Force Update)
+<ol>
+<li>如果有必须的话, 可以先删除 .m2 文件夹再更新Maven</li>
+</ol>
+</li>
+</ol>
+<h2>Request 接收参数</h2>
+<h3>参数编码问题</h3>
+<ol>
+<li>网络和IO 每次只能传输一个字节(8位)信息!</li>
+<li>字符是16位无符号整数</li>
+<li>利用网络传输字符时候, 需要将字符进行拆分才能传输</li>
+<li>字符的拆分方案称为字符的编码!</li>
+</ol>
+<p>Post 请求的编码</p>
+<p>原理:</p>
+<p><img src="3.png" /></p>
+<p>Post请求时候, 在获取请求参数之前设置请求的编码可以解决编码问题. </p>
+<p>案例:</p>
+<pre><code>public class LoginServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+
+    protected void doPost(
+            HttpServletRequest request,
+            HttpServletResponse response) 
+        throws ServletException, IOException {
+        //在读取参数之前设置request的编码,处理解码问题
+        request.setCharacterEncoding(&quot;UTF-8&quot;);
+
+        //利用request的API获取表单参数
+        String name = request.getParameter(&quot;user&quot;);
+        String pwd = request.getParameter(&quot;pwd&quot;);
+        System.out.println(name+&quot;,&quot;+pwd);
+
+        response.setContentType(
+                &quot;text/html; charset=utf-8&quot;); 
+        PrintWriter out=response.getWriter();
+        out.print(&quot;OK&quot;); 
+    }
+
+}
+</code></pre>
+
+<h3>接收get请求参数</h3>
+<p>getParamter不仅可以接受post请求参数, 也可以接收get请求参数.</p>
+<p><img src="4.png" /></p>
+<p>get编码问题可以在Tomcat配置文件server.xml中配置:</p>
+<pre><code>&lt;Connector URIEncoding=&quot;UTF-8&quot; connectionTimeout=&quot;20000&quot; 
+    port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot; redirectPort=&quot;8443&quot;/&gt;
+</code></pre>
+
+<p>案例:</p>
+<pre><code>public class GetDemoServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(
+            HttpServletRequest request, 
+            HttpServletResponse response) 
+        throws ServletException, IOException {
+
+        //接收浏览器通过 get 请求发送的参数
+        //如果浏览器没有提供对应的参数, 则接收到null
+        String id=request.getParameter(&quot;id&quot;);
+        String name=request.getParameter(&quot;name&quot;);
+
+        System.out.println(id+&quot;, &quot;+name);
+
+        response.setContentType(&quot;text/html;charset=UTF-8&quot;);
+        PrintWriter out = response.getWriter();
+        out.print(&quot;OK&quot;);
+    }
+
+}
+</code></pre>
+
+<p>配置:</p>
+<pre><code>  &lt;servlet&gt;
+    &lt;description&gt;&lt;/description&gt;
+    &lt;display-name&gt;GetDemoServlet&lt;/display-name&gt;
+    &lt;servlet-name&gt;GetDemoServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;day03.GetDemoServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;GetDemoServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/get-demo&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+</code></pre>
+
+<p>测试: </p>
+<pre><code>http://localhost:8080/Servlet03/get-demo
+http://localhost:8080/Servlet03/get-demo?id=6
+http://localhost:8080/Servlet03/get-demo?id=6&amp;name=tom
+http://localhost:8080/Servlet03/get-demo?id=6&amp;name=你吃了吗
+</code></pre>
+
+<h2>利用Servlet将数据库中的表显示到浏览器中</h2>
+<p>原理:</p>
+<p><img src="5.png" /></p>
+<h3>1. 创建表</h3>
+<p>创建员工表: </p>
+<pre><code>create database web;
+use web;
+create table t_emp(
+    empno int auto_increment primary key,
+    ename varchar(100),
+    mgr int,
+    deptno int,
+    hiredate datetime,
+    salary double,
+    comm double
+);
+
+insert into t_emp (empno, ename, mgr, deptno, hiredate, salary, comm)
+values (null, 'Tom', 0, null, now(), 1000, 200);
+
+insert into t_emp (empno, ename, mgr, deptno, hiredate, salary, comm)
+values (null, 'Jerry', 1, null, now(), 2000, 100);
+</code></pre>
+
+<p>检查:</p>
+<pre><code>select * from t_emp;
+</code></pre>
+
+<h3>2. 编写数据库连接配置文件 db.properties</h3>
+<pre><code>driver=com.mysql.jdbc.Driver
+url=jdbc:mysql://localhost:3306/web?characterEncoding=utf8&amp;useUnicode=true&amp;useSSL=false
+username=root
+password=root
+</code></pre>
+
+<h3>3. 编写数据库连接工具</h3>
+<pre><code>public class DBUtil {
+    private static String driver;
+    private static String url;
+    private static String username;
+    private static String password;
+    static {
+        try {
+            InputStream in = DBUtil.class.getClassLoader()
+                .getResourceAsStream(&quot;db.properties&quot;);
+            Properties cfg = new Properties();
+            cfg.load(in);
+            in.close();
+            driver = cfg.getProperty(&quot;driver&quot;);
+            url = cfg.getProperty(&quot;url&quot;);
+            username=cfg.getProperty(&quot;username&quot;);
+            password=cfg.getProperty(&quot;password&quot;);
+        }catch(Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public static Connection getConnection() 
+        throws Exception{
+        Class.forName(driver);
+        Connection conn = DriverManager
+            .getConnection(url,username,password);
+        return conn;
+    }
+
+    public static void close(Connection conn) {
+        try {
+            if(conn!=null) {
+                conn.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+}
+</code></pre>
+
+<h3>4. 利用JUnit进行测试:</h3>
+<ol>
+<li>
+<p>导入JUnit</p>
+<pre><code>    &lt;dependency&gt;
+      &lt;groupId&gt;junit&lt;/groupId&gt;
+      &lt;artifactId&gt;junit&lt;/artifactId&gt;
+      &lt;version&gt;4.12&lt;/version&gt;
+    &lt;/dependency&gt;
+</code></pre>
+
+</li>
+<li>
+<p>编写测试案例:</p>
+<pre><code>public class TestCase {
+
+    @Test
+    public void test() {
+        System.out.println(&quot;Hello World!&quot;); 
+    }
+
+    @Test
+    public void testHello() {
+        System.out.println(&quot;Hello Kitty!&quot;); 
+    }
+
+    @Test
+    public void testGetConnection() {
+        String sql = &quot;select now() d&quot;;
+        Connection conn = null;
+        try {
+            conn = DBUtil.getConnection();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()) {
+                Date date=rs.getDate(&quot;d&quot;);
+                System.out.println(date);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            DBUtil.close(conn);
+        }
+    }
+}
+</code></pre>
+
+</li>
+<li>
+<p>测试</p>
+</li>
+</ol>
+<h3>5. 编写Servlet 显示表内容</h3>
+<p>原理:</p>
+<p><img src="6.png" /></p>
+<p>代码: </p>
+<pre><code>public class ListServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(
+            HttpServletRequest request, 
+            HttpServletResponse response) 
+        throws ServletException, IOException {
+        //获得out对象
+        response.setContentType(&quot;text/html;charset=utf-8&quot;);
+        PrintWriter out = response.getWriter();
+
+        out.println(&quot;&lt;!DOCTYPE html&gt;&quot;);
+        out.println(&quot;&lt;html&gt;&quot;);
+        out.println(&quot;&lt;head&gt;&quot;);
+        out.println(&quot;&lt;meta charset=\&quot;UTF-8\&quot;&gt;&quot;);
+        out.println(&quot;&lt;title&gt;登录表单&lt;/title&gt;&quot;);
+        out.println(&quot;&lt;/head&gt;&quot;);
+        out.println(&quot;&lt;body&gt;&quot;);
+
+        out.println(&quot;&lt;h1&gt;员工列表&lt;/h1&gt;&quot;); 
+
+        String sql=&quot;select empno, ename, mgr, &quot;
+                + &quot;hiredate, deptno, salary, comm &quot;
+                + &quot;from t_emp&quot;;
+        Connection conn = null;
+        try {
+            conn = DBUtil.getConnection();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            //输出表格头
+            out.println(&quot;&lt;table&gt;&quot;);
+            out.println(&quot;&lt;tr&gt;&quot;);
+            out.println(&quot;&lt;td&gt;编号&lt;/td&gt;&quot;);
+            out.println(&quot;&lt;td&gt;姓名&lt;/td&gt;&quot;);
+            out.println(&quot;&lt;td&gt;入职日期&lt;/td&gt;&quot;);
+            out.println(&quot;&lt;/tr&gt;&quot;);
+            while(rs.next()) {
+                int empno = rs.getInt(&quot;empno&quot;);
+                String ename = rs.getString(&quot;ename&quot;);
+                Date date = rs.getDate(&quot;hiredate&quot;);
+                //System.out.println(empno+&quot;,&quot;+ename);
+                out.println(&quot;&lt;tr&gt;&quot;);
+                out.println(&quot;&lt;td&gt;&quot;+empno+&quot;&lt;/td&gt;&quot;);
+                out.println(&quot;&lt;td&gt;&quot;+ename+&quot;&lt;/td&gt;&quot;);
+                out.println(&quot;&lt;td&gt;&quot;+date+&quot;&lt;/td&gt;&quot;);
+                out.println(&quot;&lt;/tr&gt;&quot;);
+            }
+            out.println(&quot;&lt;/table&gt;&quot;);
+        }catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(conn);
+        }
+
+        out.println(&quot;&lt;/body&gt;&quot;);
+        out.println(&quot;&lt;/html&gt;&quot;); 
+
+    }
+
+}
+</code></pre>
+
+<p>配置:</p>
+<pre><code>  &lt;servlet&gt;
+    &lt;description&gt;&lt;/description&gt;
+    &lt;display-name&gt;ListServlet&lt;/display-name&gt;
+    &lt;servlet-name&gt;ListServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;day03.ListServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;ListServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/list&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+</code></pre>
+
+<p>测试:</p>
+<pre><code>http://localhost:8080/Servlet03/list
+</code></pre>
+
+<h2>作业</h2>
+<ol>
+<li>重新实现完整列版本的员工列表显示.</li>
+<li>实现部门列表显示功能.</li>
+</ol>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

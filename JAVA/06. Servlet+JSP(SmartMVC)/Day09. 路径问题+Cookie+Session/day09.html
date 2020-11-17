@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>day09</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>Servlet/JSP</h1>
+<h2>路径问题</h2>
+<p>Web编程时候有3套路径体系</p>
+<ol>
+<li>浏览器视角的Web路径</li>
+<li>Java Web 用于程序的路径体系</li>
+<li>本地操作系统文件路径体系(以后讲)</li>
+</ol>
+<p>ContextPath路径： Java web应用程序部署在Web服务器时候的部署文件夹。</p>
+<p>浏览器视角的路径与Java WEB路径相差了一个ContextPath路径</p>
+<p>将Java Web路径映射到浏览器视角的Web路径有多种解决方案：</p>
+<ol>
+<li>
+使用相对路径
+<ol>
+<li>书写简单，当页面移动显示位置时候会css等资源加载失败出现404错误</li>
+</ol>
+</li>
+<li>
+利用 &lt;c:url&gt; 标签解决
+<ol>
+<li>&lt;c:url&gt; 标签就是解决将Java WEB路径转化为 浏览器视角绝对路径而设计的标签</li>
+<li>这个标签使用比较繁琐</li>
+</ol>
+</li>
+<li>
+利用EL表达式在路径前面添加ContextPath，这种方式简洁方便。
+<ol>
+<li>在Servlet中将 contextPath保存到request中叫 root</li>
+<li>在页面中将所有 html 标签路径修改为 ${root}/...</li>
+</ol>
+</li>
+</ol>
+<p>案例, 将全部emp功能移动到 /emp 中, 目的是为了后续增加权限管理功能</p>
+<p>修改 员工列表功能：</p>
+<ol>
+<li>
+<p>修改web.xml</p>
+<pre><code>&lt;servlet&gt;
+    &lt;description&gt;&lt;/description&gt;
+    &lt;display-name&gt;ListEmpServlet&lt;/display-name&gt;
+    &lt;servlet-name&gt;ListEmpServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;day05.ListEmpServlet&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;ListEmpServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/emp/list&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+
+<blockquote>
+<p>此时查看网页/emp/list会看到很多 404 错误，导致很多css、js文件没有加载，因为路径上增加了一层emp造成了浏览器视角路径错误，找不到对应资源了。 </p>
+</blockquote>
+</li>
+<li>
+<p>更新 ListEmpServlet, 将contextPath添加到request中，命名为root</p>
+<pre><code>//将context路径保存request中， 用于将
+//Java WEB目录映射到 浏览器视角WEB目录
+String contextPath = request.getContextPath();
+request.setAttribute(&quot;root&quot;, contextPath);
+</code></pre>
+
+</li>
+<li>
+<p>更新 list-emp2.jsp 将全部html标签中的路径更新为 ${root}/</p>
+<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;${root}/bower_components/bootstrap/dist/css/bootstrap.min.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;${root}/bower_components/font-awesome/css/font-awesome.min.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;${root}/bower_components/Ionicons/css/ionicons.min.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;${root}/dist/css/AdminLTE.min.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;${root}/dist/css/skins/skin-blue.min.css&quot;&gt;
+
+...
+
+&lt;!-- jQuery 3 --&gt;
+&lt;script src=&quot;${root}/bower_components/jquery/dist/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;!-- Bootstrap 3.3.7 --&gt;
+&lt;script src=&quot;${root}/bower_components/bootstrap/dist/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+&lt;!-- AdminLTE App --&gt;
+&lt;script src=&quot;${root}/dist/js/adminlte.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+</li>
+<li>
+<p>更新 header.jsp </p>
+<pre><code>&lt;img src=&quot;${root}/dist/img/user2-160x160.jpg&quot; class=&quot;img-circle&quot; alt=&quot;User Image&quot;&gt;
+...
+&lt;img src=&quot;${root}/dist/img/user2-160x160.jpg&quot; class=&quot;user-image&quot; alt=&quot;User Image&quot;&gt;
+...
+&lt;img src=&quot;${root}/dist/img/user2-160x160.jpg&quot; class=&quot;img-circle&quot; alt=&quot;User Image&quot;&gt;
+</code></pre>
+
+</li>
+<li>
+<p>更新 left-side.jsp</p>
+<pre><code>&lt;img src=&quot;${root}/dist/img/user2-160x160.jpg&quot; class=&quot;img-circle&quot; alt=&quot;User Image&quot;&gt;
+</code></pre>
+
+</li>
+<li>
+<p>测试 /emp/list </p>
+</li>
+</ol>
+<p>更新其他的功能的URL，略</p>
+<h2>状态保持问题: Cookies, Session</h2>
+<p>由于HTTP协议是无持续状态的协议，所以在 HTTP协议 实现会话状态保持是一个挑战，目前主要的做法是采用 Cookies 和 Session 技术解决。 </p>
+<p>HTTP协议是无持续状态的？ 数据发送完毕，连接立即释放。 这种工作方式可以使用服务器的资源充分复用，可以为更多客户端服务。简称：无状态协议</p>
+<p>无状态协议：由于服务器服务结束以后，释放了连接，不再与客户端保持状态， 无法记住客户端， 如： 客户是否登录过。 </p>
+<h3>Cookies 技术</h3>
+<p>Cookies 技术，是在HTTP协议基础之上实现状态保持技术，其工作原理与会员卡类似：</p>
+<ol>
+<li>在客户端第一次来访时候，发会员卡。</li>
+<li>服务端可以将信息记录到卡上。</li>
+<li>客户端在每次来访时候， 都要带上会员卡用于识别身份。</li>
+<li>状态信息记录在 会员卡 上。</li>
+</ol>
+<p>Cookies 原理：</p>
+<ol>
+<li>在浏览器第一次来访时候，发Cookies。</li>
+<li>服务器可以将信息记录到Cookies上。</li>
+<li>浏览器在每次来访时候， 都要带上Cookies用于识别身份。</li>
+<li>状态信息记录在 Cookies 上。</li>
+</ol>
+<blockquote>
+<p>Cookie 饼干，当年 Netscape 公司设计了一个无厘头名字。</p>
+</blockquote>
+<p>Cookies的使用：</p>
+<ol>
+<li>Cookies 现在作为HTTP协议扩展功能，被浏览器广泛支持。</li>
+<li>Cookies 利用 HTTP 协议 消息头传送数据。 </li>
+<li>Cookies 是一个HTTP协议扩展标准，其协议头是严格规定的。</li>
+<li>Java Servlet API 提供Cookies API，只需要使用这些API就能自动下发Cookies，自动获取上传Cookies。</li>
+</ol>
+<p>Cookie中的特殊字符和中文</p>
+<p>由于Cookie是在Http协议头部传送的， Http协议头必须是 ISO8859-1 编码，并且不能使用特殊字符和中文。</p>
+<ol>
+<li>利用 Escape 编码进行解决，是HTTP协议标准。</li>
+<li>数据加入Cookie之前进行编码即可。</li>
+<li>
+<p>Java 提供了编码API  
+</p>
+<pre><code>URLEncoder.encode(&quot;您好Cookie&quot;, &quot;UTF-8&quot;)
+</code></pre>
+
+</li>
+</ol>
+<p>利用Java Servlet API 下发Cookie</p>
+<p>下发Cookie，response 对象上有下发Cookies API：</p>
+<pre><code>public class AddCookieServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    /**
+     *  请求路径 /add-cookie
+     */
+    protected void doGet(
+            HttpServletRequest request, 
+            HttpServletResponse response) 
+        throws ServletException, IOException {
+        // 利用response下发一个Cookie到浏览器
+
+        //1. 创建一个Cookie
+        Cookie cookie = new Cookie(&quot;message&quot;, 
+            URLEncoder.encode(&quot;Hello World!&quot;,&quot;UTF-8&quot;));
+        Cookie cookie2 = new Cookie(&quot;test&quot;, 
+            URLEncoder.encode(&quot;您好Cookie&quot;, &quot;UTF-8&quot;));
+
+        //2. 下发Cookie
+        response.addCookie(cookie);
+        response.addCookie(cookie2);
+
+        response.setContentType(&quot;text/html; charset=UTF-8&quot;);
+        response.getWriter().print(&quot;OK&quot;); 
+    }
+
+}
+</code></pre>
+
+<h2>读取request带回的Cookie</h2>
+<p>request中提供了读取浏览器带回的Cookie数据方法，必要时候需要解码处理</p>
+<pre><code>public class GetCookieServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 请求路径 /get-cookie
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // 读取请求中带回Cookie
+        Cookie[] cookies = request.getCookies();
+        // 如果接收到任何Cookie，getCookies()返回null
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                System.out.print(cookie.getName() + &quot;:&quot;);
+                System.out.println(
+                    URLDecoder.decode(cookie.getValue(), &quot;UTF-8&quot;));
+            }
+        }
+
+        response.setContentType(&quot;text/html; charset=UTF-8&quot;);
+        response.getWriter().println(&quot;OK&quot;);
+    }
+
+}
+</code></pre>
+
+<h2>Cookie的属性</h2>
+<h3>Cookie的生命时间</h3>
+<ol>
+<li>默认情况下， Cookie保存在浏览器内存中，浏览器关闭就会消失，适合保存与当前 浏览器会话 有关的数据。 </li>
+<li>
+下发时候设置Cookie的存活时间，设置以后Cookie会保存在浏览器的硬盘上， 会长期保存， 再次打开浏览器，Cookie还在！ 适合保存长期有效的数据。 比如登录用户名。
+<ol>
+<li>如： 记住用户名功能！可以使用Cookie实现</li>
+</ol>
+</li>
+<li>如果想删除Cookie，则设置存活时间为0 </li>
+</ol>
+<blockquote>
+<p>不要使用Cookie保存密码！！！！ </p>
+</blockquote>
+<p>案例：</p>
+<pre><code>public class CookieAgeServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 请求路径 /cookie-age
+     */
+    protected void doGet(
+            HttpServletRequest request,
+            HttpServletResponse response) 
+        throws ServletException, IOException {
+        //下发两个 Cookie 一个是默认是Cookie，一个是
+        //一天有效的，不关闭浏览器查看回送情况
+        //再次打开浏览器检查回送情况
+
+        Cookie c1 = new Cookie(&quot;c1&quot;, &quot;sort&quot;);
+        Cookie c2 = new Cookie(&quot;c2&quot;, &quot;oneDay&quot;);
+        c2.setMaxAge(60*60*24); 
+
+        //下发Cookie
+        response.addCookie(c1);
+        response.addCookie(c2);
+
+        response.setContentType(&quot;text/html;charset=UTF-8&quot;);
+        response.getWriter().print(&quot;OK&quot;); 
+    }
+
+}
+</code></pre>
+
+<h3>Cookie的域名和路径</h3>
+<ol>
+<li>浏览器在保存Cookie时，每个网站保存一组对应Cookie，在发送时候发送到对应的网站。 根据域名区分不同的网站 </li>
+<li>
+同一个网站的Cookie按照路径分级存储，回传时候按照路径级别回传：
+<ol>
+<li>目录中可以收到当前目录的Cookie和上级目录的Cookie</li>
+</ol>
+</li>
+<li>下发Cookie时候，默认情况下按照当前目录层次保存Cookie，可以利用setPath属性设置Cookie的保存路径。</li>
+</ol>
+<p>案例：</p>
+<pre><code>public class SubCookieDemo extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    /**
+     * 请求路径： /sub/cookie
+     */
+    protected void doGet(
+            HttpServletRequest request,
+            HttpServletResponse response) 
+                    throws ServletException, IOException {
+        //下发子目录 /sub 的Cookie
+        Cookie c3 = new Cookie(&quot;c3&quot;, &quot;sub&quot;);
+        response.addCookie(c3);
+
+        response.setContentType(&quot;text/html;charset=UTF-8&quot;);
+        response.getWriter().print(&quot;OK&quot;); 
+    }
+}
+</code></pre>
+
+<h2>Session 原理</h2>
+<p>Cookie的问题</p>
+<ol>
+<li>不安全，可以被冒用，涂改</li>
+<li>不能存储大量信息，一般不超过4K</li>
+<li>只能存储文本</li>
+<li>Cookie保存在客户端不安全，不能存储敏感信息，如: 密码</li>
+</ol>
+<p>Session 在Cookie基础之上解决了安全问题。 </p>
+<p>Session解决问题的方案类似于 银行卡！</p>
+<ol>
+<li>Session将数据存储在 服务器 端</li>
+<li>Session利用Cookie存储了一个 号码，用于识别用户身份，称为SessionID</li>
+<li>服务端设置了一个集合，这个集合就是Session，并且与SessionID绑定</li>
+<li>第一次创建Session时候，服务器创建Session集合对象并且分配Session的ID，将Session ID自动下发到 浏览器Cookie。</li>
+<li>第二次请求时候浏览器通过Cookie传送回 SessionID，服务器会找到对应Session集合。 为用户提供存储服务。 </li>
+<li>当客户端SessionID丢失时或者浏览器离线以后，服务器会定时销毁Session。 默认是30分钟.</li>
+</ol>
+<p>Java 提供了Session API</p>
+<pre><code>HttpSession session = request.getSession();
+session.setAttribute(&quot;msg&quot;, &quot;Hello World!&quot;);
+</code></pre>
+
+<p>案例将数据存储到Session中：</p>
+<pre><code>public class SetSessionServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    /**
+     * 请求路径 /set-session
+     */
+    protected void doGet(
+            HttpServletRequest request, 
+            HttpServletResponse response) 
+        throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+        session.setAttribute(&quot;msg&quot;, &quot;Hello World&quot;); 
+
+        response.setContentType(&quot;text/html&quot;);
+        response.getWriter().print(&quot;OK&quot;); 
+
+    }
+
+}
+</code></pre>
+
+<p>从session读取数据：</p>
+<pre><code>public class GetSessionServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 请求路径 /get-session
+     */
+    protected void doGet(
+            HttpServletRequest request, 
+            HttpServletResponse response) 
+        throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String msg = (String)session.getAttribute(&quot;msg&quot;);
+        System.out.println(msg);
+
+        response.setContentType(&quot;text/html&quot;);
+        response.getWriter().println(&quot;OOK&quot;);
+    }
+
+}
+</code></pre>
+
+<h2>作业</h2>
+<ol>
+<li>重新编写 员工管理功能，要求增加子目录 /emp</li>
+<li>重构 联系人 管理，要求增加子目录 /contact</li>
+</ol>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

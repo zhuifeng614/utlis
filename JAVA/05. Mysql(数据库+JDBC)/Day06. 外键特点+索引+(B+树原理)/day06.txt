@@ -1,0 +1,343 @@
+## 回顾
+
+1. 关系
+	1. 一对一, 性能优化
+	2. 一对多, 解决业务关系, 使用最多
+		1. 自关联 一对多 分类树 * 
+	3. 多对多: 中间的关系表
+		1. 用户和角色
+2. 视图 不是真实表, 是虚拟的表, 可以当做表用
+	1. 最重要的目的是"重用复杂查询"
+		
+## 作业
+
+1. 创建表,并且完成查询
+	1. 设计表存储 存储红包记录相关信息, 包括发红包的联系人(属性: 编号, 姓名, 性别, 电话) 红包记录信息(属性: 时间, 金额), 其中每个联系人可以发生多笔红包记录, 红包记录包含收到红包和发出红包
+	2. 查询一段时间内, 收到红包总数和发出红包总数.
+
+## 约束
+
+用于限制约定表中的数据完整性, 有效性.
+
+数据库提供了"基础的"完整性,有效性检查.
+
+### 主键约束
+
+约束一个列中的值, 符合数据库主键规则要求, 非空且不能重复(唯一).
+如果违反就会报错误! 
+
+	primary key
+
+大多数情况下, 表都使用主键约束, 但有的时候,为提高数据插入性能, 故意不设置主键约束. 比如日志表.
+
+
+验证主键约束
+
+1. 建表
+
+		-- 不添加主键约束  
+		create table t1(
+			id int,
+			name varchar(50)
+		);
+		
+		-- 添加主键约束
+		create table t2(
+			id int,
+			name varchar(50),
+			primary key(id)
+		);
+
+2. 验证
+
+		-- 没有主键约束时候	
+		insert into t1 (id, name) values (1, "Tom");
+		insert into t1 (id, name) values (1, "Jerry");
+		insert into t1 (id, name) values (null, "Andy");
+		-- 有主键约束时候
+		insert into t2 (id, name) values (1, "Tom");
+		insert into t2 (id, name) values (1, "Jerry");
+		insert into t2 (id, name) values (null, "Andy");
+
+	> 验证结果: 数据库会检查主键列的规则, 主键不能重复, 主键不能空, 如果违反了主键约束规则, 会出现错误. 
+
+### 非空约束
+
+验证表中的列值, 不能添加空值.
+
+在设计表的时候为列添加非空约束, 则在插入更改数据时候, 一旦数据为null则报错, 进制添加和修改.
+
+	not null
+
+1. 建表
+	
+		create table t3(
+			id int primary key,
+			name varchar(50) not null,
+			nick varchar(50)
+		); 
+
+2. 测试
+
+		-- 正常插入	
+		insert into t3 (id, name, nick) 
+		values (1, '刘国斌', null);
+		insert into t3 (id, name, nick) 
+		values (2, '范传奇', '范老湿');
+		-- 错误插入
+		insert into t3 (id, name, nick) 
+		values (3, null, '范');
+
+### 唯一约束
+
+限定一个列中的值, 不能重复, 保持唯一. 除了主键以外的其他列保持唯一
+
+	unique
+
+1. 建表
+		
+		-- 设定邮箱地址列是唯一约束, 不能重复
+		create table t4(
+			id int primary key,
+			name varchar(50) not null,
+			email varchar(100) unique
+		); 		
+
+2. 验证: 插入重复的邮箱地址时候出现错误!
+
+### 默认约束 
+
+为列添加默认值
+
+	default '男' 
+
+1. 建表
+
+		-- 将性别的默认值设置为 男 
+		create table t5(
+			id int primary key,
+			name varchar(50) not null,
+			sex varchar(10) default '男' 
+		); 
+
+2. 验证	
+
+		insert into t5 (id, name) values (1, '范传奇');
+		insert into t5 (id, name, sex) values (2,'刘国斌','女');
+
+### 外键约束
+
+检查表中列取值于另外一个表的主键列
+
+语法:
+	
+	FOREIGN KEY(外键列) REFERENCES 主键表(主键列)
+
+1. 建表
+
+		-- 主键表
+		create table user(
+			id int primary key,
+			name varchar(50) not null
+		); 
+		-- 外键表
+		create table trad(
+			id int primary key,
+			uid int,
+			money double,
+			FOREIGN KEY(uid) REFERENCES user(id)
+		);
+
+	> 外键列: uid 列的值必须是 user id 的值!
+	
+外键特点:
+
+1. 添加外键约束的字段值可以为null，但是不能是关联表中不存在的数据
+2. 如果建立了关系被关联的数据不能先删除，被关联的表不能先删除
+3. 有外键关联以后,删除数据时候,就必须先删除外键关联, 在删除主键表中的数据.
+
+## 索引
+
+数据库提供的一种高效查询算法! 可以提高海量数据查询效率!
+
+索引可以大大加快大数量的查询效率!
+
+数据量常见索引算法: B+树(B plus Tree) 
+
+B+树原理:
+1. 数据库数据是连续存储到 磁盘 上的数据块. 每次读写一个数据块, 每个数据块读写 需要 几个ms. 如果是海量数据查询时候, 就需要很多次读写每个数据块, 累计时间很长! 
+2. B+树 建立两层索引数据块, 索引中包含数据的范围. 只需要读取两层索引块两次, 就能确定目标数据的位置. 查询到结果. 大大减少磁盘IO次数, 提高查询性能! 
+3. 在最终数据块上还有一次IO, 一共3次磁盘块IO就可以读取到数据, 其性能非常好!!
+
+语法
+
+	create index 索引名 on 表名(字段名(?长度));
+
+1. 创建索引
+
+	create index idx_user_name on user(name);
+
+2. 使用索引(自动使用索引!)
+
+	select id, name from user where name='Tom';
+
+## 事务(交易)
+
+是指保证一个业务过程的最小单位可靠执行. 避免出现半截情况, 要么都执行, 要么都不执行.
+
+业务过程: 多个动作合成的一个完整不可再分的过程.
+
+4个特点(ACID):
+1. A 原子性: 最小不可拆分"业务逻辑单位"!(不是物理级别的不可拆分!)
+	1. 尽管"业务逻辑单位"中包含多个步骤, 但从业务角度不能拆分执行!
+2. C 一致性: 业务单位执行以后(交易发生以后), 与执行之前的总数据一致.
+	1. 不能多不能少.
+3. I 隔离性: 正在发生的业务过程不能被其他业务过程打扰, 业务过程相互隔离.
+4. D 持久性: 业务过程发生过以后, 将永久保存, 不能被更改
+
+常见数据库都(自动)支持ACID
+
+1. 利用数据库提供的事务指令就可以实现ACID
+2. 在事务开启时候, 执行 begin (开始)
+3. 后续的SQL, 都作为一组 "原子业务操作" 
+4. 在事务结束时候, 使用commit提交事务, 确认事务完成
+5. 如果业务失败, 使用rollback回滚事务, 取消业务过程
+
+# JDBC 
+
+Java 数据库连接: 将Java程序连接到数据的桥梁.
+
+1. Sun(Java) 设计了JDBC API底层封装了Socket, 简化数据库的访问.
+2. JDBC为数据库提供了统一访问接口.
+
+![](jdbc.png)
+
+使用JDBC
+
+1. 利用maven导入数据库驱动
+	1. 创建Maven项目
+	2. 找到 JDBC驱动程序的 坐标
+	3. 将JDBC坐标添加到 pom.xml
+2. 注册数据库驱动: 告诉JDBC如何找到数据库驱动的实现类
+	1. 最新的数据库驱动,会自动注册(有些驱动程序不支持).
+	2. 建议手动注册:
+		1. Class.forName("数据库驱动程序类名")
+		2. Class.forName("com.mysql.jdbc.Driver")
+3. 建立与数据库之间的连接
+		
+		String usr="root";
+		String pwd="";
+		//          jdbc:mysql://数据库IP:3306/数据库名    
+		String url="jdbc:mysql://localhost:3306/db6";
+		Connection conn=DriverManger.getConnection(url, usr, pwd);
+
+4. 创建Statement(语句)对象: 用于执行SQL(操作数据库)
+	1. DDL create drop 等 一般使用 execute
+	2. DML insert delete update  一般使用 executeUpdate 执行 
+	3. DQL select 一般使用 executeQuery
+
+		String sql = "create table t_user(id int, name varchar(50))";
+		Statement st = conn.createStatement();
+		st.execute(sql);
+		st.close();
+
+5. 关闭连接
+	
+		conn.close();
+
+完整的建表案例:
+
+	public static void main(String[] args) 
+		throws Exception{
+		//注册数据库驱动
+		Class.forName("com.mysql.jdbc.Driver");
+		//建立连接
+		String usr="root";
+		String pwd="root";
+		String url="jdbc:mysql://localhost:3306/db6";
+		Connection conn = 
+				DriverManager.getConnection(url,usr,pwd);
+		//测试:
+		System.out.println(conn);  
+		//创建Statement对象,执行SQL
+		Statement st = conn.createStatement();
+		String sql = "create table t_user ("
+				+ "id int, "
+				+ "name varchar(100))";
+		//执行sql语句
+		st.execute(sql);
+		st.close();
+		//关闭连接
+		conn.close();
+	}
+
+完整的插入数据案例:
+
+	public static void main(String[] args) 
+		throws Exception {
+		/**
+		 * 利用JDBC执行插入语句
+		 */
+		String sql="insert into t_user "
+				+ "(id, name) "
+				+ "values (2, '范传奇')"; 
+		//注册驱动
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		//连接数据库
+		String url="jdbc:mysql://localhost:3306/db6?characterEncoding=utf8&useUnicode=true&useSSL=false";
+		String username="root";
+		String password="root";
+		Connection conn = DriverManager.getConnection(
+			url, username, password);
+		//创建 Statement对象
+		Statement st = conn.createStatement();
+		//executeUpdate 返回数据库中更新行数!
+		int n = st.executeUpdate(sql);
+		//处理SQL结果
+		if(n==1) {
+			System.out.println("插入成功!");
+		}
+		//关闭资源和连接
+		st.close();
+		conn.close();
+	}
+		
+MySQL JDBC 连接常用参数, 写在连接url上:
+
+1. characterEncoding 字符编码, 可以设置为utf8
+2. useUnicode 是否使用unicode字符编码, 设置为true
+3. 关闭ssl加密, useSSL 设置为false
+
+	jdbc:mysql://localhost:3306/db6?characterEncoding=utf8&useUnicode=true&useSSL=false
+
+删除案例
+
+	public static void main(String[] args) 
+		throws Exception {
+		/**
+		 * 利用JDBC执行删除语句
+		 */
+		String sql="delete from t_user where id=1";  
+		//注册驱动
+		Class.forName("com.mysql.jdbc.Driver");
+		//连接数据库
+		String url="jdbc:mysql://localhost:3306/db6";
+		String username="root";
+		String password="root";
+		Connection conn = DriverManager.getConnection(
+			url, username, password);
+		//创建 Statement对象
+		Statement st = conn.createStatement();
+		//executeUpdate 返回数据库中更新行数!
+		int n = st.executeUpdate(sql);
+		//处理SQL结果
+		if(n>=1) {
+			System.out.println("删除成功!");
+		}else {
+			System.out.println("删除失败!");
+		}
+		//关闭资源和连接
+		st.close();
+		conn.close();
+	}
